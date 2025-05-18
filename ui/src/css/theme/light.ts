@@ -9,7 +9,7 @@ const lightColorsTheme = {
   error: "#FF5252",
   warning: "#FFB155",
   success: "#30AF5B",
-  background: "ffe",
+  background: "#ffe",
   secondaryBackground: "#F8FBFF",
   secondaryBackgroundSelected: shadeColor("#F8FBFF", -5),
   additionalBackground: "#ffffff",

@@ -11,6 +11,7 @@ const Login = lazy(() => import("@/pages/auth/Login"));
 export const AppRoutes: RouteObject[] = [
   {
     path: "/",
+
     element: <MainLayout />,
     children: [
       {

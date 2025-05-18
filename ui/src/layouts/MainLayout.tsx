@@ -1,10 +1,10 @@
 import RequireAuth from "@/components/auth/RequireAuth";
 import { LOGIN_PATH } from "@/utils/contstance";
-import { App, Layout, Spin } from "antd";
+import { App, Layout, Spin, theme } from "antd";
 import { Outlet } from "react-router-dom";
-import HeaderBar from "./components/Header";
+import HeaderBar from "./components/header/Header";
 import { Suspense } from "react";
-import SideBar from "./components/Sidebar";
+import Sidebar from "./components/sidebar/Sidebar";
 
 export default function MainLayout() {
   return (
@@ -12,11 +12,16 @@ export default function MainLayout() {
       <RequireAuth redirect_path={LOGIN_PATH}>
         <App>
           <Layout>
-            <SideBar />
-            <Layout>
+            <Sidebar />
+            <Layout style={{ minHeight: "100vh" }}>
               <HeaderBar />
               <Suspense fallback={<Spin />}>
-                <Layout.Content>
+                <Layout.Content
+                  style={{
+                    backgroundColor: theme.useToken().token.colorBgBase,
+                    flexGrow: 1,
+                  }}
+                >
                   <Outlet />
                 </Layout.Content>
               </Suspense>
