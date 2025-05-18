@@ -1,55 +1,46 @@
 import type { User } from "@/@types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AuthContext } from "./authContext";
-import { isValidToken } from "@/hooks/auth";
-import { saveInLocalStoreg, setCookie } from "@/utils";
-import { TOKEN_KEY } from "@/utils/contstance";
-import { login as API_LOGIN } from "@/api/auth";
+import {
+  deleteFromLocalStorge,
+  getFromLocalStorege,
+  saveInLocalStoreg,
+} from "@/utils";
+import { LOGIN_PATH, TOKEN_KEY } from "@/utils/contstance";
+import { vrifyToken } from "@/api/auth";
+import { Navigate } from "react-router-dom";
 
 const AuthProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [user, setUser] = useState<User | undefined>(undefined);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<Error | null>(null);
-  const [hasError, setHasError] = useState<boolean>(false);
-  const [isLogin, setIsLogin] = useState<boolean>(false);
-  const [token, setToken] = useState<string | undefined>();
+  const isAuthenticated = user != undefined;
+  // const navigate = useNavigate();
 
-  const login = (username: string, password: string) => {
-    setLoading(true);
-    API_LOGIN(username, password)
-      .then((data) => data.data)
-      .then((data) => {
-        setError(null);
-        setHasError(false);
-        setToken(data.token);
-        setUser(data.user);
-        saveInLocalStoreg(TOKEN_KEY, data.token);
-        setCookie(TOKEN_KEY, data.token, 24);
-        setIsLogin(true);
+  useEffect(() => {
+    const token = getFromLocalStorege(TOKEN_KEY);
+    if (!token) return;
+    vrifyToken()
+      .then((res) => res.data)
+      .then((res) => {
+        login(res.user as User, token);
       })
-      .catch((error) => {
-        setError(error);
-        setHasError(true);
-      })
-      .finally(() => {
-        setLoading(false);
+      .catch(() => {
+        logout();
+        Navigate({ to: LOGIN_PATH, replace: true });
       });
-    // const { error, isLoading, user, token, isError } = useLogin(
-    //   username,
-    //   password
-    // );
-    // setError(error);
-    // setLoading(isLoading);
-    // setUser(user);
-    // setToken(token);
-    // setHasError(isError);
+  }, []);
+
+  const login = (user: User, token: string) => {
+    setUser(user);
+    if (token) {
+      saveInLocalStoreg(TOKEN_KEY, token);
+    }
   };
 
-  function logout() {
-    //@todo
-    // implement logout
+  const logout = () => {
+    deleteFromLocalStorge(TOKEN_KEY);
+    setUser(undefined);
     return true;
-  }
+  };
 
   return (
     <AuthContext.Provider
@@ -57,11 +48,7 @@ const AuthProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
         user,
         login,
         logout,
-        isLogin,
-        loading,
-        error,
-        hasError,
-        token,
+        isAuthenticated,
       }}
     >
       {children}

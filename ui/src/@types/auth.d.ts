@@ -9,16 +9,13 @@ interface LoginResponse {
 
 interface AuthContextType {
   user?: User;
-  login: (username: string, password: string) => void;
+  login: (user: User, token: string) => void;
   logout: () => boolean;
-  isLogin: boolean;
-  loading: boolean;
-  hasError: boolean;
-  error: Error | null;
-  token?: string;
+  isAuthenticated: boolean;
 }
 
 export interface VerifyTokenResponse {
-  token: string;
   valid: boolean;
+  message: string;
+  user?: User;
 }

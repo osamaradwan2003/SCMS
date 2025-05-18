@@ -1,10 +1,17 @@
-import { useAuth } from "@/hooks/auth";
-import { useEffect } from "react";
+import { useLogin } from "@/hooks/auth";
 
 export default function Login() {
-  // const { login } = useAuth();
-  // useEffect(() => {
-  //   login("test", "test");
-  // });
-  return <>Login</>;
+  const mutateFunc = useLogin();
+  return (
+    <button
+      onClick={() => {
+        mutateFunc.mutate({
+          username: "test",
+          password: "test",
+        });
+      }}
+    >
+      Login
+    </button>
+  );
 }

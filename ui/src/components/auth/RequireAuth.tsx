@@ -6,8 +6,9 @@ const RequireAuth: React.FC<
     redirect_path: string;
   }>
 > = ({ children, redirect_path }) => {
-  const { isLogin } = useAuth();
-  if (isLogin) return children;
+  const { isAuthenticated } = useAuth();
+  if (isAuthenticated) return children;
+  console.log(isAuthenticated);
   return <Navigate to={redirect_path} state={401} />;
 };
 

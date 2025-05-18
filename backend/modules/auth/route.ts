@@ -5,7 +5,9 @@ const routes = Router();
 routes.post("/login", function (req, res) {
   res.send({
     token: "test",
+    message: "Login Success",
     user: {
+      id: "wsd-dslkds",
       username: "osama",
       firstname: "osama",
       lastname: "radwan",
@@ -21,7 +23,27 @@ routes.post("/login", function (req, res) {
 
 routes.post("/me", function (req, res) {
   const token = req.headers["authorization"]?.split("Bearer ")[1];
-  res.send({ token: token, valid: token == "test" });
+  if (token == "test") {
+    res.send({
+      message: "success",
+      user: {
+        id: "wsd-dslkds",
+        username: "osama",
+        firstname: "osama",
+        lastname: "radwan",
+        email: "tes.com",
+        image: "tes.png",
+        role: {
+          name: "super_admin",
+          permissions: ["all"],
+        },
+      },
+    });
+    return;
+  }
+  res
+    .status(401)
+    .send({ token: token, valid: false, message: "Invalid token" });
 });
 
 export default routes;
