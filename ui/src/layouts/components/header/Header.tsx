@@ -4,6 +4,7 @@ const { Header } = Layout;
 import headerStyle from "./header.module.css";
 import { useProfileLinks } from "@/hooks/Routes";
 import ThemeToggler from "@/components/buttons/ThemeToggler";
+import LangToggler from "@/components/buttons/LangToggler";
 const HeaderBar = () => {
   const { user } = useAuth();
   const items = useProfileLinks();
@@ -13,6 +14,7 @@ const HeaderBar = () => {
       className={headerStyle.header}
     >
       <ThemeToggler />
+      <LangToggler />
       <Dropdown menu={{ items }} placement="bottomRight">
         <Avatar src={user?.image}>
           {user?.firstname.charAt(0).toUpperCase()}

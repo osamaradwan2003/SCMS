@@ -1,8 +1,4 @@
-import { FormSchema } from "../@types";
-import FormModal from "../components/modals/formModals/FormModal";
-import { RoleSchema } from "./Role.sc";
-import { InputButton } from "../components/utils/InputButton";
-import { IoAdd } from "react-icons/io5";
+import { type FormSchema } from "@/@types";
 export const EmployeeSchema: FormSchema[] = [
   {
     name: "ep_name",
@@ -28,19 +24,6 @@ export const EmployeeSchema: FormSchema[] = [
     name: "salary",
     type: "number",
     inputProps: { placeholder: "Salary" },
-  },
-  {
-    name: "role",
-    type: "autoComplate",
-    fieldProps: {
-      children: (
-        <FormModal
-          formSchema={RoleSchema}
-          button={<InputButton icon={<IoAdd />}></InputButton>}
-        />
-      ),
-    },
-    inputProps: { placeholder: "Role" },
   },
   {
     name: "submit",

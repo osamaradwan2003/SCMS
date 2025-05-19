@@ -1,22 +1,5 @@
-import { FormSchema } from "../@types/index";
+import { type FormSchema } from "@/@types";
 import * as yup from "yup";
-import { InputButton } from "../components/utils/InputButton.tsx";
-import { IoAdd } from "react-icons/io5";
-import FormModal, {
-  modalActions,
-} from "../components/modals/formModals/FormModal.tsx";
-import { ParentFormSchema } from "./Parent.sc.tsx";
-import { FeeFormSchema } from "./Fee.sc.tsx";
-import { GroupForm } from "./Group.sc.tsx";
-import React from "react";
-
-function parentHandel(dispatch: React.Dispatch<modalActions>) {
-  dispatch("loading");
-  setTimeout(() => {
-    dispatch("loaded");
-    dispatch("close");
-  }, 3000);
-}
 
 export const StudentSchema: FormSchema[] = [
   {
@@ -35,15 +18,6 @@ export const StudentSchema: FormSchema[] = [
     type: "autoComplete",
     name: "st_parent",
     rules: yup.string().required("Please add Valid Parent"),
-    fieldProps: {
-      children: (
-        <FormModal
-          handelFunc={parentHandel}
-          button={<div></div>}
-          formSchema={ParentFormSchema}
-        ></FormModal>
-      ),
-    },
     autoCompleteProps: {
       placeholder: "ST. Parent",
       options: [
@@ -68,15 +42,6 @@ export const StudentSchema: FormSchema[] = [
   {
     type: "autoComplete",
     name: "payment_type",
-    fieldProps: {
-      children: (
-        <FormModal
-          handelFunc={parentHandel}
-          button={<InputButton icon={<IoAdd />} />}
-          formSchema={FeeFormSchema}
-        ></FormModal>
-      ),
-    },
     autoCompleteProps: {
       placeholder: "Payment",
       options: [{ label: "Free", value: "ID" }],
@@ -85,17 +50,8 @@ export const StudentSchema: FormSchema[] = [
   {
     type: "autoComplete",
     name: "st_group",
-    fieldProps: {
-      children: (
-        <FormModal
-          handelFunc={parentHandel}
-          button={<IoAdd />}
-          formSchema={GroupForm}
-        ></FormModal>
-      ),
-    },
     autoCompleteProps: {
-      placeholder: "St. Group",
+      placeholder: "St. Class",
       options: [{ label: "fajr", value: "ID" }],
     },
   },
@@ -108,24 +64,13 @@ export const StudentSchema: FormSchema[] = [
   {
     type: "upload",
     name: "st_id_doc",
-    inputProps: { placeholder: "National ID Document" },
-    uploadProp: { accept: "Image/*", maxCount: 2, multiple: true },
+    inputProps: { placeholder: "Student Documents" },
+    uploadProp: { accept: "Image/*", multiple: true },
   },
   {
     type: "upload",
     name: "st_photo",
     inputProps: { placeholder: "St. Image " },
     uploadProp: { accept: "Image/*", maxCount: 1, multiple: false },
-  },
-  {
-    type: "button",
-    name: "submit",
-    fieldProps: { className: "flex justify-center" },
-    buttonProps: {
-      children: "Create Student",
-      htmlType: "submit",
-      type: "primary",
-      block: true,
-    },
   },
 ];

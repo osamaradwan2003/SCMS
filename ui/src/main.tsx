@@ -9,6 +9,7 @@ import { AppRoutes } from "@/routes/routes";
 import { ConfigProvider, theme } from "antd";
 import { darkColorsTheme, lightColorsTheme } from "./css";
 import { isDarkTheme } from "./utils/theme";
+import "@/i18n";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter(AppRoutes);
