@@ -1,13 +1,26 @@
-import { useAuth } from "@/hooks/auth";
-import { Navigate, Outlet } from "react-router-dom";
+import { App, Layout, Spin, theme } from "antd";
+import { Outlet } from "react-router-dom";
+import HeaderBar from "./components/header/Header";
+import { Suspense } from "react";
 
 export default function AuthLayout() {
-  const { isAuthenticated } = useAuth();
-  console.log(isAuthenticated);
-  if (isAuthenticated) return <Navigate to="/" />;
   return (
-    <div style={{ margin: "50px auto" }}>
-      <Outlet />
-    </div>
+    <>
+      <App>
+        <Layout style={{ minHeight: "100vh" }}>
+          <HeaderBar />
+          <Suspense fallback={<Spin />}>
+            <Layout.Content
+              style={{
+                backgroundColor: theme.useToken().token.colorBgBase,
+                flexGrow: 1,
+              }}
+            >
+              <Outlet />
+            </Layout.Content>
+          </Suspense>
+        </Layout>
+      </App>
+    </>
   );
 }

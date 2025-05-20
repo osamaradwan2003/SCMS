@@ -15,11 +15,13 @@ const HeaderBar = () => {
     >
       <ThemeToggler />
       <LangToggler />
-      <Dropdown menu={{ items }} placement="bottomRight">
-        <Avatar src={user?.image}>
-          {user?.firstname.charAt(0).toUpperCase()}
-        </Avatar>
-      </Dropdown>
+      {user && (
+        <Dropdown menu={{ items }} placement="bottomRight">
+          <Avatar src={user?.image}>
+            {user?.firstname.charAt(0).toUpperCase()}
+          </Avatar>
+        </Dropdown>
+      )}
     </Header>
   );
 };

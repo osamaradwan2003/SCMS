@@ -1,27 +1,26 @@
 import { type FormSchema } from "@/@types";
 import * as yup from "yup";
+import i18n from "@/i18n";
+const t = i18n.t;
 
 const LoginForm: FormSchema[] = [
   {
     name: "username",
     type: "username",
-    inputProps: { placeholder: "Username" },
+    inputProps: { placeholder: t("auth:username_placeholder") },
     rules: new yup.StringSchema()
-      .min(4, "username to short")
-      .max(36, "username to long"),
+      .required(t("auth:username_required"))
+      .min(4, t("auth:username_min"))
+      .max(36, t("auth:username_max")),
   },
   {
     name: "password",
     type: "password",
-    inputProps: { placeholder: "Password" },
+    inputProps: { placeholder: t("auth:password_placeholder") },
     rules: new yup.StringSchema()
-      .min(8, "password to short")
-      .max(36, "password to long"),
-  },
-  {
-    name: "submit",
-    type: "button",
-    buttonProps: { children: "Login", type: "primary", block: true },
+      .required(t("auth:password_required"))
+      .min(8, t("password_min"))
+      .max(36, t("auth:password_max")),
   },
 ];
 

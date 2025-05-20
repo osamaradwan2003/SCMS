@@ -1,6 +1,5 @@
-import { useTranslation } from "react-i18next";
+import i18n from "@/i18n";
 
 export function useTranslate() {
-  const { t } = useTranslation();
-  return t;
+  return i18n.t;
 }

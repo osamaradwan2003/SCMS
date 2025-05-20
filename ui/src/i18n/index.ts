@@ -2,22 +2,23 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
-import en from "./locales/en/auth.json";
-import ar from "./locales/ar/auth.json";
-
+import authEn from "./locales/en/auth.json";
+import authAr from "./locales/ar/auth.json";
+import indexEn from "./locales/en/index.json";
+import indexAr from "./locales/ar/index.json";
 i18n
   .use(LanguageDetector) // Detects browser language
   .use(initReactI18next) // Integrates with React
   .init({
     resources: {
-      en: { auth: en },
-      ar: { auth: ar },
+      en: { auth: authEn, index: indexEn },
+      ar: { auth: authAr, index: indexAr },
     },
-    lng: "ar", // default
+    // lng: "ar", // default
     fallbackLng: "en",
 
     ns: ["auth", "index"],
-    defaultNS: "index",
+    defaultNS: "auth",
 
     interpolation: {
       escapeValue: false, // React already escapes
