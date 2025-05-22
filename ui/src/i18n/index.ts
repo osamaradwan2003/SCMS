@@ -6,19 +6,21 @@ import authEn from "./locales/en/auth.json";
 import authAr from "./locales/ar/auth.json";
 import indexEn from "./locales/en/index.json";
 import indexAr from "./locales/ar/index.json";
+import sidebarEn from "./locales/en/sidebar.json";
+import sidebarAr from "./locales/ar/sidebar.json";
 i18n
   .use(LanguageDetector) // Detects browser language
   .use(initReactI18next) // Integrates with React
   .init({
     resources: {
-      en: { auth: authEn, index: indexEn },
-      ar: { auth: authAr, index: indexAr },
+      en: { auth: authEn, index: indexEn, sidebar: sidebarEn },
+      ar: { auth: authAr, index: indexAr, sidebar: sidebarAr },
     },
     // lng: "ar", // default
     fallbackLng: "en",
 
-    ns: ["auth", "index"],
-    defaultNS: "auth",
+    ns: ["auth", "index", "sidebar"],
+    defaultNS: "index",
 
     interpolation: {
       escapeValue: false, // React already escapes

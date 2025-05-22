@@ -1,0 +1,18 @@
+{
+  "dashboard": "لوحة التحكم",
+  "students": "الطلاب",
+  "guardians": "أولياء الأمور",
+  "classes": "الفصول",
+  "subjects": "المواد",
+  "reports": "التقارير",
+  "weeklyReports": "التقارير الأسبوعية",
+  "employees": "الموظفون",
+  "attendance": "الحضور",
+  "payroll": "الرواتب",
+  "finance": "المالية",
+  "transactions": "المعاملات",
+  "categories": "الفئات",
+  "banks": "الحسابات البنكية",
+  "messages": "الرسائل",
+  "settings": "الإعدادات"
+}

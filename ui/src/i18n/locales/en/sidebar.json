@@ -1,0 +1,18 @@
+{
+  "dashboard": "Dashboard",
+  "students": "Students",
+  "guardians": "Guardians",
+  "classes": "Classes",
+  "subjects": "Subjects",
+  "reports": "Reports",
+  "weeklyReports": "Weekly Reports",
+  "employees": "Employees",
+  "attendance": "Attendance",
+  "payroll": "Payroll",
+  "finance": "Finance",
+  "transactions": "Transactions",
+  "categories": "Categories",
+  "banks": "Bank Accounts",
+  "messages": "Messages",
+  "settings": "Settings"
+}

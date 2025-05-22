@@ -12,3 +12,248 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id                 String               @id @default(uuid()) @db.Uuid
+  username           String               @unique
+  password           String
+  name               String
+  phone              String?
+  email              String?
+  messages           MessageLog[]
+  createdReports     WeeklyReport[]
+  Transaction        Transaction[]
+  Student            Student[]
+  Subscriptions      Subscriptions[]
+  Guardian           Guardian[]
+  Class              Class[]
+  Subject            Subject[]
+  Employee           Employee[]
+  EmployeeAttendance EmployeeAttendance[]
+  StuednAttendance   StuednAttendance[]
+  Payroll            Payroll[]
+  Bank               Bank[]
+  Category           Category[]
+  IncomeType         IncomeType[]
+  ExpenseType        ExpenseType[]
+  created_at         DateTime             @default(now())
+  updated_at         DateTime             @updatedAt
+  image              String?
+}
+
+model Student {
+  id               String             @id @default(uuid()) @db.Uuid
+  name             String
+  dob              DateTime
+  phone            String
+  classId          String?            @db.Uuid
+  class            Class?             @relation(fields: [classId], references: [id])
+  guardianId       String?            @db.Uuid
+  reports          WeeklyReport[]
+  messages         MessageLog[]
+  Guardian         Guardian?          @relation(fields: [guardianId], references: [id])
+  StuednAttendance StuednAttendance[]
+  Subscriptions    Subscriptions?     @relation(fields: [subscriptionsId], references: [id])
+  subscriptionsId  String?            @db.Uuid
+  created_by       User?              @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId           String?            @db.Uuid
+  created_at       DateTime           @default(now())
+  updated_at       DateTime           @updatedAt
+}
+
+model Subscriptions {
+  id         String    @id @default(uuid()) @db.Uuid
+  name       String
+  value      Decimal
+  notes      String?
+  students   Student[]
+  created_by User?     @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId     String?   @db.Uuid
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+}
+
+model Guardian {
+  id             String       @id @default(uuid()) @db.Uuid
+  name           String
+  phone          String
+  relationDegree String // e.g., Father, Mother
+  messages       MessageLog[]
+  Student        Student[]
+  created_by     User?        @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId         String?      @db.Uuid
+  created_at     DateTime     @default(now())
+  updated_at     DateTime     @updatedAt
+}
+
+model Class {
+  id         String     @id @default(uuid()) @db.Uuid
+  name       String
+  students   Student[]
+  subjects   Subject[]  @relation("ClassSubjects")
+  teachers   Employee[]
+  created_by User?      @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId     String?    @db.Uuid
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
+}
+
+model Subject {
+  id         String         @id @default(uuid()) @db.Uuid
+  name       String
+  reports    WeeklyReport[]
+  classes    Class[]        @relation("ClassSubjects")
+  created_by User?          @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId     String?        @db.Uuid
+  created_at DateTime       @default(now())
+  updated_at DateTime       @updatedAt
+}
+
+model WeeklyReport {
+  id          String   @id @default(uuid()) @db.Uuid
+  studentId   String   @db.Uuid
+  subjectId   String   @db.Uuid
+  week        DateTime
+  strengths   String
+  weaknesses  String
+  score       Int
+  adherence   String
+  createdById String   @db.Uuid
+  student     Student  @relation(fields: [studentId], references: [id])
+  subject     Subject  @relation(fields: [subjectId], references: [id])
+  created_by  User?    @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId      String?  @db.Uuid
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
+
+model MessageLog {
+  id         String    @id @default(uuid()) @db.Uuid
+  senderId   String?   @db.Uuid
+  studentId  String?   @db.Uuid
+  guardianId String?   @db.Uuid
+  type       String // "bulk", "private", "report"
+  content    String
+  sentAt     DateTime  @default(now())
+  sender     User?     @relation(fields: [senderId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  student    Student?  @relation(fields: [studentId], references: [id])
+  guardian   Guardian? @relation(fields: [guardianId], references: [id])
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+}
+
+model Employee {
+  id         String               @id @default(uuid()) @db.Uuid
+  name       String
+  role       String
+  is_teacher Boolean              @default(false)
+  joinDate   DateTime
+  salary     Float
+  attendance EmployeeAttendance[]
+  payrolls   Payroll[]
+  Class      Class?               @relation(fields: [classId], references: [id])
+  classId    String?              @db.Uuid
+  created_by User?                @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId     String?              @db.Uuid
+  created_at DateTime             @default(now())
+  updated_at DateTime             @updatedAt
+}
+
+model EmployeeAttendance {
+  id         String   @id @default(uuid()) @db.Uuid
+  employeeId String   @db.Uuid
+  date       DateTime
+  status     String
+  employee   Employee @relation(fields: [employeeId], references: [id])
+  created_by User?    @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId     String?  @db.Uuid
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model StuednAttendance {
+  id         String   @id @default(uuid()) @db.Uuid
+  studentID  String   @db.Uuid
+  date       DateTime
+  status     String
+  student    Student  @relation(fields: [studentID], references: [id])
+  created_by User?    @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId     String?  @db.Uuid
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Payroll {
+  id         String   @id @default(uuid()) @db.Uuid
+  employeeId String   @db.Uuid
+  month      DateTime
+  amount     Float
+  status     String
+  employee   Employee @relation(fields: [employeeId], references: [id])
+  created_by User?    @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId     String?  @db.Uuid
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Bank {
+  id           String        @id @default(uuid()) @db.Uuid
+  name         String
+  balance      Float         @default(0)
+  transactions Transaction[]
+  created_by   User?         @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId       String?       @db.Uuid
+  created_at   DateTime      @default(now())
+  updated_at   DateTime      @updatedAt
+}
+
+model Category {
+  id              String        @id @default(uuid()) @db.Uuid
+  name            String
+  type            String // "income" or "expense"
+  calculateMethod String // "add" or "subtract"
+  transactions    Transaction[]
+  created_by      User?         @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId          String?       @db.Uuid
+  created_at      DateTime      @default(now())
+  updated_at      DateTime      @updatedAt
+}
+
+model IncomeType {
+  id           String        @id @default(uuid()) @db.Uuid
+  name         String
+  transactions Transaction[]
+  created_by   User?         @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId       String?       @db.Uuid
+  created_at   DateTime      @default(now())
+  updated_at   DateTime      @updatedAt
+}
+
+model ExpenseType {
+  id           String        @id @default(uuid()) @db.Uuid
+  name         String
+  transactions Transaction[]
+  created_by   User?         @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId       String?       @db.Uuid
+  created_at   DateTime      @default(now())
+  updated_at   DateTime      @updatedAt
+}
+
+model Transaction {
+  id            String       @id @default(uuid()) @db.Uuid
+  categoryId    String       @db.Uuid
+  bankId        String       @db.Uuid
+  incomeTypeId  String?      @db.Uuid
+  expenseTypeId String?      @db.Uuid
+  date          DateTime
+  amount        Float
+  note          String?
+  category      Category     @relation(fields: [categoryId], references: [id])
+  bank          Bank         @relation(fields: [bankId], references: [id])
+  incomeType    IncomeType?  @relation(fields: [incomeTypeId], references: [id])
+  expenseType   ExpenseType? @relation(fields: [expenseTypeId], references: [id])
+  created_by    User?        @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId        String?      @db.Uuid
+  created_at    DateTime     @default(now())
+  updated_at    DateTime     @updatedAt
+}

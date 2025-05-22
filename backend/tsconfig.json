@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
     "paths": {
-      "@": ["./*"],
-      "@controllers": ["./controllers"],
-      "@routes": ["./routes"],
-      "@db": ["./db"],
-      "@utils": ["./utils"]
+      "@/*": ["./*"],
+      "@modules/*": ["./modules/*"],
+      "@routes/*": ["./routes/*"],
+      "@db/*": ["./db/*"],
+      "@utils/*": ["./utils/*"]
     },
     /* Visit https://aka.ms/tsconfig to read more about this file */
 

@@ -9,7 +9,9 @@ import Sidebar from "./components/sidebar/Sidebar";
 export default function MainLayout() {
   return (
     <>
-      <RequireAuth redirect_path={LOGIN_PATH}>
+      <RequireAuth
+        redirect_path={`${LOGIN_PATH}?callbackUrl=${window.location.pathname}`}
+      >
         <App>
           <Layout>
             <Sidebar />

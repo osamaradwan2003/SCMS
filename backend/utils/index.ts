@@ -1,18 +1,11 @@
-import path from "path";
-import fs from "fs";
-import { type Express } from "express";
+import { generateToken, verifyToken } from "./jwt";
+import { comparePassword, hashPassword } from "./password";
+import { loadRoutes } from "./routes";
 
-export function loadRoutes(app: Express, execlude?: string[]) {
-  const path_route = path.join(__dirname, "../", "./modules");
-  fs.readdirSync(path_route, { recursive: true }).forEach(function (file) {
-    if ((file as string).endsWith("route.ts")) {
-      let path_name = (file as string)
-        .replace(path.sep + "route.ts", "")
-        .replace("\\", "/");
-      if (execlude && execlude?.indexOf(path_name) > -1) return;
-      // console.log(path_name);
-      const route = require(path.join(path_route, file as string));
-      app.use(`/${path_name}`, route.default || route);
-    }
-  });
-}
+export {
+  loadRoutes,
+  hashPassword,
+  comparePassword,
+  generateToken,
+  verifyToken,
+};
