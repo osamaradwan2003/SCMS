@@ -99,3 +99,42 @@ export const yupValidator = (schema: Schema) => ({
     await schema.validateSync(value);
   },
 });
+
+export function calculateAge(dateOfBirth: Date): number {
+  const today: Date = new Date();
+  const birthDate: Date = new Date(dateOfBirth);
+  let age: number = today.getFullYear() - birthDate.getFullYear();
+  const month: number = today.getMonth() - birthDate.getMonth();
+
+  if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  return age;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function CreateFormData(values: Record<string, string | any>) {
+  const formData = new FormData();
+  for (const name in values) {
+    if (values[name] == undefined) continue;
+    // console.log(values[name])
+    if (name == "files") {
+      for (let i = 0; i < values[name].fileList.length; i++) {
+        formData.append(
+          `${name}[${i}]`,
+          values[name].fileList[i].originFileObj
+        );
+      }
+      continue;
+    }
+    formData.append(name, values[name]);
+  }
+  return formData;
+}
+export function getLastXDay(x: number): Date {
+  const today = new Date();
+  const lastDay = new Date(today);
+  lastDay.setDate(today.getDate() - x);
+  return lastDay;
+}

@@ -2,7 +2,7 @@ import { Layout, Avatar, Dropdown, theme } from "antd";
 import { useAuth } from "@/hooks/auth";
 const { Header } = Layout;
 import headerStyle from "./header.module.css";
-import { useProfileLinks } from "@/hooks/Routes";
+import { useProfileLinks } from "@/hooks/routes";
 
 import ThemeToggler from "@/components/buttons/ThemeToggler";
 import LangToggler from "@/components/buttons/LangToggler";

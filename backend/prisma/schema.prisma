@@ -45,16 +45,20 @@ model Student {
   id               String             @id @default(uuid()) @db.Uuid
   name             String
   dob              DateTime
-  phone            String
+  phone            String?
+  image            String?
+  gender           String?            @db.Char(10)
+  address          String
+  docs             String?
   classId          String?            @db.Uuid
   class            Class?             @relation(fields: [classId], references: [id])
-  guardianId       String?            @db.Uuid
+  guardianId       String             @db.Uuid
   reports          WeeklyReport[]
   messages         MessageLog[]
-  Guardian         Guardian?          @relation(fields: [guardianId], references: [id])
+  Guardian         Guardian           @relation(fields: [guardianId], references: [id])
   StuednAttendance StuednAttendance[]
   Subscriptions    Subscriptions?     @relation(fields: [subscriptionsId], references: [id])
-  subscriptionsId  String?            @db.Uuid
+  subscriptionsId  String             @db.Uuid
   created_by       User?              @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
   userId           String?            @db.Uuid
   created_at       DateTime           @default(now())

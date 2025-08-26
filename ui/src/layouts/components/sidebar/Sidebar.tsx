@@ -1,4 +1,4 @@
-import { useSidebarLinks } from "@/hooks/Routes";
+import { useSidebarLinks } from "@/hooks/routes";
 import { Layout, Menu, Divider, Image, Typography, theme } from "antd";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";

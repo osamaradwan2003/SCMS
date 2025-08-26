@@ -1,0 +1,41 @@
+{
+  "name": "الاسم",
+  "dob": "تاريخ الميلاد",
+  "phone": "رقم الهاتف",
+  "gender": "النوع",
+  "address": "العنوان",
+  "image": "الصورة",
+  "docs": "المستندات",
+  "classId": "الصف",
+  "guardianId": "الولي",
+  "subscriptionsId": "الاشتراك",
+  "submit": "إنشاء طالب",
+
+  "placeholder": {
+    "name": "ادخل اسم الطالب",
+    "dob": "اختر تاريخ الميلاد",
+    "phone": "ادخل رقم الهاتف",
+    "gender": "اختر النوع",
+    "address": "ادخل العنوان",
+    "classId": "ابحث عن الصف",
+    "guardianId": "ابحث عن الولي",
+    "subscriptionsId": "ابحث عن الاشتراك"
+  },
+
+  "validation": {
+    "name_required": "الاسم مطلوب",
+    "dob_required": "تاريخ الميلاد مطلوب",
+    "phone_invalid": "رقم الهاتف غير صحيح",
+    "address_required": "العنوان مطلوب",
+    "guardian_required": "الولي مطلوب",
+    "subscription_required": "الاشتراك مطلوب",
+    "gender_invalid": "اختر النوع بشكل صحيح",
+    "image_required": "يجب رفع صورة",
+    "gender_required": "يجب إدخال نوع الطالب"
+  },
+
+  "gender_options": {
+    "male": "ذكر",
+    "female": "أنثى"
+  }
+}

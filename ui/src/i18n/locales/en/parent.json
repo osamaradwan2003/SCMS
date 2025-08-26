@@ -1,0 +1,39 @@
+{
+  "name": "Name",
+  "dob": "Date of Birth",
+  "phone": "Phone Number",
+  "gender": "Gender",
+  "address": "Address",
+  "image": "Image",
+  "docs": "Documents",
+  "classId": "Class",
+  "guardianId": "Guardian",
+  "subscriptionsId": "Subscription",
+  "submit": "Create Student",
+
+  "placeholder": {
+    "name": "Enter student name",
+    "dob": "Select date of birth",
+    "phone": "Enter phone number",
+    "gender": "Select gender",
+    "address": "Enter address",
+    "classId": "Search class",
+    "guardianId": "Search guardian",
+    "subscriptionsId": "Search subscription"
+  },
+
+  "validation": {
+    "name_required": "Name is required",
+    "dob_required": "Date of birth is required",
+    "phone_invalid": "Invalid phone number",
+    "address_required": "Address is required",
+    "subscription_required": "Subscription is required",
+    "gender_invalid": "Select a valid gender",
+    "image_required": "Image must be uploaded"
+  },
+
+  "gender_options": {
+    "male": "Male",
+    "female": "Female"
+  }
+}

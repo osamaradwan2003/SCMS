@@ -19,6 +19,7 @@ export default function MainLayout() {
               <HeaderBar />
               <Suspense fallback={<Spin />}>
                 <Layout.Content
+                  className="padding-2"
                   style={{
                     backgroundColor: theme.useToken().token.colorBgBase,
                     flexGrow: 1,

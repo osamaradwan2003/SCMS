@@ -14,3 +14,17 @@ body,
 .padding-2 {
   padding: 2em 2em;
 }
+
+.default-form-style {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1%;
+}
+
+.default-form-style > * {
+  flex-basis: 49%;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
