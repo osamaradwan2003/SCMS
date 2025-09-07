@@ -1,0 +1,69 @@
+{
+  "title": "الرسائل",
+  "create_title": "إرسال رسالة",
+  "edit_title": "تعديل رسالة",
+  "content": "المحتوى",
+  "recipient": "المستقبل",
+  "type": "النوع",
+  "sentAt": "تاريخ الإرسال",
+  "isRead": "حالة القراءة",
+  "submit": "إرسال الرسالة",
+  "update": "تحديث الرسالة",
+  "delete": "حذف الرسالة",
+  "delete_confirm": "هل أنت متأكد من حذف هذه الرسالة؟",
+
+  "placeholder": {
+    "content": "أدخل محتوى الرسالة",
+    "recipient": "اختر المستقبل",
+    "type": "اختر نوع الرسالة"
+  },
+
+  "validation": {
+    "content_required": "محتوى الرسالة مطلوب",
+    "recipient_required": "المستقبل مطلوب",
+    "type_required": "نوع الرسالة مطلوب"
+  },
+
+  "type_options": {
+    "private": "خاصة",
+    "bulk": "جماعية",
+    "report": "تقرير"
+  },
+
+  "read_status": {
+    "read": "مقروءة",
+    "unread": "غير مقروءة"
+  },
+
+  "messages": {
+    "create_success": "تم إرسال الرسالة بنجاح",
+    "update_success": "تم تحديث الرسالة بنجاح",
+    "delete_success": "تم حذف الرسالة بنجاح",
+    "create_error": "فشل في إرسال الرسالة",
+    "update_error": "فشل في تحديث الرسالة",
+    "delete_error": "فشل في حذف الرسالة",
+    "mark_read_success": "تم تعليم الرسالة كمقروءة",
+    "mark_unread_success": "تم تعليم الرسالة كغير مقروءة"
+  },
+
+  "table": {
+    "content": "المحتوى",
+    "recipient": "المستقبل",
+    "type": "النوع",
+    "sentAt": "تاريخ الإرسال",
+    "isRead": "الحالة",
+    "actions": "الإجراءات"
+  },
+
+  "actions": {
+    "mark_read": "تعليم كمقروءة",
+    "mark_unread": "تعليم كغير مقروءة",
+    "reply": "رد"
+  },
+
+  "filters": {
+    "all_types": "جميع الأنواع",
+    "all_recipients": "جميع المستقبلين",
+    "read_status": "حالة القراءة"
+  }
+}

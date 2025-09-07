@@ -1,0 +1,69 @@
+{
+  "title": "Messages",
+  "create_title": "Send Message",
+  "edit_title": "Edit Message",
+  "content": "Content",
+  "recipient": "Recipient",
+  "type": "Type",
+  "sentAt": "Sent At",
+  "isRead": "Read Status",
+  "submit": "Send Message",
+  "update": "Update Message",
+  "delete": "Delete Message",
+  "delete_confirm": "Are you sure you want to delete this message?",
+
+  "placeholder": {
+    "content": "Enter message content",
+    "recipient": "Select recipient",
+    "type": "Select message type"
+  },
+
+  "validation": {
+    "content_required": "Message content is required",
+    "recipient_required": "Recipient is required",
+    "type_required": "Message type is required"
+  },
+
+  "type_options": {
+    "private": "Private",
+    "bulk": "Bulk",
+    "report": "Report"
+  },
+
+  "read_status": {
+    "read": "Read",
+    "unread": "Unread"
+  },
+
+  "messages": {
+    "create_success": "Message sent successfully",
+    "update_success": "Message updated successfully",
+    "delete_success": "Message deleted successfully",
+    "create_error": "Failed to send message",
+    "update_error": "Failed to update message",
+    "delete_error": "Failed to delete message",
+    "mark_read_success": "Message marked as read",
+    "mark_unread_success": "Message marked as unread"
+  },
+
+  "table": {
+    "content": "Content",
+    "recipient": "Recipient",
+    "type": "Type",
+    "sentAt": "Sent At",
+    "isRead": "Status",
+    "actions": "Actions"
+  },
+
+  "actions": {
+    "mark_read": "Mark as Read",
+    "mark_unread": "Mark as Unread",
+    "reply": "Reply"
+  },
+
+  "filters": {
+    "all_types": "All Types",
+    "all_recipients": "All Recipients",
+    "read_status": "Read Status"
+  }
+}

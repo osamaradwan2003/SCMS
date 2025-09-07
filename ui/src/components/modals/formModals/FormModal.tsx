@@ -1,7 +1,7 @@
-import { FormSchema } from "../../../@types";
-import { Modal } from "antd";
-import React, { cloneElement, ReactElement, useReducer } from "react";
-import CreateForm from "../../Form/CreateForm.tsx";
+import { type FormSchema } from "@/@types";
+import { Modal, type ModalProps } from "antd";
+import React, { cloneElement, type ReactElement, useReducer } from "react";
+import CreateForm from "@/components/Form/CreateForm";
 
 export declare type FromModalProps = {
   formSchema: FormSchema[];
@@ -9,7 +9,10 @@ export declare type FromModalProps = {
     dispatch: React.Dispatch<modalActions>,
     e: React.MouseEvent<HTMLButtonElement>
   ) => void;
-  button: ReactElement;
+  button: ReactElement<{
+    onClick?: (e: React.MouseEvent<HTMLElement>) => void;
+  }>;
+  modelProps?: ModalProps;
 };
 export declare type modalActions = "open" | "close" | "loading" | "loaded";
 
@@ -32,10 +35,16 @@ function reducer(state: typeof modalStates, action: modalActions) {
       return state;
   }
 }
-function FormModal({ formSchema, handelFunc, button }: FromModalProps) {
+function FormModal({
+  formSchema,
+  handelFunc,
+  button,
+  ...modelProps
+}: FromModalProps) {
   const [modalReducer, dispatch] = useReducer(reducer, modalStates);
   const modalBtn = cloneElement(button, {
-    onClick: () => {
+    onClick: (e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault();
       dispatch("open");
     },
   });
@@ -43,6 +52,7 @@ function FormModal({ formSchema, handelFunc, button }: FromModalProps) {
     <>
       {modalBtn}
       <Modal
+        {...modelProps}
         open={modalReducer.isOpen}
         confirmLoading={modalReducer.isLoading}
         onOk={(e) => {

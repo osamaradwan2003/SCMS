@@ -12,12 +12,17 @@ import { Navigate } from "react-router-dom";
 
 const AuthProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [user, setUser] = useState<User | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(true);
   const isAuthenticated = user != undefined;
   // const navigate = useNavigate();
 
   useEffect(() => {
     const token = getFromLocalStorege(TOKEN_KEY);
-    if (!token) return;
+    if (!token) {
+      setIsLoading(false);
+      return;
+    }
+    
     vrifyToken()
       .then((res) => res.data)
       .then((res) => {
@@ -26,6 +31,9 @@ const AuthProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
       .catch(() => {
         logout();
         Navigate({ to: LOGIN_PATH, replace: true });
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
@@ -49,6 +57,7 @@ const AuthProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
         login,
         logout,
         isAuthenticated,
+        isLoading,
       }}
     >
       {children}

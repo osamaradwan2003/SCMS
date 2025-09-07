@@ -1,0 +1,113 @@
+{
+  "title": "Guardians",
+  "create_title": "Create Guardian",
+  "edit_title": "Edit Guardian",
+  "view_title": "Guardian Details",
+  "guardians_list": "Guardians List",
+  "create_guardian": "Create Guardian",
+  "edit_guardian": "Edit Guardian",
+  "view_guardian": "View Guardian",
+  "search_placeholder": "Search guardians...",
+  "no_data": "No guardians found",
+  "loading": "Loading guardians...",
+  "of": "of",
+  "items": "items",
+  "yes": "Yes",
+  "no": "No",
+  "create": "Create",
+  "update": "Update",
+  "edit": "Edit",
+  "delete": "Delete",
+  "view": "View",
+  "cancel": "Cancel",
+  "save": "Save",
+  "back": "Back",
+  "actions": "Actions",
+  "delete_confirmation": "Delete Guardian",
+  "delete_description": "Are you sure you want to delete this guardian? This action cannot be undone.",
+
+  "fields": {
+    "name": "Full Name",
+    "phone": "Phone Number",
+    "email": "Email Address",
+    "address": "Address",
+    "relationship": "Relationship",
+    "occupation": "Occupation",
+    "emergencyContact": "Emergency Contact",
+    "students": "Students",
+    "profile_photo": "Profile Photo",
+    "documents": "Documents"
+  },
+
+  "placeholder": {
+    "name": "Enter guardian name",
+    "firstName": "Enter first name",
+    "phone": "Enter phone number",
+    "relation_degree": "Enter relation degree",
+    "email": "Enter email address",
+    "address": "Enter address",
+    "relationship": "Select relationship",
+    "occupation": "Enter occupation"
+  },
+
+  "placeholders": {
+    "name": "Enter guardian name",
+    "firstName": "Enter first name",
+    "phone": "Enter phone number",
+    "relation_degree": "Enter relation degree",
+    "email": "Enter email address",
+    "address": "Enter address",
+    "relationship": "Select relationship",
+    "occupation": "Enter occupation"
+  },
+
+  "validation": {
+    "guardiansName_required": "Guardian name is required",
+    "lastName_required": "Last name is required",
+    "phone_required": "Phone number is required",
+    "phone_invalid": "Please enter a valid phone number",
+    "email_required": "Email is required",
+    "email_invalid": "Please enter a valid email address",
+    "relationship_required": "Relationship is required"
+  },
+
+  "relationship_options": {
+    "father": "Father",
+    "mother": "Mother",
+    "grandfather": "Grandfather",
+    "grandmother": "Grandmother",
+    "uncle": "Uncle",
+    "aunt": "Aunt",
+    "brother": "Brother",
+    "sister": "Sister",
+    "other": "Other"
+  },
+
+  "help": {
+    "profile_photo": "Upload a profile photo for the guardian (JPG, PNG, GIF supported)",
+    "documents": "Upload relevant documents (PDF, DOC, DOCX, TXT, or images)"
+  },
+
+  "messages": {
+    "create_success": "Guardian created successfully",
+    "update_success": "Guardian updated successfully",
+    "delete_success": "Guardian deleted successfully",
+    "create_error": "Failed to create guardian",
+    "update_error": "Failed to update guardian",
+    "delete_error": "Failed to delete guardian",
+    "fetch_error": "Failed to load guardian data"
+  },
+
+  "table": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "relationship": "Relationship",
+    "occupation": "Occupation",
+    "emergencyContact": "Emergency Contact",
+    "students": "Students",
+    "actions": "Actions"
+  }
+}

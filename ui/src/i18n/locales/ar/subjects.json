@@ -1,0 +1,81 @@
+{
+  "title": "المواد",
+  "create_title": "إضافة مادة",
+  "edit_title": "تعديل مادة",
+  "view_title": "تفاصيل المادة",
+  "subjects_list": "قائمة المواد",
+  "create_subject": "إضافة مادة",
+  "edit_subject": "تعديل مادة",
+  "view_subject": "عرض المادة",
+  "search_placeholder": "البحث في المواد...",
+  "no_data": "لا توجد مواد",
+  "loading": "جاري تحميل المواد...",
+  "of": "من",
+  "items": "عنصر",
+  "yes": "نعم",
+  "no": "لا",
+  "create": "إنشاء",
+  "update": "تحديث",
+  "edit": "تعديل",
+  "delete": "حذف",
+  "view": "عرض",
+  "cancel": "إلغاء",
+  "save": "حفظ",
+  "back": "رجوع",
+  "delete_confirmation": "حذف المادة",
+  "delete_description": "هل أنت متأكد من حذف هذه المادة؟ لا يمكن التراجع عن هذا الإجراء.",
+
+  "fields": {
+    "name": "اسم المادة",
+    "description": "الوصف",
+    "code": "رمز المادة",
+    "credits": "الساعات المعتمدة",
+    "classId": "الفصل",
+    "class": "الفصل"
+  },
+
+  "placeholder": {
+    "name": "أدخل اسم المادة",
+    "code": "أدخل رمز المادة",
+    "description": "أدخل وصف المادة",
+    "credits": "أدخل عدد الساعات المعتمدة",
+    "classId": "اختر الفصل"
+  },
+
+  "placeholders": {
+    "name": "أدخل اسم المادة",
+    "code": "أدخل رمز المادة",
+    "description": "أدخل وصف المادة",
+    "credits": "أدخل عدد الساعات المعتمدة",
+    "classId": "اختر الفصل"
+  },
+
+  "validation": {
+    "name_required": "اسم المادة مطلوب",
+    "code_required": "رمز المادة مطلوب",
+    "code_unique": "يجب أن يكون رمز المادة فريد",
+    "credits_required": "الساعات المعتمدة مطلوبة",
+    "credits_min": "يجب أن تكون الساعات المعتمدة على الأقل 1",
+    "credits_max": "لا يمكن أن تتجاوز الساعات المعتمدة 10",
+    "class_required": "الفصل مطلوب"
+  },
+
+  "messages": {
+    "create_success": "تم إنشاء المادة بنجاح",
+    "update_success": "تم تحديث المادة بنجاح",
+    "delete_success": "تم حذف المادة بنجاح",
+    "create_error": "فشل في إنشاء المادة",
+    "update_error": "فشل في تحديث المادة",
+    "delete_error": "فشل في حذف المادة",
+    "fetch_error": "فشل في تحميل بيانات المادة"
+  },
+
+  "table": {
+    "name": "الاسم",
+    "code": "الرمز",
+    "description": "الوصف",
+    "credits": "الساعات المعتمدة",
+    "class": "الفصل",
+    "actions": "الإجراءات"
+  }
+}

@@ -12,6 +12,7 @@ interface AuthContextType {
   login: (user: User, token: string) => void;
   logout: () => boolean;
   isAuthenticated: boolean;
+  isLoading: boolean;
 }
 
 export interface VerifyTokenResponse {

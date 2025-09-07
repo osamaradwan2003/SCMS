@@ -7,6 +7,7 @@ import {
   SelectProps,
   ButtonProps,
 } from "antd";
+import type { TextAreaProps } from "antd/es/input";
 
 /*
  *FormSchema Data type for Create Form Component
@@ -23,12 +24,14 @@ declare type FormSchema = {
     | "field"
     | "select"
     | "field"
+    | "textarea"
     | "input";
   rules?: Schema;
   fieldProps?: FormItemProps;
   inputProps?: InputProps;
   uploadProp?: UploadProps;
   autoCompleteProps?: AutoCompleteProps;
+  textareaProps?: TextAreaProps;
   selectProps?: SelectProps;
   buttonProps?: ButtonProps;
 };

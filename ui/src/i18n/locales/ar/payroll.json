@@ -1,0 +1,57 @@
+{
+  "title": "الرواتب",
+  "create_title": "إنشاء راتب",
+  "edit_title": "تعديل راتب",
+  "employee": "الموظف",
+  "amount": "المبلغ",
+  "month": "الشهر",
+  "status": "الحالة",
+  "submit": "حفظ الراتب",
+  "update": "تحديث الراتب",
+  "delete": "حذف الراتب",
+  "delete_confirm": "هل أنت متأكد من حذف سجل الراتب؟",
+
+  "placeholder": {
+    "employee": "اختر الموظف",
+    "amount": "أدخل المبلغ",
+    "month": "اختر الشهر",
+    "status": "اختر الحالة"
+  },
+
+  "validation": {
+    "employee_required": "الموظف مطلوب",
+    "amount_required": "المبلغ مطلوب",
+    "amount_min": "المبلغ يجب أن يكون أكبر من 0",
+    "month_required": "الشهر مطلوب",
+    "status_required": "الحالة مطلوبة"
+  },
+
+  "status_options": {
+    "pending": "معلق",
+    "paid": "مدفوع",
+    "cancelled": "ملغي"
+  },
+
+  "messages": {
+    "create_success": "تم إنشاء الراتب بنجاح",
+    "update_success": "تم تحديث الراتب بنجاح",
+    "delete_success": "تم حذف الراتب بنجاح",
+    "create_error": "فشل في إنشاء الراتب",
+    "update_error": "فشل في تحديث الراتب",
+    "delete_error": "فشل في حذف الراتب"
+  },
+
+  "table": {
+    "employee": "الموظف",
+    "amount": "المبلغ",
+    "month": "الشهر",
+    "status": "الحالة",
+    "actions": "الإجراءات"
+  },
+
+  "filters": {
+    "all_employees": "جميع الموظفين",
+    "all_status": "جميع الحالات",
+    "month_range": "نطاق الشهر"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "title": "أنواع الدخل",
+  "create_title": "إضافة نوع دخل",
+  "edit_title": "تعديل نوع دخل",
+  "name": "الاسم",
+  "description": "الوصف",
+  "submit": "حفظ نوع الدخل",
+  "update": "تحديث نوع الدخل",
+  "delete": "حذف نوع الدخل",
+  "delete_confirm": "هل أنت متأكد من حذف نوع الدخل؟",
+
+  "placeholder": {
+    "name": "أدخل اسم نوع الدخل",
+    "description": "أدخل الوصف"
+  },
+
+  "validation": {
+    "name_required": "الاسم مطلوب",
+    "name_min": "الاسم يجب أن يكون على الأقل حرفين",
+    "name_max": "الاسم يجب ألا يزيد عن 50 حرف"
+  },
+
+  "messages": {
+    "create_success": "تم إضافة نوع الدخل بنجاح",
+    "update_success": "تم تحديث نوع الدخل بنجاح",
+    "delete_success": "تم حذف نوع الدخل بنجاح",
+    "create_error": "فشل في إضافة نوع الدخل",
+    "update_error": "فشل في تحديث نوع الدخل",
+    "delete_error": "فشل في حذف نوع الدخل"
+  },
+
+  "table": {
+    "name": "الاسم",
+    "description": "الوصف",
+    "transactions": "المعاملات",
+    "actions": "الإجراءات"
+  }
+}

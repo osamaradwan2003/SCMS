@@ -1,0 +1,56 @@
+{
+  "title": "الحضور",
+  "create_title": "تسجيل الحضور",
+  "edit_title": "تعديل الحضور",
+  "student": "الطالب",
+  "date": "التاريخ",
+  "status": "الحالة",
+  "notes": "الملاحظات",
+  "submit": "حفظ الحضور",
+  "update": "تحديث الحضور",
+  "delete": "حذف الحضور",
+  "delete_confirm": "هل أنت متأكد من حذف سجل الحضور؟",
+
+  "placeholder": {
+    "student": "اختر الطالب",
+    "date": "اختر التاريخ",
+    "status": "اختر الحالة",
+    "notes": "أدخل الملاحظات"
+  },
+
+  "validation": {
+    "student_required": "الطالب مطلوب",
+    "date_required": "التاريخ مطلوب",
+    "status_required": "الحالة مطلوبة"
+  },
+
+  "status_options": {
+    "present": "حاضر",
+    "absent": "غائب",
+    "late": "متأخر",
+    "excused": "غياب بعذر"
+  },
+
+  "messages": {
+    "create_success": "تم تسجيل الحضور بنجاح",
+    "update_success": "تم تحديث الحضور بنجاح",
+    "delete_success": "تم حذف الحضور بنجاح",
+    "create_error": "فشل في تسجيل الحضور",
+    "update_error": "فشل في تحديث الحضور",
+    "delete_error": "فشل في حذف الحضور"
+  },
+
+  "table": {
+    "student": "الطالب",
+    "date": "التاريخ",
+    "status": "الحالة",
+    "notes": "الملاحظات",
+    "actions": "الإجراءات"
+  },
+
+  "filters": {
+    "all_students": "جميع الطلاب",
+    "all_status": "جميع الحالات",
+    "date_range": "نطاق التاريخ"
+  }
+}

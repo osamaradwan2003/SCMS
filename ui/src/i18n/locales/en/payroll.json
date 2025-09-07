@@ -1,0 +1,57 @@
+{
+  "title": "Payroll",
+  "create_title": "Create Payroll",
+  "edit_title": "Edit Payroll",
+  "employee": "Employee",
+  "amount": "Amount",
+  "month": "Month",
+  "status": "Status",
+  "submit": "Save Payroll",
+  "update": "Update Payroll",
+  "delete": "Delete Payroll",
+  "delete_confirm": "Are you sure you want to delete this payroll record?",
+
+  "placeholder": {
+    "employee": "Select employee",
+    "amount": "Enter amount",
+    "month": "Select month",
+    "status": "Select status"
+  },
+
+  "validation": {
+    "employee_required": "Employee is required",
+    "amount_required": "Amount is required",
+    "amount_min": "Amount must be greater than 0",
+    "month_required": "Month is required",
+    "status_required": "Status is required"
+  },
+
+  "status_options": {
+    "pending": "Pending",
+    "paid": "Paid",
+    "cancelled": "Cancelled"
+  },
+
+  "messages": {
+    "create_success": "Payroll created successfully",
+    "update_success": "Payroll updated successfully",
+    "delete_success": "Payroll deleted successfully",
+    "create_error": "Failed to create payroll",
+    "update_error": "Failed to update payroll",
+    "delete_error": "Failed to delete payroll"
+  },
+
+  "table": {
+    "employee": "Employee",
+    "amount": "Amount",
+    "month": "Month",
+    "status": "Status",
+    "actions": "Actions"
+  },
+
+  "filters": {
+    "all_employees": "All Employees",
+    "all_status": "All Status",
+    "month_range": "Month Range"
+  }
+}

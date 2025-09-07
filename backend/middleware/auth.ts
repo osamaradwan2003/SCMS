@@ -1,5 +1,5 @@
 // checkLogin middleware
-import { Request, Response, NextFunction } from "express";
+import { Response, NextFunction } from "express";
 import { verifyToken } from "@utils/index";
 import { RequestWithUser } from "@/@types/auth";
 

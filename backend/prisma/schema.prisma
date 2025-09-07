@@ -22,7 +22,7 @@ model User {
   email              String?
   messages           MessageLog[]
   createdReports     WeeklyReport[]
-  Transaction        Transaction[]
+  transactions       Transaction[]
   Student            Student[]
   Subscriptions      Subscriptions[]
   Guardian           Guardian[]
@@ -84,6 +84,8 @@ model Guardian {
   relationDegree String // e.g., Father, Mother
   messages       MessageLog[]
   Student        Student[]
+  profile_photo  String?
+  documents      String?
   created_by     User?        @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
   userId         String?      @db.Uuid
   created_at     DateTime     @default(now())
@@ -138,6 +140,7 @@ model MessageLog {
   guardianId String?   @db.Uuid
   type       String // "bulk", "private", "report"
   content    String
+  isRead     Boolean   @default(false)
   sentAt     DateTime  @default(now())
   sender     User?     @relation(fields: [senderId], references: [id], onDelete: SetNull, onUpdate: Cascade)
   student    Student?  @relation(fields: [studentId], references: [id])
@@ -201,14 +204,14 @@ model Payroll {
 }
 
 model Bank {
-  id           String        @id @default(uuid()) @db.Uuid
-  name         String
-  balance      Float         @default(0)
-  transactions Transaction[]
-  created_by   User?         @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
-  userId       String?       @db.Uuid
-  created_at   DateTime      @default(now())
-  updated_at   DateTime      @updatedAt
+  id          String        @id @default(uuid()) @db.Uuid
+  name        String
+  balance     Float         @default(0)
+  transaction Transaction[]
+  created_by  User?         @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId      String?       @db.Uuid
+  created_at  DateTime      @default(now())
+  updated_at  DateTime      @updatedAt
 }
 
 model Category {
@@ -216,7 +219,7 @@ model Category {
   name            String
   type            String // "income" or "expense"
   calculateMethod String // "add" or "subtract"
-  transactions    Transaction[]
+  transaction     Transaction[]
   created_by      User?         @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
   userId          String?       @db.Uuid
   created_at      DateTime      @default(now())
@@ -224,23 +227,25 @@ model Category {
 }
 
 model IncomeType {
-  id           String        @id @default(uuid()) @db.Uuid
-  name         String
-  transactions Transaction[]
-  created_by   User?         @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
-  userId       String?       @db.Uuid
-  created_at   DateTime      @default(now())
-  updated_at   DateTime      @updatedAt
+  id          String        @id @default(uuid()) @db.Uuid
+  name        String
+  description String?
+  transaction Transaction[]
+  created_by  User?         @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId      String?       @db.Uuid
+  created_at  DateTime      @default(now())
+  updated_at  DateTime      @updatedAt
 }
 
 model ExpenseType {
-  id           String        @id @default(uuid()) @db.Uuid
-  name         String
-  transactions Transaction[]
-  created_by   User?         @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
-  userId       String?       @db.Uuid
-  created_at   DateTime      @default(now())
-  updated_at   DateTime      @updatedAt
+  id          String        @id @default(uuid()) @db.Uuid
+  name        String
+  description String?
+  transaction Transaction[]
+  created_by  User?         @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId      String?       @db.Uuid
+  created_at  DateTime      @default(now())
+  updated_at  DateTime      @updatedAt
 }
 
 model Transaction {

@@ -1,0 +1,62 @@
+{
+  "title": "Transaction",
+  "create_title": "Create Transaction",
+  "edit_title": "Edit Transaction",
+  "amount": "Amount",
+  "description": "Description",
+  "date": "Date",
+  "type": "Type",
+  "bankId": "Bank",
+  "categoryId": "Category",
+  "incomeTypeId": "Income Type",
+  "expenseTypeId": "Expense Type",
+  "submit": "Save Transaction",
+  "update": "Update Transaction",
+  "delete": "Delete Transaction",
+  "delete_confirm": "Are you sure you want to delete this Transaction?",
+
+  "placeholder": {
+    "amount": "Enter amount",
+    "description": "Enter description",
+    "date": "Select date",
+    "type": "Select type",
+    "bankId": "Select bank",
+    "categoryId": "Select category",
+    "incomeTypeId": "Select income type",
+    "expenseTypeId": "Select expense type"
+  },
+
+  "validation": {
+    "amount_required": "Amount is required",
+    "amount_min": "Amount must be greater than 0",
+    "description_required": "Description is required",
+    "date_required": "Date is required",
+    "type_required": "Type is required",
+    "bank_required": "Bank is required",
+    "category_required": "Category is required"
+  },
+
+  "type_options": {
+    "income": "Income",
+    "expense": "Expense"
+  },
+
+  "messages": {
+    "create_success": "Transaction created successfully",
+    "update_success": "Transaction updated successfully",
+    "delete_success": "Transaction deleted successfully",
+    "create_error": "Failed to create Transaction",
+    "update_error": "Failed to update Transaction",
+    "delete_error": "Failed to delete Transaction"
+  },
+
+  "table": {
+    "amount": "Amount",
+    "description": "Description",
+    "date": "Date",
+    "type": "Type",
+    "bank": "Bank",
+    "category": "Category",
+    "actions": "Actions"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "title": "البنوك",
+  "create_title": "إضافة بنك",
+  "edit_title": "تعديل بنك",
+  "name": "اسم البنك",
+  "accountNumber": "رقم الحساب",
+  "balance": "الرصيد",
+  "description": "الوصف",
+  "submit": "حفظ البنك",
+  "update": "تحديث البنك",
+  "delete": "حذف البنك",
+  "delete_confirm": "هل أنت متأكد من حذف هذا البنك؟",
+
+  "placeholder": {
+    "name": "أدخل اسم البنك",
+    "accountNumber": "أدخل رقم الحساب",
+    "balance": "أدخل الرصيد الأولي",
+    "description": "أدخل الوصف"
+  },
+
+  "validation": {
+    "name_required": "اسم البنك مطلوب",
+    "account_number_required": "رقم الحساب مطلوب",
+    "balance_required": "الرصيد مطلوب",
+    "balance_min": "الرصيد لا يمكن أن يكون سالب"
+  },
+
+  "messages": {
+    "create_success": "تم إضافة البنك بنجاح",
+    "update_success": "تم تحديث البنك بنجاح",
+    "delete_success": "تم حذف البنك بنجاح",
+    "create_error": "فشل في إضافة البنك",
+    "update_error": "فشل في تحديث البنك",
+    "delete_error": "فشل في حذف البنك"
+  },
+
+  "table": {
+    "name": "الاسم",
+    "account_number": "رقم الحساب",
+    "balance": "الرصيد",
+    "description": "الوصف",
+    "actions": "الإجراءات"
+  }
+}

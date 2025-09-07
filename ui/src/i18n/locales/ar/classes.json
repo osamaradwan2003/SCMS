@@ -1,0 +1,83 @@
+{
+  "title": "الفصول",
+  "create_title": "إضافة فصل",
+  "edit_title": "تعديل فصل",
+  "view_title": "تفاصيل الفصل",
+  "classes_list": "قائمة الفصول",
+  "create_class": "إضافة فصل",
+  "edit_class": "تعديل فصل",
+  "view_class": "عرض الفصل",
+  "search_placeholder": "البحث في الفصول...",
+  "no_data": "لا توجد فصول",
+  "loading": "جاري تحميل الفصول...",
+  "of": "من",
+  "items": "عنصر",
+  "yes": "نعم",
+  "no": "لا",
+  "create": "إنشاء",
+  "update": "تحديث",
+  "edit": "تعديل",
+  "delete": "حذف",
+  "view": "عرض",
+  "cancel": "إلغاء",
+  "save": "حفظ",
+  "back": "رجوع",
+  "delete_confirmation": "حذف الفصل",
+  "delete_description": "هل أنت متأكد من حذف هذا الفصل؟ لا يمكن التراجع عن هذا الإجراء.",
+
+  "fields": {
+    "name": "اسم الفصل",
+    "description": "الوصف",
+    "capacity": "السعة",
+    "employeeId": "المعلم المعين",
+    "teacher": "المعلم",
+    "teacherId": "المعلم المعين",
+    "subjects": "المواد",
+    "students": "الطلاب",
+    "studentCount": "عدد الطلاب"
+  },
+
+  "placeholder": {
+    "name": "أدخل اسم الفصل",
+    "description": "أدخل وصف الفصل",
+    "capacity": "أدخل سعة الفصل",
+    "teacherId": "البحث عن المعلم",
+    "subjects": "اختر المواد"
+  },
+
+  "placeholders": {
+    "name": "أدخل اسم الفصل",
+    "description": "أدخل وصف الفصل",
+    "capacity": "أدخل سعة الفصل",
+    "employeeId": "البحث عن المعلم",
+    "teacherId": "البحث عن المعلم",
+    "subjects": "اختر المواد"
+  },
+
+  "validation": {
+    "name_required": "اسم الفصل مطلوب",
+    "capacity_required": "السعة مطلوبة",
+    "capacity_min": "يجب أن تكون السعة على الأقل 1",
+    "capacity_max": "لا يمكن أن تتجاوز السعة 100",
+    "teacher_required": "المعلم مطلوب"
+  },
+
+  "messages": {
+    "create_success": "تم إنشاء الفصل بنجاح",
+    "update_success": "تم تحديث الفصل بنجاح",
+    "delete_success": "تم حذف الفصل بنجاح",
+    "create_error": "فشل في إنشاء الفصل",
+    "update_error": "فشل في تحديث الفصل",
+    "delete_error": "فشل في حذف الفصل",
+    "fetch_error": "فشل في تحميل بيانات الفصل"
+  },
+
+  "table": {
+    "name": "الاسم",
+    "description": "الوصف",
+    "capacity": "السعة",
+    "teacher": "المعلم",
+    "student_count": "الطلاب",
+    "actions": "الإجراءات"
+  }
+}

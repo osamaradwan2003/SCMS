@@ -1,0 +1,56 @@
+{
+  "title": "Attendance",
+  "create_title": "Mark Attendance",
+  "edit_title": "Edit Attendance",
+  "student": "Student",
+  "date": "Date",
+  "status": "Status",
+  "notes": "Notes",
+  "submit": "Save Attendance",
+  "update": "Update Attendance",
+  "delete": "Delete Attendance",
+  "delete_confirm": "Are you sure you want to delete this attendance record?",
+
+  "placeholder": {
+    "student": "Select student",
+    "date": "Select date",
+    "status": "Select status",
+    "notes": "Enter notes"
+  },
+
+  "validation": {
+    "student_required": "Student is required",
+    "date_required": "Date is required",
+    "status_required": "Status is required"
+  },
+
+  "status_options": {
+    "present": "Present",
+    "absent": "Absent",
+    "late": "Late",
+    "excused": "Excused"
+  },
+
+  "messages": {
+    "create_success": "Attendance marked successfully",
+    "update_success": "Attendance updated successfully",
+    "delete_success": "Attendance deleted successfully",
+    "create_error": "Failed to mark attendance",
+    "update_error": "Failed to update attendance",
+    "delete_error": "Failed to delete attendance"
+  },
+
+  "table": {
+    "student": "Student",
+    "date": "Date",
+    "status": "Status",
+    "notes": "Notes",
+    "actions": "Actions"
+  },
+
+  "filters": {
+    "all_students": "All Students",
+    "all_status": "All Status",
+    "date_range": "Date Range"
+  }
+}

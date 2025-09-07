@@ -1,0 +1,38 @@
+{
+  "title": "أنواع المصروفات",
+  "create_title": "إضافة نوع مصروف",
+  "edit_title": "تعديل نوع مصروف",
+  "name": "الاسم",
+  "description": "الوصف",
+  "submit": "حفظ نوع المصروف",
+  "update": "تحديث نوع المصروف",
+  "delete": "حذف نوع المصروف",
+  "delete_confirm": "هل أنت متأكد من حذف نوع المصروف؟",
+
+  "placeholder": {
+    "name": "أدخل اسم نوع المصروف",
+    "description": "أدخل الوصف"
+  },
+
+  "validation": {
+    "name_required": "الاسم مطلوب",
+    "name_min": "الاسم يجب أن يكون على الأقل حرفين",
+    "name_max": "الاسم يجب ألا يزيد عن 50 حرف"
+  },
+
+  "messages": {
+    "create_success": "تم إضافة نوع المصروف بنجاح",
+    "update_success": "تم تحديث نوع المصروف بنجاح",
+    "delete_success": "تم حذف نوع المصروف بنجاح",
+    "create_error": "فشل في إضافة نوع المصروف",
+    "update_error": "فشل في تحديث نوع المصروف",
+    "delete_error": "فشل في حذف نوع المصروف"
+  },
+
+  "table": {
+    "name": "الاسم",
+    "description": "الوصف",
+    "transactions": "المعاملات",
+    "actions": "الإجراءات"
+  }
+}

@@ -5,9 +5,23 @@ import { Suspense } from "react";
 import { useAuth } from "@/hooks/auth";
 
 export default function AuthLayout() {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
   const location = useLocation();
   const redirect_path = location.search.split("callbackUrl=")[1] || "/";
+  
+  if (isLoading) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100vh' 
+      }}>
+        <Spin size="large" />
+      </div>
+    );
+  }
+  
   if (user) return <Navigate to={`${redirect_path}`} replace />;
   return (
     <>

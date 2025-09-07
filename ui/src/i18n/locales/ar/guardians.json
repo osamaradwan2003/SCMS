@@ -1,0 +1,103 @@
+{
+  "title": "أولياء الأمور",
+  "create_title": "إضافة ولي أمر",
+  "edit_title": "تعديل ولي أمر",
+  "view_title": "تفاصيل ولي الأمر",
+  "guardians_list": "قائمة أولياء الأمور",
+  "create_guardian": "إضافة ولي أمر",
+  "edit_guardian": "تعديل ولي أمر",
+  "view_guardian": "عرض ولي الأمر",
+  "search_placeholder": "البحث في أولياء الأمور...",
+  "no_data": "لا توجد أولياء أمور",
+  "loading": "جاري تحميل أولياء الأمور...",
+  "of": "من",
+  "items": "عنصر",
+  "yes": "نعم",
+  "no": "لا",
+  "create": "إنشاء",
+  "update": "تحديث",
+  "edit": "تعديل",
+  "delete": "حذف",
+  "view": "عرض",
+  "cancel": "إلغاء",
+  "save": "حفظ",
+  "back": "رجوع",
+  "actions": "الإجراءات",
+  "delete_confirmation": "حذف ولي الأمر",
+  "delete_description": "هل أنت متأكد من حذف ولي الأمر هذا؟ لا يمكن التراجع عن هذا الإجراء.",
+
+  "fields": {
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "name": "الاسم الكامل",
+    "phone": "رقم الهاتف",
+    "email": "البريد الإلكتروني",
+    "address": "العنوان",
+    "relationship": "صلة القرابة",
+    "occupation": "المهنة",
+    "emergencyContact": "جهة اتصال طوارئ",
+    "students": "الطلاب",
+    "profile_photo": "الصورة الشخصية",
+    "documents": "المستندات"
+  },
+
+  "placeholders": {
+    "name": "أدخل اسم الولي",
+    "firstName": "أدخل الاسم الأول",
+    "phone": "أدخل رقم الهاتف",
+    "relation_degree": "أدخل درجة القرابة",
+    "email": "أدخل البريد الإلكتروني",
+    "address": "أدخل العنوان",
+    "relationship": "اختر العلاقة"
+  },
+
+  "validation": {
+    "guardiansName_required": "إسم ولي الأمر مطلوب",
+    "lastName_required": "اسم العائلة مطلوب",
+    "phone_required": "رقم الهاتف مطلوب",
+    "phone_invalid": "يرجى إدخال رقم هاتف صحيح",
+    "email_required": "البريد الإلكتروني مطلوب",
+    "email_invalid": "يرجى إدخال بريد إلكتروني صحيح",
+    "relationship_required": "صلة القرابة مطلوبة"
+  },
+
+  "relationship_options": {
+    "father": "أب",
+    "mother": "أم",
+    "grandfather": "جد",
+    "grandmother": "جدة",
+    "uncle": "عم",
+    "aunt": "عمة",
+    "brother": "أخ",
+    "sister": "أخت",
+    "other": "أخرى"
+  },
+
+  "help": {
+    "profile_photo": "ارفع صورة شخصية لولي الأمر (JPG, PNG, GIF مدعومة)",
+    "documents": "ارفع المستندات ذات الصلة (PDF, DOC, DOCX, TXT, أو الصور)"
+  },
+
+  "messages": {
+    "create_success": "تم إنشاء ولي الأمر بنجاح",
+    "update_success": "تم تحديث ولي الأمر بنجاح",
+    "delete_success": "تم حذف ولي الأمر بنجاح",
+    "create_error": "فشل في إنشاء ولي الأمر",
+    "update_error": "فشل في تحديث ولي الأمر",
+    "delete_error": "فشل في حذف ولي الأمر",
+    "fetch_error": "فشل في تحميل بيانات ولي الأمر"
+  },
+
+  "table": {
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "name": "الاسم",
+    "phone": "الهاتف",
+    "email": "البريد الإلكتروني",
+    "relationship": "صلة القرابة",
+    "occupation": "المهنة",
+    "emergencyContact": "جهة اتصال طوارئ",
+    "students": "الطلاب",
+    "actions": "الإجراءات"
+  }
+}

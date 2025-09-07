@@ -103,10 +103,10 @@ export function useSidebarLinks() {
       children: crudChildren("payroll"),
     },
     {
-      key: "transactions",
+      key: "Transaction",
       icon: <DollarOutlined />,
-      label: t("transactions"),
-      children: crudChildren("transactions"),
+      label: t("Transaction"),
+      children: crudChildren("Transaction"),
     },
     {
       key: "categories",

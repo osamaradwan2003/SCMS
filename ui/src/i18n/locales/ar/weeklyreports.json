@@ -1,0 +1,63 @@
+{
+  "title": "التقارير الأسبوعية",
+  "create_title": "إنشاء تقرير أسبوعي",
+  "edit_title": "تعديل تقرير أسبوعي",
+  "student": "الطالب",
+  "subject": "المادة",
+  "week": "الأسبوع",
+  "score": "الدرجة",
+  "strengths": "نقاط القوة",
+  "weaknesses": "نقاط الضعف",
+  "adherence": "الالتزام",
+  "submit": "حفظ التقرير",
+  "update": "تحديث التقرير",
+  "delete": "حذف التقرير",
+  "delete_confirm": "هل أنت متأكد من حذف هذا التقرير الأسبوعي؟",
+
+  "placeholder": {
+    "student": "اختر الطالب",
+    "subject": "اختر المادة",
+    "week": "اختر تاريخ الأسبوع",
+    "score": "أدخل الدرجة (0-100)",
+    "strengths": "أدخل نقاط قوة الطالب",
+    "weaknesses": "أدخل المجالات التي تحتاج تحسين",
+    "adherence": "أدخل ملاحظات الالتزام"
+  },
+
+  "validation": {
+    "student_required": "الطالب مطلوب",
+    "subject_required": "المادة مطلوبة",
+    "week_required": "تاريخ الأسبوع مطلوب",
+    "score_required": "الدرجة مطلوبة",
+    "score_min": "الدرجة يجب أن تكون على الأقل 0",
+    "score_max": "الدرجة يجب ألا تزيد عن 100",
+    "strengths_required": "نقاط القوة مطلوبة",
+    "weaknesses_required": "نقاط الضعف مطلوبة"
+  },
+
+  "messages": {
+    "create_success": "تم إنشاء التقرير الأسبوعي بنجاح",
+    "update_success": "تم تحديث التقرير الأسبوعي بنجاح",
+    "delete_success": "تم حذف التقرير الأسبوعي بنجاح",
+    "create_error": "فشل في إنشاء التقرير الأسبوعي",
+    "update_error": "فشل في تحديث التقرير الأسبوعي",
+    "delete_error": "فشل في حذف التقرير الأسبوعي"
+  },
+
+  "table": {
+    "student": "الطالب",
+    "subject": "المادة",
+    "week": "الأسبوع",
+    "score": "الدرجة",
+    "strengths": "نقاط القوة",
+    "weaknesses": "نقاط الضعف",
+    "adherence": "الالتزام",
+    "actions": "الإجراءات"
+  },
+
+  "filters": {
+    "all_students": "جميع الطلاب",
+    "all_subjects": "جميع المواد",
+    "week_range": "نطاق الأسبوع"
+  }
+}

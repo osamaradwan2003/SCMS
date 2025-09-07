@@ -1,0 +1,62 @@
+{
+  "title": "الموظفين",
+  "create_title": "إضافة موظف",
+  "edit_title": "تعديل موظف",
+  "name": "الاسم الكامل",
+  "email": "البريد الإلكتروني",
+  "phone": "رقم الهاتف",
+  "address": "العنوان",
+  "position": "المنصب",
+  "salary": "الراتب",
+  "hireDate": "تاريخ التوظيف",
+  "classId": "الفصل المخصص",
+  "submit": "حفظ الموظف",
+  "update": "تحديث الموظف",
+  "delete": "حذف الموظف",
+  "delete_confirm": "هل أنت متأكد من حذف هذا الموظف؟",
+
+  "placeholder": {
+    "name": "أدخل اسم الموظف",
+    "firstName": "أدخل الاسم الأول",
+    "lastName": "أدخل اسم العائلة",
+    "email": "أدخل البريد الإلكتروني",
+    "phone": "أدخل رقم الهاتف",
+    "address": "أدخل العنوان",
+    "position": "أدخل المنصب",
+    "salary": "أدخل مبلغ الراتب",
+    "hireDate": "اختر تاريخ التوظيف",
+    "classId": "اختر الفصل المخصص"
+  },
+
+  "validation": {
+    "name_required": "الاسم الكامل مطلوب",
+    "email_required": "البريد الإلكتروني مطلوب",
+    "email_invalid": "تنسيق البريد الإلكتروني غير صحيح",
+    "phone_invalid": "رقم الهاتف غير صحيح",
+    "address_required": "العنوان مطلوب",
+    "position_required": "المنصب مطلوب",
+    "salary_required": "الراتب مطلوب",
+    "salary_min": "الراتب يجب أن يكون أكبر من 0",
+    "hire_date_required": "تاريخ التوظيف مطلوب"
+  },
+
+  "messages": {
+    "create_success": "تم إضافة الموظف بنجاح",
+    "update_success": "تم تحديث الموظف بنجاح",
+    "delete_success": "تم حذف الموظف بنجاح",
+    "create_error": "فشل في إضافة الموظف",
+    "update_error": "فشل في تحديث الموظف",
+    "delete_error": "فشل في حذف الموظف"
+  },
+
+  "table": {
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "phone": "الهاتف",
+    "position": "المنصب",
+    "salary": "الراتب",
+    "hire_date": "تاريخ التوظيف",
+    "class": "الفصل المخصص",
+    "actions": "الإجراءات"
+  }
+}

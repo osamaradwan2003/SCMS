@@ -1,0 +1,44 @@
+{
+  "title": "Banks",
+  "create_title": "Create Bank",
+  "edit_title": "Edit Bank",
+  "name": "Bank Name",
+  "accountNumber": "Account Number",
+  "balance": "Balance",
+  "description": "Description",
+  "submit": "Save Bank",
+  "update": "Update Bank",
+  "delete": "Delete Bank",
+  "delete_confirm": "Are you sure you want to delete this bank?",
+
+  "placeholder": {
+    "name": "Enter bank name",
+    "accountNumber": "Enter account number",
+    "balance": "Enter initial balance",
+    "description": "Enter description"
+  },
+
+  "validation": {
+    "name_required": "Bank name is required",
+    "account_number_required": "Account number is required",
+    "balance_required": "Balance is required",
+    "balance_min": "Balance cannot be negative"
+  },
+
+  "messages": {
+    "create_success": "Bank created successfully",
+    "update_success": "Bank updated successfully",
+    "delete_success": "Bank deleted successfully",
+    "create_error": "Failed to create bank",
+    "update_error": "Failed to update bank",
+    "delete_error": "Failed to delete bank"
+  },
+
+  "table": {
+    "name": "Name",
+    "account_number": "Account Number",
+    "balance": "Balance",
+    "description": "Description",
+    "actions": "Actions"
+  }
+}

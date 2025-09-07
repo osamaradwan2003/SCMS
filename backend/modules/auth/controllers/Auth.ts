@@ -14,7 +14,7 @@ export default class AuthController {
     }
   }
   //logout
-  static async logout(req: Request, res: Response) {
+  static async logout(_: Request, res: Response) {
     try {
       const result = await AuthServices.logout();
       res.send(result);

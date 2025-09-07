@@ -10,7 +10,7 @@
   "attendance": "Attendance",
   "payroll": "Payroll",
   "finance": "Finance",
-  "transactions": "Transactions",
+  "Transaction": "Transaction",
   "categories": "Categories",
   "banks": "Bank Accounts",
   "messages": "Messages",

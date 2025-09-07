@@ -1,0 +1,65 @@
+{
+  "title": "الاشتراكات",
+  "create_title": "إنشاء اشتراك",
+  "edit_title": "تعديل اشتراك",
+  "student": "الطالب",
+  "amount": "المبلغ",
+  "startDate": "تاريخ البداية",
+  "endDate": "تاريخ النهاية",
+  "status": "الحالة",
+  "notes": "الملاحظات",
+  "submit": "حفظ الاشتراك",
+  "update": "تحديث الاشتراك",
+  "delete": "حذف الاشتراك",
+  "delete_confirm": "هل أنت متأكد من حذف هذا الاشتراك؟",
+
+  "placeholder": {
+    "student": "اختر الطالب",
+    "amount": "أدخل المبلغ",
+    "startDate": "اختر تاريخ البداية",
+    "endDate": "اختر تاريخ النهاية",
+    "status": "اختر الحالة",
+    "notes": "أدخل الملاحظات"
+  },
+
+  "validation": {
+    "student_required": "الطالب مطلوب",
+    "amount_required": "المبلغ مطلوب",
+    "amount_min": "المبلغ يجب أن يكون أكبر من 0",
+    "startDate_required": "تاريخ البداية مطلوب",
+    "endDate_required": "تاريخ النهاية مطلوب",
+    "status_required": "الحالة مطلوبة"
+  },
+
+  "status_options": {
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "expired": "منتهي الصلاحية",
+    "cancelled": "ملغي"
+  },
+
+  "messages": {
+    "create_success": "تم إنشاء الاشتراك بنجاح",
+    "update_success": "تم تحديث الاشتراك بنجاح",
+    "delete_success": "تم حذف الاشتراك بنجاح",
+    "create_error": "فشل في إنشاء الاشتراك",
+    "update_error": "فشل في تحديث الاشتراك",
+    "delete_error": "فشل في حذف الاشتراك"
+  },
+
+  "table": {
+    "student": "الطالب",
+    "amount": "المبلغ",
+    "startDate": "تاريخ البداية",
+    "endDate": "تاريخ النهاية",
+    "status": "الحالة",
+    "notes": "الملاحظات",
+    "actions": "الإجراءات"
+  },
+
+  "filters": {
+    "all_students": "جميع الطلاب",
+    "all_status": "جميع الحالات",
+    "date_range": "نطاق التاريخ"
+  }
+}

@@ -61,6 +61,12 @@ export default function CreateField(field: FormSchema) {
         {field?.fieldProps?.children as ReactNode}
       </Form.Item>
     );
+  } else if (field.type == "textarea") {
+    return (
+      <Form.Item name={field.name} {...field.fieldProps}>
+        <Input.TextArea {...field.textareaProps} />
+      </Form.Item>
+    );
   }
   return (
     <Form.Item

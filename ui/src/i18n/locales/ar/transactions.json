@@ -1,0 +1,62 @@
+{
+  "title": "المعاملات",
+  "create_title": "إضافة معاملة",
+  "edit_title": "تعديل معاملة",
+  "amount": "المبلغ",
+  "description": "الوصف",
+  "date": "التاريخ",
+  "type": "النوع",
+  "bankId": "البنك",
+  "categoryId": "الفئة",
+  "incomeTypeId": "نوع الدخل",
+  "expenseTypeId": "نوع المصروف",
+  "submit": "حفظ المعاملة",
+  "update": "تحديث المعاملة",
+  "delete": "حذف المعاملة",
+  "delete_confirm": "هل أنت متأكد من حذف هذه المعاملة؟",
+
+  "placeholder": {
+    "amount": "أدخل المبلغ",
+    "description": "أدخل الوصف",
+    "date": "اختر التاريخ",
+    "type": "اختر النوع",
+    "bankId": "اختر البنك",
+    "categoryId": "اختر الفئة",
+    "incomeTypeId": "اختر نوع الدخل",
+    "expenseTypeId": "اختر نوع المصروف"
+  },
+
+  "validation": {
+    "amount_required": "المبلغ مطلوب",
+    "amount_min": "المبلغ يجب أن يكون أكبر من 0",
+    "description_required": "الوصف مطلوب",
+    "date_required": "التاريخ مطلوب",
+    "type_required": "النوع مطلوب",
+    "bank_required": "البنك مطلوب",
+    "category_required": "الفئة مطلوبة"
+  },
+
+  "type_options": {
+    "income": "دخل",
+    "expense": "مصروف"
+  },
+
+  "messages": {
+    "create_success": "تم إضافة المعاملة بنجاح",
+    "update_success": "تم تحديث المعاملة بنجاح",
+    "delete_success": "تم حذف المعاملة بنجاح",
+    "create_error": "فشل في إضافة المعاملة",
+    "update_error": "فشل في تحديث المعاملة",
+    "delete_error": "فشل في حذف المعاملة"
+  },
+
+  "table": {
+    "amount": "المبلغ",
+    "description": "الوصف",
+    "date": "التاريخ",
+    "type": "النوع",
+    "bank": "البنك",
+    "category": "الفئة",
+    "actions": "الإجراءات"
+  }
+}

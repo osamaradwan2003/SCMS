@@ -1,41 +1,118 @@
 {
-  "name": "Name",
-  "dob": "Date of Birth",
-  "phone": "Phone Number",
-  "gender": "Gender",
-  "address": "Address",
-  "image": "Image",
-  "docs": "Documents",
-  "classId": "Class",
-  "guardianId": "Guardian",
-  "subscriptionsId": "Subscription",
-  "submit": "Create Student",
+  "title": "Students",
+  "create_title": "Create Student",
+  "edit_title": "Edit Student",
+  "view_title": "Student Details",
+  "students_list": "Students List",
+  "create_student": "Create Student",
+  "edit_student": "Edit Student",
+  "view_student": "View Student",
+  "search_placeholder": "Search students...",
+  "no_data": "No students found",
+  "loading": "Loading students...",
+  "of": "of",
+  "items": "items",
+  "yes": "Yes",
+  "no": "No",
+  "create": "Create",
+  "update": "Update",
+  "edit": "Edit",
+  "delete": "Delete",
+  "view": "View",
+  "cancel": "Cancel",
+  "save": "Save",
+  "back": "Back",
+  "delete_confirmation": "Delete Student",
+  "delete_description": "Are you sure you want to delete this student? This action cannot be undone.",
+
+  "fields": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "name": "Full Name",
+    "studentId": "Student ID",
+    "dob": "Date of Birth",
+    "phone": "Phone Number",
+    "gender": "Gender",
+    "address": "Address",
+    "image": "Profile Image",
+    "docs": "Documents",
+    "classId": "Class",
+    "guardianId": "Guardian",
+    "subscriptionsId": "Subscription",
+    "class": "Class",
+    "guardian": "Guardian",
+    "subscription": "Subscription"
+  },
 
   "placeholder": {
     "name": "Enter student name",
+    "firstName": "Enter first name",
+    "lastName": "Enter last name",
+    "studentId": "Enter student ID",
     "dob": "Select date of birth",
     "phone": "Enter phone number",
     "gender": "Select gender",
     "address": "Enter address",
-    "classId": "Search class",
-    "guardianId": "Search guardian",
-    "subscriptionsId": "Search subscription"
+    "classId": "Search for class",
+    "guardianId": "Search for guardian",
+    "subscriptionsId": "Search for subscription"
+  },
+
+  "placeholders": {
+    "name": "Enter student name",
+    "firstName": "Enter first name",
+    "lastName": "Enter last name",
+    "studentId": "Enter student ID",
+    "dob": "Select date of birth",
+    "phone": "Enter phone number",
+    "gender": "Select gender",
+    "address": "Enter address",
+    "classId": "Search for class",
+    "guardianId": "Search for guardian",
+    "subscriptionsId": "Search for subscription"
   },
 
   "validation": {
-    "name_required": "Name is required",
+    "firstName_required": "First name is required",
+    "lastName_required": "Last name is required",
+    "studentId_required": "Student ID is required",
+    "studentId_unique": "Student ID must be unique",
     "dob_required": "Date of birth is required",
     "phone_invalid": "Invalid phone number",
     "address_required": "Address is required",
     "guardian_required": "Guardian is required",
     "subscription_required": "Subscription is required",
     "gender_invalid": "Select a valid gender",
-    "gender_required": "Please enter student Gender",
-    "image_required": "Image must be uploaded"
+    "gender_required": "Gender is required",
+    "image_required": "Profile image is required",
+    "class_required": "Class is required"
   },
 
   "gender_options": {
     "male": "Male",
     "female": "Female"
+  },
+
+  "messages": {
+    "create_success": "Student created successfully",
+    "update_success": "Student updated successfully",
+    "delete_success": "Student deleted successfully",
+    "create_error": "Failed to create student",
+    "update_error": "Failed to update student",
+    "delete_error": "Failed to delete student",
+    "fetch_error": "Failed to load student data"
+  },
+
+  "table": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "studentId": "Student ID",
+    "name": "Name",
+    "dob": "Date of Birth",
+    "phone": "Phone",
+    "gender": "Gender",
+    "class": "Class",
+    "guardian": "Guardian",
+    "actions": "Actions"
   }
 }
