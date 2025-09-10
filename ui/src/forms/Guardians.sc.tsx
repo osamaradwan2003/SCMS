@@ -73,8 +73,9 @@ export const CreateGuardianFormSchema = (): FormSchema[] => {
       rules: yup.mixed().nullable().notRequired(),
       uploadProp: {
         name: "profile_photo",
-        listType: "picture-card",
+        listType: "picture",
         maxCount: 1,
+        multiple: false,
         accept: "image/*",
         beforeUpload: () => false, // Prevent auto upload
         showUploadList: {
@@ -85,6 +86,7 @@ export const CreateGuardianFormSchema = (): FormSchema[] => {
       fieldProps: {
         label: t("fields.profile_photo"),
         help: t("help.profile_photo"),
+        className: "item-file-upload",
       },
     },
     {
@@ -92,9 +94,11 @@ export const CreateGuardianFormSchema = (): FormSchema[] => {
       type: "upload",
       rules: yup.mixed().nullable().notRequired(),
       uploadProp: {
+        children: t("buttons.upload"),
         name: "documents",
-        listType: "text",
-        maxCount: 1,
+        listType: "picture",
+        maxCount: 5,
+        multiple: true,
         accept: ".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png",
         beforeUpload: () => false, // Prevent auto upload
         showUploadList: {
@@ -105,6 +109,7 @@ export const CreateGuardianFormSchema = (): FormSchema[] => {
       fieldProps: {
         label: t("fields.documents"),
         help: t("help.documents"),
+        className: "item-file-upload",
       },
     },
   ];
@@ -202,7 +207,7 @@ export const UpdateGuardianFormSchema = (): FormSchema[] => {
       uploadProp: {
         name: "documents",
         listType: "text",
-        maxCount: 1,
+        maxCount: 5,
         accept: ".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png",
         beforeUpload: () => false, // Prevent auto upload
         showUploadList: {
@@ -213,15 +218,6 @@ export const UpdateGuardianFormSchema = (): FormSchema[] => {
       fieldProps: {
         label: t("fields.documents"),
         help: t("help.documents"),
-      },
-    },
-    {
-      name: "submit",
-      type: "button",
-      buttonProps: {
-        type: "primary",
-        htmlType: "submit",
-        children: t("update"),
       },
     },
   ];

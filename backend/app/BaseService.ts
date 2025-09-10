@@ -26,13 +26,13 @@ export abstract class BaseService<T = any, CreateData = any, UpdateData = any> {
   }
 
   // Abstract methods that must be implemented by child classes
-  protected abstract validateCreateData(data: CreateData): void;
-  protected abstract validateUpdateData(data: UpdateData): void;
+  protected abstract validateCreateData(data: CreateData): Promise<void> | void;
+  protected abstract validateUpdateData(data: UpdateData, id?: string): Promise<void> | void;
   protected abstract beforeDelete?(id: string): Promise<void>;
 
   // Generic CRUD operations
   async create(data: CreateData, userId?: string): Promise<T> {
-    this.validateCreateData(data);
+    await this.validateCreateData(data);
     
     const createData = userId ? { ...data, userId } : data;
     
@@ -63,7 +63,7 @@ export abstract class BaseService<T = any, CreateData = any, UpdateData = any> {
   }
 
   async update(id: string, data: UpdateData): Promise<T> {
-    this.validateUpdateData(data);
+    await this.validateUpdateData(data, id);
     
     return await (this.prisma as any)[this.modelName].update({
       where: { id },

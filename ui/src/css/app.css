@@ -28,3 +28,26 @@ body,
 .flex-grow {
   flex-grow: 1;
 }
+
+/** global styles */
+
+.ant-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.ant-form > .ant-form-item {
+  flex-grow: 1;
+  flex: 1;
+  flex-basis: 100%;
+  width: 100%;
+}
+
+.ant-form > .ant-form-item.item-file-upload {
+  width: 49% !important;
+  flex-basis: 49% !important;
+  gap: 1%;
+  margin-bottom: 4rem;
+}

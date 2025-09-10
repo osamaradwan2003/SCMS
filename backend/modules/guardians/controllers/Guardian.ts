@@ -1,7 +1,7 @@
 import { Response } from "express";
 import GuardianServices from "../services/Guardian";
 import { RequestWithUser } from "@/@types/auth";
-import { BaseController } from "@/app";
+import { BaseController, ValidationError } from "@/app";
 import { UploadedFile } from "express-fileupload";
 
 export default class GuardianController extends BaseController {
@@ -15,28 +15,27 @@ export default class GuardianController extends BaseController {
       let profilePhotoPath: string | undefined;
       let documentsPath: string | undefined;
 
-      if (req.files) {
-        // Handle profile photo upload
-        if (req.files.profile_photo) {
-          const profilePhoto = Array.isArray(req.files.profile_photo) 
-            ? req.files.profile_photo[0] 
-            : req.files.profile_photo as UploadedFile;
-          profilePhotoPath = this.uploadFile(profilePhoto);
-        }
+      // Handle profile photo upload from req.files
+      if (req.files?.profile_photo) {
+        const profilePhoto = Array.isArray(req.files.profile_photo)
+          ? req.files.profile_photo[0]
+          : (req.files.profile_photo as UploadedFile);
+        profilePhotoPath = this.uploadFile(profilePhoto);
+      }
 
-        // Handle documents upload
-        if (req.files.documents) {
-          const documents = Array.isArray(req.files.documents) 
-            ? req.files.documents[0] 
-            : req.files.documents as UploadedFile;
-          documentsPath = this.uploadFile(documents);
-        }
+      // Handle documents upload from req.files
+      if (req.files?.documents) {
+        const documents = Array.isArray(req.files.documents)
+          ? req.files.documents[0]
+          : (req.files.documents as UploadedFile);
+        documentsPath = this.uploadFile(documents);
       }
 
       // Map 'relationship' to 'relationDegree' for backward compatibility
       const data = {
         name: req.body.name,
         phone: req.body.phone,
+        email: req.body.email,
         relationDegree: req.body.relationship || req.body.relationDegree,
         profile_photo: profilePhotoPath,
         documents: documentsPath,
@@ -45,6 +44,10 @@ export default class GuardianController extends BaseController {
       const guardian = await this.service.create(data, req.user?.id);
       return this.success(res, "Guardian created successfully", guardian, 201);
     } catch (error: any) {
+      console.log(error);
+      if (error instanceof ValidationError) {
+        return this.validationError(res, error);
+      }
       return this.error(res, error.message, 400);
     }
   }
@@ -53,7 +56,7 @@ export default class GuardianController extends BaseController {
   async update(req: RequestWithUser, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
-      
+
       // Handle file uploads
       let profilePhotoPath: string | undefined;
       let documentsPath: string | undefined;
@@ -61,28 +64,29 @@ export default class GuardianController extends BaseController {
       if (req.files) {
         // Handle profile photo upload
         if (req.files.profile_photo) {
-          const profilePhoto = Array.isArray(req.files.profile_photo) 
-            ? req.files.profile_photo[0] 
-            : req.files.profile_photo as UploadedFile;
+          const profilePhoto = Array.isArray(req.files.profile_photo)
+            ? req.files.profile_photo[0]
+            : (req.files.profile_photo as UploadedFile);
           profilePhotoPath = this.uploadFile(profilePhoto);
         }
 
         // Handle documents upload
         if (req.files.documents) {
-          const documents = Array.isArray(req.files.documents) 
-            ? req.files.documents[0] 
-            : req.files.documents as UploadedFile;
+          const documents = Array.isArray(req.files.documents)
+            ? req.files.documents[0]
+            : (req.files.documents as UploadedFile);
           documentsPath = this.uploadFile(documents);
         }
       }
 
       // Prepare update data
       const updateData: any = {};
-      
+
       if (req.body.name) updateData.name = req.body.name;
       if (req.body.phone) updateData.phone = req.body.phone;
       if (req.body.relationship || req.body.relationDegree) {
-        updateData.relationDegree = req.body.relationship || req.body.relationDegree;
+        updateData.relationDegree =
+          req.body.relationship || req.body.relationDegree;
       }
       if (profilePhotoPath) updateData.profile_photo = profilePhotoPath;
       if (documentsPath) updateData.documents = documentsPath;
@@ -90,6 +94,9 @@ export default class GuardianController extends BaseController {
       const guardian = await this.service.update(id, updateData);
       return this.success(res, "Guardian updated successfully", guardian);
     } catch (error: any) {
+      if (error instanceof ValidationError) {
+        return this.validationError(res, error);
+      }
       return this.error(res, error.message, 400);
     }
   }
@@ -98,7 +105,7 @@ export default class GuardianController extends BaseController {
   async uploadFiles(req: RequestWithUser, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
-      
+
       if (!req.files) {
         return this.error(res, "No files uploaded", 400);
       }
@@ -107,17 +114,17 @@ export default class GuardianController extends BaseController {
 
       // Handle profile photo upload
       if (req.files.profile_photo) {
-        const profilePhoto = Array.isArray(req.files.profile_photo) 
-          ? req.files.profile_photo[0] 
-          : req.files.profile_photo as UploadedFile;
+        const profilePhoto = Array.isArray(req.files.profile_photo)
+          ? req.files.profile_photo[0]
+          : (req.files.profile_photo as UploadedFile);
         updateData.profile_photo = this.uploadFile(profilePhoto);
       }
 
       // Handle documents upload
       if (req.files.documents) {
-        const documents = Array.isArray(req.files.documents) 
-          ? req.files.documents[0] 
-          : req.files.documents as UploadedFile;
+        const documents = Array.isArray(req.files.documents)
+          ? req.files.documents[0]
+          : (req.files.documents as UploadedFile);
         updateData.documents = this.uploadFile(documents);
       }
 

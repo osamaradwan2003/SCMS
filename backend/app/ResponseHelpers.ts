@@ -1,10 +1,12 @@
 import { Response } from "express";
+import { ValidationErrorDetail } from "./ValidationHelpers";
 
 export interface StandardResponse<T = any> {
   success: boolean;
   message: string;
   data?: T;
   error?: string;
+  validationErrors?: ValidationErrorDetail[];
   timestamp: string;
 }
 
@@ -45,7 +47,8 @@ export class ResponseHelpers {
     res: Response,
     message: string,
     statusCode: number = 400,
-    error?: string
+    error?: string,
+    validationErrors?: ValidationErrorDetail[]
   ): Response {
     const response: StandardResponse = {
       success: false,
@@ -55,6 +58,10 @@ export class ResponseHelpers {
 
     if (error) {
       response.error = error;
+    }
+
+    if (validationErrors && validationErrors.length > 0) {
+      response.validationErrors = validationErrors;
     }
 
     return res.status(statusCode).json(response);
@@ -116,8 +123,12 @@ export class ResponseHelpers {
   }
 
   // Validation error response
-  static validationError(res: Response, message: string): Response {
-    return this.error(res, message, 422);
+  static validationError(
+    res: Response, 
+    message: string, 
+    validationErrors?: ValidationErrorDetail[]
+  ): Response {
+    return this.error(res, message, 422, message, validationErrors);
   }
 
   // Internal server error response

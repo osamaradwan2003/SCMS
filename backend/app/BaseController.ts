@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { RequestWithUser } from "@/@types/auth";
 import { BaseService, PaginationResult } from "./BaseService";
+import { ValidationError, ValidationErrorDetail } from "./ValidationHelpers";
 import fs from "fs";
 import { type UploadedFile } from "express-fileupload";
 
@@ -8,6 +9,7 @@ export interface ApiResponse<T = any> {
   message: string;
   data?: T;
   error?: string;
+  validationErrors?: ValidationErrorDetail[];
 }
 
 export interface PaginatedApiResponse<T = any> extends ApiResponse<T[]> {
@@ -42,9 +44,27 @@ export abstract class BaseController<
   protected error(
     res: Response,
     message: string,
-    statusCode: number = 400
+    statusCode: number = 400,
+    validationErrors?: ValidationErrorDetail[]
   ): Response {
-    return res.status(statusCode).json({ message, error: message });
+    const response: ApiResponse = { message, error: message };
+    if (validationErrors && validationErrors.length > 0) {
+      response.validationErrors = validationErrors;
+    }
+    return res.status(statusCode).json(response);
+  }
+
+  // Validation error response helper
+  protected validationError(
+    res: Response,
+    validationError: ValidationError,
+    statusCode: number = 422
+  ): Response {
+    return res.status(statusCode).json({
+      message: "Validation failed",
+      error: "Validation failed",
+      validationErrors: validationError.errors
+    });
   }
 
   // Paginated response helper
@@ -93,6 +113,9 @@ export abstract class BaseController<
         201
       );
     } catch (error: any) {
+      if (error instanceof ValidationError) {
+        return this.validationError(res, error);
+      }
       return this.error(res, error.message, 400);
     }
   }
@@ -130,6 +153,9 @@ export abstract class BaseController<
       const data = await this.service.update(id, req.body);
       return this.success(res, `${this.entityName} updated successfully`, data);
     } catch (error: any) {
+      if (error instanceof ValidationError) {
+        return this.validationError(res, error);
+      }
       return this.error(res, error.message, 400);
     }
   }

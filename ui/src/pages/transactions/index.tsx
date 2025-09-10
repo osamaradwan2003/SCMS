@@ -7,7 +7,7 @@ import {
   SearchOutlined,
 } from "@ant-design/icons";
 import { useTranslate } from "@/hooks/locales";
-import { FormModal } from "@/components";
+import formModel from "@/components/modals/formModals/FormModal";
 import {
   CreateTransactionFormSchema,
   UpdateTransactionFormSchema,

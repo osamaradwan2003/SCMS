@@ -1,5 +1,6 @@
 import { httpClient } from './httpClient';
 import type { AxiosResponse } from 'axios';
+import type { UploadFile } from 'antd';
 
 // Types
 export interface Guardian {
@@ -28,6 +29,20 @@ export interface CreateGuardianData {
   relationship: string;
   profile_photo?: File;
   documents?: File;
+}
+
+export interface CreateGuardianFormData {
+  name: string;
+  phone: string;
+  email?: string;
+  address?: string;
+  relationship: string;
+  profile_photo?: {
+    fileList: UploadFile[];
+  };
+  documents?: {
+    fileList: UploadFile[];
+  };
 }
 
 export interface UpdateGuardianData {
@@ -93,7 +108,7 @@ export const guardiansApi = {
   },
 
   // Create new guardian
-  create: (data: CreateGuardianData): Promise<AxiosResponse<Guardian>> => {
+  create: (data: CreateGuardianFormData): Promise<AxiosResponse<Guardian>> => {
     const formData = new FormData();
     formData.append('name', data.name);
     formData.append('phone', data.phone);
@@ -101,8 +116,22 @@ export const guardiansApi = {
     
     if (data.email) formData.append('email', data.email);
     if (data.address) formData.append('address', data.address);
-    if (data.profile_photo) formData.append('profile_photo', data.profile_photo);
-    if (data.documents) formData.append('documents', data.documents);
+    
+    // Handle file uploads from Ant Design Upload component
+    if (data.profile_photo && data.profile_photo.fileList && data.profile_photo.fileList.length > 0) {
+      const file = data.profile_photo.fileList[0];
+      if (file.originFileObj) {
+        formData.append('profile_photo', file.originFileObj);
+      }
+    }
+    
+    if (data.documents && data.documents.fileList && data.documents.fileList.length > 0) {
+      data.documents.fileList.forEach((file: UploadFile) => {
+        if (file.originFileObj) {
+          formData.append(`documents`, file.originFileObj);
+        }
+      });
+    }
 
     return httpClient.post('/guardians', formData, {
       headers: {

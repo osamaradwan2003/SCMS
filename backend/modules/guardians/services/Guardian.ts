@@ -3,6 +3,7 @@ import { BaseService, ValidationHelpers, ValidationError } from "@/app";
 interface GuardianCreateData {
   name: string;
   phone: string;
+  email?: string;
   relationDegree: string;
   profile_photo?: string;
   documents?: string;
@@ -35,43 +36,49 @@ export default class GuardianServices extends BaseService<
   };
   protected defaultOrderBy = { created_at: "desc" };
 
-  protected validateCreateData(data: GuardianCreateData): void {
-    ValidationHelpers.validateRequired(data, [
-      "name",
-      "phone",
-      "relationDegree",
-    ]);
-
-    if (!ValidationHelpers.validatePhone(data.phone)) {
-      throw new ValidationError("Invalid phone number format");
+  protected async validateCreateData(data: GuardianCreateData): Promise<void> {
+    // Use schema-based validation
+    await ValidationHelpers.validateModelData(data, 'Guardian', undefined, false);
+    
+    // Additional custom validations
+    ValidationHelpers.validateLength(data.name, 2, 100, "name");
+    ValidationHelpers.validateLength(data.relationDegree, 2, 50, "relationDegree");
+    
+    // Validate phone format and uniqueness
+    ValidationHelpers.validatePhone(data.phone, "phone");
+    await ValidationHelpers.validateUnique(data.phone, 'Guardian', 'phone');
+    
+    // Validate email if provided
+    if (data.email) {
+      ValidationHelpers.validateEmail(data.email, "email");
+      await ValidationHelpers.validateUnique(data.email, 'Guardian', 'email');
     }
-
-    ValidationHelpers.validateLength(data.name, 2, 100, "Name");
-    ValidationHelpers.validateLength(
-      data.relationDegree,
-      2,
-      50,
-      "Relation degree"
-    );
+    
+    // Throw if any validation errors
+    ValidationHelpers.throwIfErrors();
   }
 
-  protected validateUpdateData(data: GuardianUpdateData): void {
-    if (data.phone && !ValidationHelpers.validatePhone(data.phone)) {
-      throw new ValidationError("Invalid phone number format");
-    }
-
+  protected async validateUpdateData(data: GuardianUpdateData, id?: string): Promise<void> {
+    // Use schema-based validation for updates
+    await ValidationHelpers.validateModelData(data, 'Guardian', id, true);
+    
+    // Additional custom validations
     if (data.name) {
-      ValidationHelpers.validateLength(data.name, 2, 100, "Name");
+      ValidationHelpers.validateLength(data.name, 2, 100, "name");
     }
-
+    
     if (data.relationDegree) {
-      ValidationHelpers.validateLength(
-        data.relationDegree,
-        2,
-        50,
-        "Relation degree"
-      );
+      ValidationHelpers.validateLength(data.relationDegree, 2, 50, "relationDegree");
     }
+    
+    // Validate phone format and uniqueness if provided
+    if (data.phone) {
+      ValidationHelpers.validatePhone(data.phone, "phone");
+      await ValidationHelpers.validateUnique(data.phone, 'Guardian', 'phone', id);
+    }
+    
+    // Throw if any validation errors
+    ValidationHelpers.throwIfErrors();
   }
 
   protected async beforeDelete(id: string): Promise<void> {

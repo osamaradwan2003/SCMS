@@ -1,30 +1,29 @@
 import React from "react";
 import { Button, Form, message } from "antd";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { httpClient } from "@/api/httpClient";
-import type { CreateGuardianData } from "@/api/guardians";
+// import { httpClient } from "@/api/httpClient";
+import { type CreateGuardianFormData, guardiansApi } from "@/api/guardians";
 import { useTranslate } from "@/hooks/locales";
 import { CreateGuardianFormSchema } from "@/forms/Guardians.sc";
 import CreateForm from "@/components/Form/CreateForm";
 
 const CreateGuardianPage: React.FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const t = useTranslate("guardians");
 
   const createGuardianMutation = useMutation({
-    mutationFn: (data: CreateGuardianData) =>
-      httpClient.post("/guardians", data),
+    mutationFn: (data: CreateGuardianFormData) => guardiansApi.create(data),
     onSuccess: () => {
       message.success(t("messages.create_success"));
-      navigate("/guardians");
+      window.location.reload();
     },
     onError: (error: Error) => {
       message.error(error.message || t("messages.create_error"));
     },
   });
 
-  const handleSubmit = (values: CreateGuardianData) => {
+  const handleSubmit = (values: CreateGuardianFormData) => {
     createGuardianMutation.mutate(values);
   };
 

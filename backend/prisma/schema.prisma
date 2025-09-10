@@ -80,7 +80,8 @@ model Subscriptions {
 model Guardian {
   id             String       @id @default(uuid()) @db.Uuid
   name           String
-  phone          String
+  phone          String       @unique
+  email          String?      @unique
   relationDegree String // e.g., Father, Mother
   messages       MessageLog[]
   Student        Student[]
