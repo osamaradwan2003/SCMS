@@ -3,6 +3,8 @@ import GuardianServices from "../services/Guardian";
 import { RequestWithUser } from "@/@types/auth";
 import { BaseController, ValidationError } from "@/app";
 import { UploadedFile } from "express-fileupload";
+import { prisma } from "@/db/client";
+import { hashPassword } from "@/utils/password";
 
 export default class GuardianController extends BaseController {
   protected service = new GuardianServices();
@@ -36,7 +38,7 @@ export default class GuardianController extends BaseController {
         name: req.body.name,
         phone: req.body.phone,
         email: req.body.email,
-        relationDegree: req.body.relationship || req.body.relationDegree,
+        address: req.body.address,
         profile_photo: profilePhotoPath,
         documents: documentsPath,
       };
@@ -60,37 +62,32 @@ export default class GuardianController extends BaseController {
       // Handle file uploads
       let profilePhotoPath: string | undefined;
       let documentsPath: string | undefined;
-
-      if (req.files) {
-        // Handle profile photo upload
-        if (req.files.profile_photo) {
-          const profilePhoto = Array.isArray(req.files.profile_photo)
-            ? req.files.profile_photo[0]
-            : (req.files.profile_photo as UploadedFile);
-          profilePhotoPath = this.uploadFile(profilePhoto);
-        }
-
-        // Handle documents upload
-        if (req.files.documents) {
-          const documents = Array.isArray(req.files.documents)
-            ? req.files.documents[0]
-            : (req.files.documents as UploadedFile);
-          documentsPath = this.uploadFile(documents);
-        }
+      // Handle profile photo upload from req.files
+      if (req.files?.profile_photo) {
+        const profilePhoto = Array.isArray(req.files.profile_photo)
+          ? req.files.profile_photo[0]
+          : (req.files.profile_photo as UploadedFile);
+        profilePhotoPath = this.uploadFile(profilePhoto);
       }
 
-      // Prepare update data
+      // Handle documents upload from req.files
+      if (req.files?.documents) {
+        const documents = Array.isArray(req.files.documents)
+          ? req.files.documents[0]
+          : (req.files.documents as UploadedFile);
+        documentsPath = this.uploadFile(documents);
+      }
+
+      // Map 'relationship' to 'relationDegree' for backward compatibility
+
       const updateData: any = {};
 
       if (req.body.name) updateData.name = req.body.name;
       if (req.body.phone) updateData.phone = req.body.phone;
-      if (req.body.relationship || req.body.relationDegree) {
-        updateData.relationDegree =
-          req.body.relationship || req.body.relationDegree;
-      }
+      if (req.body.email) updateData.email = req.body.email;
+      if (req.body.address) updateData.address = req.body.address;
       if (profilePhotoPath) updateData.profile_photo = profilePhotoPath;
       if (documentsPath) updateData.documents = documentsPath;
-
       const guardian = await this.service.update(id, updateData);
       return this.success(res, "Guardian updated successfully", guardian);
     } catch (error: any) {
@@ -150,6 +147,38 @@ export default class GuardianController extends BaseController {
     }
   }
 
+  // Update guardian account username/password
+  async updateAccount(req: RequestWithUser, res: Response): Promise<Response> {
+    try {
+      const { id } = req.params;
+      const { username, password } = req.body as { username?: string; password?: string };
+
+      const guardian = await prisma.guardian.findUnique({ where: { id } });
+      if (!guardian) return this.error(res, "Guardian not found", 404);
+      if (!guardian.accountUserId) return this.error(res, "No linked account for this guardian", 400);
+
+      const data: { username?: string; password?: string; mustChangePassword?: boolean; firstLogin?: boolean } = {};
+      if (username) data.username = username;
+      if (password) {
+        data.password = hashPassword(password);
+        data.mustChangePassword = true;
+        data.firstLogin = true;
+      }
+
+      if (data.username) {
+        const exists = await prisma.user.findUnique({ where: { username: data.username } });
+        if (exists && exists.id !== guardian.accountUserId) {
+          return this.error(res, "Username already taken", 422);
+        }
+      }
+
+      const updated = await prisma.user.update({ where: { id: guardian.accountUserId }, data });
+      return this.success(res, "Account updated successfully", { id: updated.id, username: updated.username });
+    } catch (error: any) {
+      return this.error(res, error.message, 400);
+    }
+  }
+
   // Static methods for backward compatibility
   static async create(req: RequestWithUser, res: Response) {
     const controller = new GuardianController();
@@ -199,5 +228,10 @@ export default class GuardianController extends BaseController {
   static async uploadFiles(req: RequestWithUser, res: Response) {
     const controller = new GuardianController();
     return await controller.uploadFiles(req, res);
+  }
+
+  static async updateAccount(req: RequestWithUser, res: Response) {
+    const controller = new GuardianController();
+    return await controller.updateAccount(req, res);
   }
 }

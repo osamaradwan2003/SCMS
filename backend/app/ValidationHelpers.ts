@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Prisma } from "@prisma/client";
 import { prisma } from "@db/client";
 
 export interface ValidationErrorDetail {
@@ -10,13 +10,15 @@ export interface ValidationErrorDetail {
 
 export class ValidationError extends Error {
   public errors: ValidationErrorDetail[];
-  
+
   constructor(errors: ValidationErrorDetail[] | string) {
-    if (typeof errors === 'string') {
+    if (typeof errors === "string") {
       super(errors);
-      this.errors = [{ field: 'general', message: errors, code: 'VALIDATION_ERROR' }];
+      this.errors = [
+        { field: "general", message: errors, code: "VALIDATION_ERROR" },
+      ];
     } else {
-      super('Validation failed');
+      super("Validation failed");
       this.errors = errors;
     }
     this.name = "ValidationError";
@@ -31,7 +33,7 @@ export class ValidationError extends Error {
   }
 
   getErrorsForField(field: string): ValidationErrorDetail[] {
-    return this.errors.filter(error => error.field === field);
+    return this.errors.filter((error) => error.field === field);
   }
 }
 
@@ -44,7 +46,12 @@ export class ValidationHelpers {
   }
 
   // Add error to collection
-  static addError(field: string, message: string, code: string, value?: any): void {
+  static addError(
+    field: string,
+    message: string,
+    code: string,
+    value?: any
+  ): void {
     this.errors.push({ field, message, code, value });
   }
 
@@ -72,38 +79,68 @@ export class ValidationHelpers {
         !data[field] ||
         (typeof data[field] === "string" && data[field].trim() === "")
       ) {
-        this.addError(field, `${field} is required`, 'REQUIRED_FIELD', data[field]);
+        this.addError(
+          field,
+          `${field} is required`,
+          "REQUIRED_FIELD",
+          data[field]
+        );
       }
     }
   }
 
   static validateString(value: string, fieldName: string): void {
     if (typeof value !== "string") {
-      this.addError(fieldName, `${fieldName} must be a string`, 'INVALID_TYPE', value);
+      this.addError(
+        fieldName,
+        `${fieldName} must be a string`,
+        "INVALID_TYPE",
+        value
+      );
     } else if (value.trim() === "") {
-      this.addError(fieldName, `${fieldName} cannot be empty`, 'EMPTY_STRING', value);
+      this.addError(
+        fieldName,
+        `${fieldName} cannot be empty`,
+        "EMPTY_STRING",
+        value
+      );
     } else if (!isNaN(Number(value))) {
-      this.addError(fieldName, `${fieldName} cannot be a numeric string`, 'NUMERIC_STRING', value);
+      this.addError(
+        fieldName,
+        `${fieldName} cannot be a numeric string`,
+        "NUMERIC_STRING",
+        value
+      );
     }
   }
 
   // Email validation
-  static validateEmail(email: string, fieldName: string = 'email'): boolean {
+  static validateEmail(email: string, fieldName: string = "email"): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isValid = emailRegex.test(email);
     if (!isValid) {
-      this.addError(fieldName, `${fieldName} must be a valid email address`, 'INVALID_EMAIL', email);
+      this.addError(
+        fieldName,
+        `${fieldName} must be a valid email address`,
+        "INVALID_EMAIL",
+        email
+      );
     }
     return isValid;
   }
 
   // Phone validation (basic)
-  static validatePhone(phone: string, fieldName: string = 'phone'): boolean {
+  static validatePhone(phone: string, fieldName: string = "phone"): boolean {
     const phoneRegex =
       /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
     const isValid = phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ""));
     if (!isValid) {
-      this.addError(fieldName, `${fieldName} must be a valid phone number`, 'INVALID_PHONE', phone);
+      this.addError(
+        fieldName,
+        `${fieldName} must be a valid phone number`,
+        "INVALID_PHONE",
+        phone
+      );
     }
     return isValid;
   }
@@ -119,7 +156,7 @@ export class ValidationHelpers {
       this.addError(
         fieldName,
         `${fieldName} must be at least ${min} characters long`,
-        'MIN_LENGTH',
+        "MIN_LENGTH",
         { value, min, max, actualLength: value.length }
       );
     }
@@ -127,7 +164,7 @@ export class ValidationHelpers {
       this.addError(
         fieldName,
         `${fieldName} must not exceed ${max} characters`,
-        'MAX_LENGTH',
+        "MAX_LENGTH",
         { value, min, max, actualLength: value.length }
       );
     }
@@ -140,28 +177,39 @@ export class ValidationHelpers {
     excludeId?: string
   ): Promise<boolean> {
     if (!value) {
-      this.addError(field, `${field} is required`, 'REQUIRED_FIELD', value);
+      this.addError(field, `${field} is required`, "REQUIRED_FIELD", value);
       return false;
     }
 
     try {
       const whereClause: any = { [field]: value };
       if (excludeId) {
-        whereClause.id = { not: excludeId };
+        whereClause.id = { not: excludeId as string };
       }
-
-      const result = await (prisma as any)[modelName].findUnique({
+      console.log(whereClause);
+      const result = await (prisma as any)[modelName].findFirst({
         where: whereClause,
-        select: { id: true }
+        select: { id: true },
       });
 
       if (result) {
-        this.addError(field, `${field} '${value}' already exists`, 'DUPLICATE_VALUE', value);
+        this.addError(
+          field,
+          `${field} '${value}' already exists`,
+          "DUPLICATE_VALUE",
+          value
+        );
         return false;
       }
       return true;
     } catch (error) {
-      this.addError(field, `Error validating ${field} uniqueness`, 'VALIDATION_ERROR', value);
+      console.error(error);
+      this.addError(
+        field,
+        `Error validating ${field} uniqueness`,
+        "VALIDATION_ERROR",
+        value
+      );
       return false;
     }
   }
@@ -177,7 +225,7 @@ export class ValidationHelpers {
       this.addError(
         fieldName,
         `${fieldName} must be at least ${min}`,
-        'MIN_VALUE',
+        "MIN_VALUE",
         { value, min, max }
       );
     }
@@ -185,7 +233,7 @@ export class ValidationHelpers {
       this.addError(
         fieldName,
         `${fieldName} must not exceed ${max}`,
-        'MAX_VALUE',
+        "MAX_VALUE",
         { value, min, max }
       );
     }
@@ -195,7 +243,12 @@ export class ValidationHelpers {
   static validateDate(date: string | Date, fieldName: string): void {
     const dateObj = new Date(date);
     if (isNaN(dateObj.getTime())) {
-      this.addError(fieldName, `${fieldName} must be a valid date`, 'INVALID_DATE', date);
+      this.addError(
+        fieldName,
+        `${fieldName} must be a valid date`,
+        "INVALID_DATE",
+        date
+      );
     }
   }
 
@@ -205,7 +258,12 @@ export class ValidationHelpers {
     const dateObj = new Date(date);
     const now = new Date();
     if (dateObj <= now) {
-      this.addError(fieldName, `${fieldName} must be a future date`, 'PAST_DATE', date);
+      this.addError(
+        fieldName,
+        `${fieldName} must be a future date`,
+        "PAST_DATE",
+        date
+      );
     }
   }
 
@@ -215,7 +273,12 @@ export class ValidationHelpers {
     const dateObj = new Date(date);
     const now = new Date();
     if (dateObj >= now) {
-      this.addError(fieldName, `${fieldName} must be a past date`, 'FUTURE_DATE', date);
+      this.addError(
+        fieldName,
+        `${fieldName} must be a past date`,
+        "FUTURE_DATE",
+        date
+      );
     }
   }
 
@@ -229,7 +292,7 @@ export class ValidationHelpers {
       this.addError(
         fieldName,
         `${fieldName} must be one of: ${allowedValues.join(", ")}`,
-        'INVALID_ENUM',
+        "INVALID_ENUM",
         { value, allowedValues }
       );
     }
@@ -243,14 +306,19 @@ export class ValidationHelpers {
     maxLength?: number
   ): void {
     if (!Array.isArray(value)) {
-      this.addError(fieldName, `${fieldName} must be an array`, 'INVALID_TYPE', value);
+      this.addError(
+        fieldName,
+        `${fieldName} must be an array`,
+        "INVALID_TYPE",
+        value
+      );
       return;
     }
     if (minLength !== undefined && value.length < minLength) {
       this.addError(
         fieldName,
         `${fieldName} must contain at least ${minLength} items`,
-        'MIN_ARRAY_LENGTH',
+        "MIN_ARRAY_LENGTH",
         { value, minLength, maxLength, actualLength: value.length }
       );
     }
@@ -258,7 +326,7 @@ export class ValidationHelpers {
       this.addError(
         fieldName,
         `${fieldName} must contain at most ${maxLength} items`,
-        'MAX_ARRAY_LENGTH',
+        "MAX_ARRAY_LENGTH",
         { value, minLength, maxLength, actualLength: value.length }
       );
     }
@@ -269,7 +337,12 @@ export class ValidationHelpers {
     const uuidRegex =
       /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
     if (!uuidRegex.test(value)) {
-      this.addError(fieldName, `${fieldName} must be a valid UUID`, 'INVALID_UUID', value);
+      this.addError(
+        fieldName,
+        `${fieldName} must be a valid UUID`,
+        "INVALID_UUID",
+        value
+      );
     }
   }
 
@@ -286,7 +359,7 @@ export class ValidationHelpers {
     return email.toLowerCase().trim();
   }
 
-  // Schema-based validation methods
+  // Basic field validation methods
   static async validateSchemaField(
     value: any,
     modelName: string,
@@ -294,93 +367,60 @@ export class ValidationHelpers {
     excludeId?: string
   ): Promise<void> {
     try {
-      // Get field information from Prisma schema
-      const model = (prisma as any)._dmmf.datamodel.models.find(
-        (m: any) => m.name.toLowerCase() === modelName.toLowerCase()
-      );
-      
-      if (!model) {
-        this.addError(fieldName, `Model ${modelName} not found in schema`, 'SCHEMA_ERROR', value);
+      // Skip validation if value is null or undefined
+      if (value === null || value === undefined) {
         return;
       }
 
-      const field = model.fields.find((f: any) => f.name === fieldName);
-      if (!field) {
-        this.addError(fieldName, `Field ${fieldName} not found in ${modelName} schema`, 'SCHEMA_ERROR', value);
-        return;
+      // Basic type validation
+      if (typeof value === "string") {
+        // String validation
+        if (value.trim() === "") {
+          return; // Skip empty strings
+        }
+
+        // String length validation
+        if (value.length > 255) {
+          this.addError(
+            fieldName,
+            `${fieldName} is too long (max 255 characters)`,
+            "MAX_LENGTH",
+            value
+          );
+        }
+
+        // Email validation
+        if (fieldName.toLowerCase().includes("email")) {
+          this.validateEmail(value, fieldName);
+        }
+
+        // Phone validation
+        if (fieldName.toLowerCase().includes("phone")) {
+          this.validatePhone(value, fieldName);
+        }
+      } else if (typeof value === "number") {
+        // Number validation
+        if (isNaN(value)) {
+          this.addError(
+            fieldName,
+            `${fieldName} must be a valid number`,
+            "INVALID_TYPE",
+            value
+          );
+        }
+      } else if (typeof value === "boolean") {
+        // Boolean validation - already valid
+      } else if (value instanceof Date) {
+        // Date validation
+        this.validateDate(value, fieldName);
       }
-
-      // Check if field is required
-      if (!field.isOptional && (value === null || value === undefined || value === '')) {
-        this.addError(fieldName, `${fieldName} is required`, 'REQUIRED_FIELD', value);
-        return;
-      }
-
-      // Skip validation if field is optional and empty
-      if (field.isOptional && (value === null || value === undefined || value === '')) {
-        return;
-      }
-
-      // Type-based validation
-      switch (field.type) {
-        case 'String':
-          if (typeof value !== 'string') {
-            this.addError(fieldName, `${fieldName} must be a string`, 'INVALID_TYPE', value);
-          } else {
-            // Check for unique constraint
-            if (field.isUnique) {
-              await this.validateUnique(value, modelName, fieldName, excludeId);
-            }
-            // Check string length based on database constraints
-            if (field.type === 'String' && value.length > 255) { // Default varchar length
-              this.addError(fieldName, `${fieldName} is too long (max 255 characters)`, 'MAX_LENGTH', value);
-            }
-          }
-          break;
-
-        case 'Int':
-          if (!Number.isInteger(Number(value))) {
-            this.addError(fieldName, `${fieldName} must be an integer`, 'INVALID_TYPE', value);
-          }
-          break;
-
-        case 'Float':
-        case 'Decimal':
-          if (isNaN(Number(value))) {
-            this.addError(fieldName, `${fieldName} must be a number`, 'INVALID_TYPE', value);
-          }
-          break;
-
-        case 'Boolean':
-          if (typeof value !== 'boolean' && value !== 'true' && value !== 'false') {
-            this.addError(fieldName, `${fieldName} must be a boolean`, 'INVALID_TYPE', value);
-          }
-          break;
-
-        case 'DateTime':
-          this.validateDate(value, fieldName);
-          break;
-
-        default:
-          // Handle custom types and relations
-          if (field.kind === 'enum') {
-            // Handle enum validation - would need enum values from schema
-            // This is a placeholder for enum validation
-          }
-          break;
-      }
-
-      // Handle specific field validations based on field name patterns
-      if (fieldName.toLowerCase().includes('email')) {
-        this.validateEmail(value, fieldName);
-      }
-      
-      if (fieldName.toLowerCase().includes('phone')) {
-        this.validatePhone(value, fieldName);
-      }
-
     } catch (error) {
-      this.addError(fieldName, `Schema validation error for ${fieldName}`, 'SCHEMA_ERROR', value);
+      this.addError(
+        fieldName,
+        `Validation error for ${fieldName}`,
+        "VALIDATION_ERROR",
+        value
+      );
     }
   }
 
@@ -394,41 +434,71 @@ export class ValidationHelpers {
     this.clearErrors();
 
     try {
-      const model = (prisma as any)._dmmf.datamodel.models.find(
-        (m: any) => m.name.toLowerCase() === modelName.toLowerCase()
-      );
-      
-      if (!model) {
-        this.addError('general', `Model ${modelName} not found in schema`, 'SCHEMA_ERROR', data);
-        return;
-      }
-
-      // Validate each field in the data
+      // Validate each field in the data using basic validation
       for (const [fieldName, value] of Object.entries(data)) {
         // Skip system fields for updates
-        if (isUpdate && ['id', 'created_at', 'updated_at'].includes(fieldName)) {
+        if (
+          isUpdate &&
+          ["id", "created_at", "updated_at"].includes(fieldName)
+        ) {
           continue;
         }
 
-        await this.validateSchemaField(value, modelName, fieldName, excludeId);
-      }
+        // Basic validation without schema dependency
+        if (value === null || value === undefined) {
+          continue; // Skip null/undefined values
+        }
 
-      // Check for required fields that are missing (only for create operations)
-      if (!isUpdate) {
-        for (const field of model.fields) {
-          if (!field.isOptional && 
-              !field.hasDefaultValue && 
-              field.name !== 'id' && 
-              field.name !== 'created_at' && 
-              field.name !== 'updated_at' &&
-              !(field.name in data)) {
-            this.addError(field.name, `${field.name} is required`, 'REQUIRED_FIELD', undefined);
+        // Type-based validation
+        if (typeof value === "string") {
+          if (value.trim() === "") {
+            continue; // Skip empty strings
+          }
+
+          // Email validation
+          if (fieldName.toLowerCase().includes("email")) {
+            this.validateEmail(value, fieldName);
+          }
+
+          // Phone validation
+          if (fieldName.toLowerCase().includes("phone")) {
+            this.validatePhone(value, fieldName);
+          }
+
+          // String length validation
+          if (value.length > 255) {
+            this.addError(
+              fieldName,
+              `${fieldName} is too long (max 255 characters)`,
+              "MAX_LENGTH",
+              value
+            );
           }
         }
       }
 
+      // Basic required field validation for common fields
+      if (!isUpdate) {
+        const commonRequiredFields = ["name"];
+        for (const field of commonRequiredFields) {
+          if (field in data && (!data[field] || data[field].trim() === "")) {
+            this.addError(
+              field,
+              `${field} is required`,
+              "REQUIRED_FIELD",
+              data[field]
+            );
+          }
+        }
+      }
     } catch (error) {
-      this.addError('general', `Model validation error for ${modelName}`, 'SCHEMA_ERROR', data);
+      console.error(error);
+      this.addError(
+        "general",
+        `Model validation error for ${modelName}`,
+        "SCHEMA_ERROR",
+        data
+      );
     }
   }
 
@@ -443,16 +513,26 @@ export class ValidationHelpers {
     try {
       const record = await (prisma as any)[referencedModel].findUnique({
         where: { id: value },
-        select: { id: true }
+        select: { id: true },
       });
 
       if (!record) {
-        this.addError(fieldName, `Referenced ${referencedModel} with id '${value}' does not exist`, 'FOREIGN_KEY_ERROR', value);
+        this.addError(
+          fieldName,
+          `Referenced ${referencedModel} with id '${value}' does not exist`,
+          "FOREIGN_KEY_ERROR",
+          value
+        );
         return false;
       }
       return true;
     } catch (error) {
-      this.addError(fieldName, `Error validating ${fieldName} reference`, 'VALIDATION_ERROR', value);
+      this.addError(
+        fieldName,
+        `Error validating ${fieldName} reference`,
+        "VALIDATION_ERROR",
+        value
+      );
       return false;
     }
   }

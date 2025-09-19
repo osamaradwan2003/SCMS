@@ -1,36 +1,39 @@
 import { Router } from "express";
 import IncomeTypeController from "./controllers/IncomeType";
+import { checkLogin } from "@/middleware/auth";
+import { checkPermission } from "@/middleware/permissions";
+import { AppModel } from "@prisma/client";
 
 const routes = Router();
 
 // Create income type
-routes.post("/", IncomeTypeController.create as any);
+routes.post("/", checkLogin, checkPermission(AppModel.IncomeType, "create"), IncomeTypeController.create as any);
 
 // Get all income types
-routes.get("/", IncomeTypeController.getAll as any);
+routes.get("/", checkLogin, checkPermission(AppModel.IncomeType, "view"), IncomeTypeController.getAll as any);
 
 // Get paginated income types
-routes.get("/paginate", IncomeTypeController.paginate as any);
+routes.get("/paginate", checkLogin, checkPermission(AppModel.IncomeType, "view"), IncomeTypeController.paginate as any);
 
 // Search income types
-routes.get("/search", IncomeTypeController.search as any);
+routes.get("/search", checkLogin, checkPermission(AppModel.IncomeType, "view"), IncomeTypeController.search as any);
 
 // Get income type statistics
-routes.get("/statistics", IncomeTypeController.getStatistics as any);
+routes.get("/statistics", checkLogin, checkPermission(AppModel.IncomeType, "view"), IncomeTypeController.getStatistics as any);
 
 // Get income types with counts
-routes.get("/counts", IncomeTypeController.getWithCounts as any);
+routes.get("/counts", checkLogin, checkPermission(AppModel.IncomeType, "view"), IncomeTypeController.getWithCounts as any);
 
 // Get income type by ID
-routes.get("/:id", IncomeTypeController.getById as any);
+routes.get("/:id", checkLogin, checkPermission(AppModel.IncomeType, "view"), IncomeTypeController.getById as any);
 
 // Update income type
-routes.put("/:id", IncomeTypeController.update as any);
+routes.put("/:id", checkLogin, checkPermission(AppModel.IncomeType, "update"), IncomeTypeController.update as any);
 
 // Delete income type
-routes.delete("/:id", IncomeTypeController.delete as any);
+routes.delete("/:id", checkLogin, checkPermission(AppModel.IncomeType, "delete"), IncomeTypeController.delete as any);
 
 // Delete multiple income types
-routes.delete("/", IncomeTypeController.deleteMany as any);
+routes.delete("/", checkLogin, checkPermission(AppModel.IncomeType, "delete"), IncomeTypeController.deleteMany as any);
 
 export default routes;

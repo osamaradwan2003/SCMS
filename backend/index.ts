@@ -5,20 +5,24 @@ import { loadRoutes } from "@utils/index";
 import { checkLogin } from "./middleware/auth";
 import routes from "@/modules/auth/loginRoute";
 import fileUpload from "express-fileupload";
+import path from "path";
 dotenv.config();
 const app = express();
 app.use(cors());
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
-app.use(fileUpload({
-  limits: { 
-    fileSize: 50 * 1024 * 1024, // 50MB limit
-  },
-  abortOnLimit: true,
-  responseOnLimit: "File size limit has been reached",
-}));
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
+app.use(
+  fileUpload({
+    limits: {
+      fileSize: 50 * 1024 * 1024, // 50MB limit
+    },
+    abortOnLimit: true,
+    responseOnLimit: "File size limit has been reached",
+  })
+);
 //autoload route
 app.use("/api/auth", routes); //skip auth routes from middleware
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(checkLogin);
 loadRoutes(app, "/api");
 app.listen(3000, () => {

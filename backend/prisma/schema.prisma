@@ -20,6 +20,7 @@ model User {
   name               String
   phone              String?
   email              String?
+  firstLogin         Boolean              @default(true)
   messages           MessageLog[]
   createdReports     WeeklyReport[]
   transactions       Transaction[]
@@ -36,9 +37,38 @@ model User {
   Category           Category[]
   IncomeType         IncomeType[]
   ExpenseType        ExpenseType[]
+  Department         Department[]
+  // Back-relations for account-linked entities
+  studentAccounts    Student[]            @relation("StudentAccountUser")
+  guardianAccounts   Guardian[]           @relation("GuardianAccountUser")
+  employeeAccounts   Employee[]           @relation("EmployeeAccountUser")
+  // Flexible roles m2m membership
+  roles              Role[]               @relation("UserRoles")
+  // Roles created by this user (audit backref)
+  createdRoles       Role[]               @relation("RoleCreatedBy")
+  // Optional per-user overrides for permissions
+  userPermissions    UserPermission[]
   created_at         DateTime             @default(now())
   updated_at         DateTime             @updatedAt
   image              String?
+}
+
+// Optional per-user per-model CRUD permission overrides
+model UserPermission {
+  id         String   @id @default(uuid()) @db.Uuid
+  userId     String   @db.Uuid
+  model      AppModel
+  can_view   Boolean  @default(false)
+  can_create Boolean  @default(false)
+  can_update Boolean  @default(false)
+  can_delete Boolean  @default(false)
+  // Relations
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // Audit
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@unique([userId, model])
 }
 
 model Student {
@@ -53,14 +83,19 @@ model Student {
   classId          String?            @db.Uuid
   class            Class?             @relation(fields: [classId], references: [id])
   guardianId       String             @db.Uuid
+  guradianDegree   String // e.g., Father, Mother
   reports          WeeklyReport[]
   messages         MessageLog[]
+  is_teacher       Boolean            @default(false)
   Guardian         Guardian           @relation(fields: [guardianId], references: [id])
   StuednAttendance StuednAttendance[]
   Subscriptions    Subscriptions?     @relation(fields: [subscriptionsId], references: [id])
   subscriptionsId  String             @db.Uuid
   created_by       User?              @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
   userId           String?            @db.Uuid
+  // Linked login user account for this student
+  accountUserId    String?            @db.Uuid
+  accountUser      User?              @relation("StudentAccountUser", fields: [accountUserId], references: [id], onDelete: SetNull)
   created_at       DateTime           @default(now())
   updated_at       DateTime           @updatedAt
 }
@@ -78,42 +113,101 @@ model Subscriptions {
 }
 
 model Guardian {
-  id             String       @id @default(uuid()) @db.Uuid
-  name           String
-  phone          String       @unique
-  email          String?      @unique
-  relationDegree String // e.g., Father, Mother
-  messages       MessageLog[]
-  Student        Student[]
-  profile_photo  String?
-  documents      String?
-  created_by     User?        @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
-  userId         String?      @db.Uuid
-  created_at     DateTime     @default(now())
-  updated_at     DateTime     @updatedAt
+  id            String       @id @default(uuid()) @db.Uuid
+  name          String
+  phone         String       @unique
+  email         String?
+  address       String?
+  messages      MessageLog[]
+  Student       Student[]
+  profile_photo String?
+  documents     String?
+  created_by    User?        @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId        String?      @db.Uuid
+  // Linked login user account for this guardian/parent
+  accountUserId String?      @db.Uuid
+  accountUser   User?        @relation("GuardianAccountUser", fields: [accountUserId], references: [id], onDelete: SetNull)
+  created_at    DateTime     @default(now())
+  updated_at    DateTime     @updatedAt
 }
 
 model Class {
-  id         String     @id @default(uuid()) @db.Uuid
-  name       String
-  students   Student[]
-  subjects   Subject[]  @relation("ClassSubjects")
-  teachers   Employee[]
-  created_by User?      @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
-  userId     String?    @db.Uuid
-  created_at DateTime   @default(now())
-  updated_at DateTime   @updatedAt
+  id          String    @id @default(uuid()) @db.Uuid
+  name        String
+  description String?
+  students    Student[]
+  subjects    Subject[] @relation("ClassSubjects")
+  // Assign teachers to class via many-to-many relation
+  created_by  User?     @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId      String?   @db.Uuid
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+}
+
+model Department {
+  id          String     @id @default(uuid()) @db.Uuid
+  name        String
+  description String?
+  // Department manager (an Employee)
+  managerId   String?    @db.Uuid
+  manager     Employee?  @relation("DepartmentManager", fields: [managerId], references: [id], onDelete: SetNull)
+  // Employees in this department
+  employees   Employee[]
+  // Audit fields
+  created_by  User?      @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId      String?    @db.Uuid
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
 }
 
 model Subject {
-  id         String         @id @default(uuid()) @db.Uuid
-  name       String
-  reports    WeeklyReport[]
-  classes    Class[]        @relation("ClassSubjects")
-  created_by User?          @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
-  userId     String?        @db.Uuid
-  created_at DateTime       @default(now())
-  updated_at DateTime       @updatedAt
+  id          String         @id @default(uuid()) @db.Uuid
+  name        String
+  description String?
+  reports     WeeklyReport[]
+  classes     Class[]        @relation("ClassSubjects")
+  // Direct many-to-many: which employees (teachers) teach this subject
+  teachers    Employee[]     @relation("SubjectTeachers")
+  created_by  User?          @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId      String?        @db.Uuid
+  created_at  DateTime       @default(now())
+  updated_at  DateTime       @updatedAt
+}
+
+model Role {
+  id              String           @id @default(uuid()) @db.Uuid
+  name            String           @unique
+  description     String?
+  isSystem        Boolean          @default(false)
+  // Arbitrary permissions structure per role
+  permissions     Json?
+  // Users who have this role (m2m)
+  users           User[]           @relation("UserRoles")
+  // Per-model CRUD permissions for this role
+  rolePermissions RolePermission[]
+  // Audit fields
+  created_by      User?            @relation("RoleCreatedBy", fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId          String?          @db.Uuid
+  created_at      DateTime         @default(now())
+  updated_at      DateTime         @updatedAt
+}
+
+// Role-based per-model CRUD permissions
+model RolePermission {
+  id         String   @id @default(uuid()) @db.Uuid
+  roleId     String   @db.Uuid
+  model      AppModel
+  can_view   Boolean  @default(false)
+  can_create Boolean  @default(false)
+  can_update Boolean  @default(false)
+  can_delete Boolean  @default(false)
+  // Relations
+  role       Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  // Audit
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@unique([roleId, model])
 }
 
 model WeeklyReport {
@@ -150,21 +244,48 @@ model MessageLog {
   updated_at DateTime  @updatedAt
 }
 
+enum EmployeeStatus {
+  active
+  inactive
+  terminated
+  on_leave
+}
+
 model Employee {
-  id         String               @id @default(uuid()) @db.Uuid
-  name       String
-  role       String
-  is_teacher Boolean              @default(false)
-  joinDate   DateTime
-  salary     Float
-  attendance EmployeeAttendance[]
-  payrolls   Payroll[]
-  Class      Class?               @relation(fields: [classId], references: [id])
-  classId    String?              @db.Uuid
-  created_by User?                @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
-  userId     String?              @db.Uuid
-  created_at DateTime             @default(now())
-  updated_at DateTime             @updatedAt
+  id                 String               @id @default(uuid()) @db.Uuid
+  name               String
+  email              String?
+  phone              String?
+  address            String?
+  position           String
+  is_teacher         Boolean              @default(false)
+  departmentId       String?              @db.Uuid
+  department         Department?          @relation(fields: [departmentId], references: [id], onDelete: SetNull)
+  hireDate           DateTime
+  salary             Float
+  status             EmployeeStatus       @default(active)
+  // Self-referential manager/subordinates relation
+  managerId          String?              @db.Uuid
+  manager            Employee?            @relation("EmployeeManager", fields: [managerId], references: [id], onDelete: SetNull)
+  subordinates       Employee[]           @relation("EmployeeManager")
+  // Optional media fields
+  profile_image      String?
+  docs               String?
+  // Related entities
+  attendance         EmployeeAttendance[]
+  payrolls           Payroll[]
+  // Departments this employee manages
+  departmentsManaged Department[]         @relation("DepartmentManager")
+  // Audit fields
+  created_by         User?                @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId             String?              @db.Uuid
+  // Linked login user account for this employee
+  accountUserId      String?              @db.Uuid
+  accountUser        User?                @relation("EmployeeAccountUser", fields: [accountUserId], references: [id], onDelete: SetNull)
+  created_at         DateTime             @default(now())
+  updated_at         DateTime             @updatedAt
+  // Many-to-many relation with Class for teachers assignment
+  subjects           Subject[]            @relation("SubjectTeachers")
 }
 
 model EmployeeAttendance {
@@ -207,7 +328,7 @@ model Payroll {
 model Bank {
   id          String        @id @default(uuid()) @db.Uuid
   name        String
-  balance     Float         @default(0)
+  balance     Float         @default(0) // start balance
   transaction Transaction[]
   created_by  User?         @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
   userId      String?       @db.Uuid
@@ -215,16 +336,43 @@ model Bank {
   updated_at  DateTime      @updatedAt
 }
 
+enum CalculateMethod {
+  ADD
+  SUBTRACT
+}
+
+// Application models for permission scoping
+enum AppModel {
+  User
+  Student
+  Guardian
+  Class
+  Subject
+  Employee
+  EmployeeAttendance
+  StuednAttendance
+  Payroll
+  Bank
+  Category
+  IncomeType
+  ExpenseType
+  Transaction
+  MessageLog
+  Department
+  Subscriptions
+  WeeklyReport
+}
+
 model Category {
-  id              String        @id @default(uuid()) @db.Uuid
+  id              String          @id @default(uuid()) @db.Uuid
   name            String
   type            String // "income" or "expense"
-  calculateMethod String // "add" or "subtract"
+  calculateMethod CalculateMethod // "add" or "subtract"
   transaction     Transaction[]
-  created_by      User?         @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
-  userId          String?       @db.Uuid
-  created_at      DateTime      @default(now())
-  updated_at      DateTime      @updatedAt
+  created_by      User?           @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  userId          String?         @db.Uuid
+  created_at      DateTime        @default(now())
+  updated_at      DateTime        @updatedAt
 }
 
 model IncomeType {

@@ -1,39 +1,42 @@
 import { Router } from "express";
 import ClassController from "./controllers/Class";
+import { checkLogin } from "@/middleware/auth";
+import { checkPermission } from "@/middleware/permissions";
+import { AppModel } from "@prisma/client";
 
 const routes = Router();
 
 // Create class
-routes.post("/", ClassController.create as any);
+routes.post("/", checkLogin, checkPermission(AppModel.Class, "create"), ClassController.create as any);
 
 // Get all classes
-routes.get("/", ClassController.getAll as any);
+routes.get("/", checkLogin, checkPermission(AppModel.Class, "view"), ClassController.getAll as any);
 
 // Get paginated classes
-routes.get("/paginate", ClassController.paginate as any);
+routes.get("/paginate", checkLogin, checkPermission(AppModel.Class, "view"), ClassController.paginate as any);
 
 // Search classes
-routes.get("/search", ClassController.search as any);
+routes.get("/search", checkLogin, checkPermission(AppModel.Class, "view"), ClassController.search as any);
 
 // Get classes with counts
-routes.get("/counts", ClassController.getWithCounts as any);
+routes.get("/counts", checkLogin, checkPermission(AppModel.Class, "view"), ClassController.getWithCounts as any);
 
 // Get class by ID
-routes.get("/:id", ClassController.getById as any);
+routes.get("/:id", checkLogin, checkPermission(AppModel.Class, "view"), ClassController.getById as any);
 
 // Update class
-routes.put("/:id", ClassController.update as any);
+routes.put("/:id", checkLogin, checkPermission(AppModel.Class, "update"), ClassController.update as any);
 
 // Delete class
-routes.delete("/:id", ClassController.delete as any);
+routes.delete("/:id", checkLogin, checkPermission(AppModel.Class, "delete"), ClassController.delete as any);
 
 // Add subjects to class
-routes.post("/:id/subjects", ClassController.addSubjects as any);
+routes.post("/:id/subjects", checkLogin, checkPermission(AppModel.Class, "update"), ClassController.addSubjects as any);
 
 // Remove subjects from class
-routes.delete("/:id/subjects", ClassController.removeSubjects as any);
+routes.delete("/:id/subjects", checkLogin, checkPermission(AppModel.Class, "update"), ClassController.removeSubjects as any);
 
 // Delete multiple classes
-routes.delete("/", ClassController.deleteMany as any);
+routes.delete("/", checkLogin, checkPermission(AppModel.Class, "delete"), ClassController.deleteMany as any);
 
 export default routes;

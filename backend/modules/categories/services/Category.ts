@@ -1,11 +1,12 @@
 import { prisma } from "@db/client";
+// Note: Prisma enum values are stored as uppercase strings in the DB (e.g., 'ADD' | 'SUBTRACT').
 
 export default class CategoryServices {
   // Create category
   static async createCategory(
     name: string,
     type: string,
-    calculateMethod: string,
+    calculateMethod: "add" | "subtract",
     userId: string
   ) {
     if (!["income", "expense"].includes(type)) {
@@ -31,7 +32,7 @@ export default class CategoryServices {
       data: {
         name,
         type,
-        calculateMethod,
+        calculateMethod: calculateMethod === "add" ? "ADD" : "SUBTRACT",
         userId,
       },
       include: {
@@ -135,7 +136,7 @@ export default class CategoryServices {
     data: {
       name?: string;
       type?: string;
-      calculateMethod?: string;
+      calculateMethod?: "add" | "subtract";
     }
   ) {
     if (data.type && !["income", "expense"].includes(data.type)) {
@@ -167,9 +168,22 @@ export default class CategoryServices {
       }
     }
 
+    const updateData: {
+      name?: string;
+      type?: string;
+      calculateMethod?: "ADD" | "SUBTRACT";
+    } = { ...data } as any;
+
+    if (data.calculateMethod) {
+      updateData.calculateMethod =
+        data.calculateMethod === "add" ? "ADD" : "SUBTRACT";
+      // Remove the string version if it exists on the spread object typing
+      // (TypeScript typing above already ensures enum type for calculateMethod)
+    }
+
     const category = await prisma.category.update({
       where: { id },
-      data,
+      data: updateData,
       include: {
         created_by: {
           select: {

@@ -20,7 +20,9 @@ export default class AttendanceServices {
     });
 
     if (existingAttendance) {
-      throw new Error("Attendance already recorded for this student on this date");
+      throw new Error(
+        "Attendance already recorded for this student on this date"
+      );
     }
 
     const attendance = await prisma.stuednAttendance.create({
@@ -173,7 +175,9 @@ export default class AttendanceServices {
     });
 
     if (existingAttendance) {
-      throw new Error("Attendance already recorded for this employee on this date");
+      throw new Error(
+        "Attendance already recorded for this employee on this date"
+      );
     }
 
     const attendance = await prisma.employeeAttendance.create({
@@ -184,11 +188,7 @@ export default class AttendanceServices {
         userId,
       },
       include: {
-        employee: {
-          include: {
-            Class: true,
-          },
-        },
+        employee: true,
         created_by: {
           select: {
             id: true,
@@ -205,11 +205,7 @@ export default class AttendanceServices {
     const attendance = await prisma.employeeAttendance.findUnique({
       where: { id },
       include: {
-        employee: {
-          include: {
-            Class: true,
-          },
-        },
+        employee: true,
         created_by: {
           select: {
             id: true,
@@ -234,11 +230,7 @@ export default class AttendanceServices {
       where: { id },
       data,
       include: {
-        employee: {
-          include: {
-            Class: true,
-          },
-        },
+        employee: true,
         created_by: {
           select: {
             id: true,
@@ -275,7 +267,10 @@ export default class AttendanceServices {
     });
   }
 
-  static async getEmployeeAttendanceByDateRange(startDate: Date, endDate: Date) {
+  static async getEmployeeAttendanceByDateRange(
+    startDate: Date,
+    endDate: Date
+  ) {
     return await prisma.employeeAttendance.findMany({
       where: {
         date: {
@@ -284,11 +279,7 @@ export default class AttendanceServices {
         },
       },
       include: {
-        employee: {
-          include: {
-            Class: true,
-          },
-        },
+        employee: true,
         created_by: {
           select: {
             id: true,
@@ -323,7 +314,11 @@ export default class AttendanceServices {
         );
         results.push({ success: true, data: attendance });
       } catch (error: any) {
-        results.push({ success: false, error: error.message, studentId: data.studentId });
+        results.push({
+          success: false,
+          error: error.message,
+          studentId: data.studentId,
+        });
       }
     }
     return results;
@@ -348,20 +343,28 @@ export default class AttendanceServices {
         );
         results.push({ success: true, data: attendance });
       } catch (error: any) {
-        results.push({ success: false, error: error.message, employeeId: data.employeeId });
+        results.push({
+          success: false,
+          error: error.message,
+          employeeId: data.employeeId,
+        });
       }
     }
     return results;
   }
 
   // Statistics
-  static async getStudentAttendanceStatistics(studentId?: string, startDate?: Date, endDate?: Date) {
+  static async getStudentAttendanceStatistics(
+    studentId?: string,
+    startDate?: Date,
+    endDate?: Date
+  ) {
     const whereClause: any = {};
-    
+
     if (studentId) {
       whereClause.studentID = studentId;
     }
-    
+
     if (startDate && endDate) {
       whereClause.date = {
         gte: startDate,
@@ -369,12 +372,14 @@ export default class AttendanceServices {
       };
     }
 
-    const totalRecords = await prisma.stuednAttendance.count({ where: whereClause });
-    
+    const totalRecords = await prisma.stuednAttendance.count({
+      where: whereClause,
+    });
+
     const presentCount = await prisma.stuednAttendance.count({
       where: { ...whereClause, status: "present" },
     });
-    
+
     const absentCount = await prisma.stuednAttendance.count({
       where: { ...whereClause, status: "absent" },
     });
@@ -383,17 +388,22 @@ export default class AttendanceServices {
       totalRecords,
       presentCount,
       absentCount,
-      attendanceRate: totalRecords > 0 ? (presentCount / totalRecords) * 100 : 0,
+      attendanceRate:
+        totalRecords > 0 ? (presentCount / totalRecords) * 100 : 0,
     };
   }
 
-  static async getEmployeeAttendanceStatistics(employeeId?: string, startDate?: Date, endDate?: Date) {
+  static async getEmployeeAttendanceStatistics(
+    employeeId?: string,
+    startDate?: Date,
+    endDate?: Date
+  ) {
     const whereClause: any = {};
-    
+
     if (employeeId) {
       whereClause.employeeId = employeeId;
     }
-    
+
     if (startDate && endDate) {
       whereClause.date = {
         gte: startDate,
@@ -401,12 +411,14 @@ export default class AttendanceServices {
       };
     }
 
-    const totalRecords = await prisma.employeeAttendance.count({ where: whereClause });
-    
+    const totalRecords = await prisma.employeeAttendance.count({
+      where: whereClause,
+    });
+
     const presentCount = await prisma.employeeAttendance.count({
       where: { ...whereClause, status: "present" },
     });
-    
+
     const absentCount = await prisma.employeeAttendance.count({
       where: { ...whereClause, status: "absent" },
     });
@@ -415,7 +427,8 @@ export default class AttendanceServices {
       totalRecords,
       presentCount,
       absentCount,
-      attendanceRate: totalRecords > 0 ? (presentCount / totalRecords) * 100 : 0,
+      attendanceRate:
+        totalRecords > 0 ? (presentCount / totalRecords) * 100 : 0,
     };
   }
 }

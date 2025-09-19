@@ -12,7 +12,7 @@ export default class PayrollServices {
     // Check if payroll already exists for this employee in this month
     const startOfMonth = new Date(month.getFullYear(), month.getMonth(), 1);
     const endOfMonth = new Date(month.getFullYear(), month.getMonth() + 1, 0);
-    
+
     const existingPayroll = await prisma.payroll.findFirst({
       where: {
         employeeId,
@@ -36,11 +36,7 @@ export default class PayrollServices {
         userId,
       },
       include: {
-        employee: {
-          include: {
-            Class: true,
-          },
-        },
+        employee: true,
         created_by: {
           select: {
             id: true,
@@ -58,11 +54,7 @@ export default class PayrollServices {
     const payroll = await prisma.payroll.findUnique({
       where: { id },
       include: {
-        employee: {
-          include: {
-            Class: true,
-          },
-        },
+        employee: true,
         created_by: {
           select: {
             id: true,
@@ -80,11 +72,7 @@ export default class PayrollServices {
   static async getAllPayrolls() {
     return await prisma.payroll.findMany({
       include: {
-        employee: {
-          include: {
-            Class: true,
-          },
-        },
+        employee: true,
         created_by: {
           select: {
             id: true,
@@ -93,10 +81,7 @@ export default class PayrollServices {
           },
         },
       },
-      orderBy: [
-        { month: "desc" },
-        { created_at: "desc" },
-      ],
+      orderBy: [{ month: "desc" }, { created_at: "desc" }],
     });
   }
 
@@ -120,8 +105,16 @@ export default class PayrollServices {
       }
 
       const newMonth = data.month;
-      const startOfMonth = new Date(newMonth.getFullYear(), newMonth.getMonth(), 1);
-      const endOfMonth = new Date(newMonth.getFullYear(), newMonth.getMonth() + 1, 0);
+      const startOfMonth = new Date(
+        newMonth.getFullYear(),
+        newMonth.getMonth(),
+        1
+      );
+      const endOfMonth = new Date(
+        newMonth.getFullYear(),
+        newMonth.getMonth() + 1,
+        0
+      );
 
       const existingPayroll = await prisma.payroll.findFirst({
         where: {
@@ -135,7 +128,9 @@ export default class PayrollServices {
       });
 
       if (existingPayroll) {
-        throw new Error("Payroll already exists for this employee in this month");
+        throw new Error(
+          "Payroll already exists for this employee in this month"
+        );
       }
     }
 
@@ -143,11 +138,7 @@ export default class PayrollServices {
       where: { id },
       data,
       include: {
-        employee: {
-          include: {
-            Class: true,
-          },
-        },
+        employee: true,
         created_by: {
           select: {
             id: true,
@@ -180,11 +171,7 @@ export default class PayrollServices {
       skip,
       take: limit,
       include: {
-        employee: {
-          include: {
-            Class: true,
-          },
-        },
+        employee: true,
         created_by: {
           select: {
             id: true,
@@ -193,10 +180,7 @@ export default class PayrollServices {
           },
         },
       },
-      orderBy: [
-        { month: "desc" },
-        { created_at: "desc" },
-      ],
+      orderBy: [{ month: "desc" }, { created_at: "desc" }],
     });
 
     const total = await prisma.payroll.count();
@@ -234,11 +218,7 @@ export default class PayrollServices {
     const payrolls = await prisma.payroll.findMany({
       where: whereClause,
       include: {
-        employee: {
-          include: {
-            Class: true,
-          },
-        },
+        employee: true,
         created_by: {
           select: {
             id: true,
@@ -249,10 +229,7 @@ export default class PayrollServices {
       },
       skip: limit ? (page - 1) * limit : 0,
       take: limit,
-      orderBy: [
-        { month: "desc" },
-        { created_at: "desc" },
-      ],
+      orderBy: [{ month: "desc" }, { created_at: "desc" }],
     });
 
     return payrolls;
@@ -309,9 +286,7 @@ export default class PayrollServices {
           },
         },
       },
-      orderBy: [
-        { month: "desc" },
-      ],
+      orderBy: [{ month: "desc" }],
     });
   }
 
@@ -319,7 +294,7 @@ export default class PayrollServices {
   static async getByMonthYear(month: number, year: number) {
     const startOfMonth = new Date(year, month - 1, 1);
     const endOfMonth = new Date(year, month, 0);
-    
+
     return await prisma.payroll.findMany({
       where: {
         month: {
@@ -328,11 +303,7 @@ export default class PayrollServices {
         },
       },
       include: {
-        employee: {
-          include: {
-            Class: true,
-          },
-        },
+        employee: true,
         created_by: {
           select: {
             id: true,
@@ -350,10 +321,15 @@ export default class PayrollServices {
   }
 
   // Get payrolls by date range
-  static async getByDateRange(startMonth: number, startYear: number, endMonth: number, endYear: number) {
+  static async getByDateRange(
+    startMonth: number,
+    startYear: number,
+    endMonth: number,
+    endYear: number
+  ) {
     const startDate = new Date(startYear, startMonth - 1, 1);
     const endDate = new Date(endYear, endMonth, 0);
-    
+
     return await prisma.payroll.findMany({
       where: {
         month: {
@@ -362,11 +338,7 @@ export default class PayrollServices {
         },
       },
       include: {
-        employee: {
-          include: {
-            Class: true,
-          },
-        },
+        employee: true,
         created_by: {
           select: {
             id: true,
@@ -375,10 +347,7 @@ export default class PayrollServices {
           },
         },
       },
-      orderBy: [
-        { month: "desc" },
-        { created_at: "desc" },
-      ],
+      orderBy: [{ month: "desc" }, { created_at: "desc" }],
     });
   }
 
@@ -394,7 +363,7 @@ export default class PayrollServices {
   // Get payroll statistics
   static async getStatistics(month?: number, year?: number) {
     const whereClause: any = {};
-    
+
     if (month !== undefined && year !== undefined) {
       const startOfMonth = new Date(year, month - 1, 1);
       const endOfMonth = new Date(year, month, 0);
@@ -412,7 +381,7 @@ export default class PayrollServices {
     }
 
     const totalPayrolls = await prisma.payroll.count({ where: whereClause });
-    
+
     const totalAmount = await prisma.payroll.aggregate({
       where: whereClause,
       _sum: {
@@ -453,7 +422,7 @@ export default class PayrollServices {
   // Get monthly payroll summary
   static async getMonthlyPayrollSummary(year: number) {
     const monthlyData = [];
-    
+
     for (let month = 1; month <= 12; month++) {
       const stats = await this.getStatistics(month, year);
       monthlyData.push({
@@ -487,9 +456,7 @@ export default class PayrollServices {
 
     const lastPayroll = await prisma.payroll.findFirst({
       where: { employeeId },
-      orderBy: [
-        { month: "desc" },
-      ],
+      orderBy: [{ month: "desc" }],
     });
 
     return {

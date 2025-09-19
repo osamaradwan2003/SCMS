@@ -1,27 +1,85 @@
 import { Response } from "express";
 import EmployeeServices from "../services/Employee";
 import { RequestWithUser } from "@/@types/auth";
+import type { UploadedFile } from "express-fileupload";
+import fs from "fs";
 
 export default class EmployeeController {
+  // Minimal helper to save uploaded file to disk and return relative path
+  private static uploadFile(file: UploadedFile): string {
+    if (!file) throw new Error("No file uploaded");
+    const parts = file.name.split(".");
+    const ext = parts.length > 1 ? parts.pop()! : "bin";
+    const base = parts.join(".");
+    const newFilename = `${Date.now()}${base}.${ext}`;
+    const dir = `uploads/${ext}`;
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    const target = `${dir}/${newFilename}`;
+    file.mv(target, (err) => {
+      if (err) throw err;
+    });
+    return target;
+  }
   // Create employee
   static async create(req: RequestWithUser, res: Response) {
-    const { name, role, is_teacher, joinDate, salary, classId } = req.body;
-    
-    if (!name || !role || joinDate === undefined || salary === undefined) {
+    const {
+      name,
+      position,
+      hireDate,
+      salary,
+      is_teacher,
+      email,
+      phone,
+      address,
+      status,
+      managerId,
+      departmentId,
+    } = req.body;
+
+    // Convert is_teacher string to boolean
+    const isTeacherBoolean = is_teacher === "true" || is_teacher === true;
+
+    console.log(req.body);
+
+    if (!name || !position || hireDate === undefined || salary === undefined) {
       return res.status(400).send({
-        message: "Name, role, join date, and salary are required",
+        message: "Name, position, hire date, and salary are required",
       });
     }
 
     try {
+      // Handle file uploads if present (multipart/form-data)
+      let profileImagePath: string | undefined;
+      let docsPath: string | undefined;
+      if (req.files?.profile_image) {
+        const profile = Array.isArray(req.files.profile_image)
+          ? req.files.profile_image[0]
+          : (req.files.profile_image as UploadedFile);
+        profileImagePath = EmployeeController.uploadFile(profile);
+      }
+      if (req.files?.docs) {
+        const doc = Array.isArray(req.files.docs)
+          ? req.files.docs[0]
+          : (req.files.docs as UploadedFile);
+        docsPath = EmployeeController.uploadFile(doc);
+      }
       const employee = await EmployeeServices.createEmployee(
         name,
-        role,
-        is_teacher || false,
-        new Date(joinDate),
+        position,
+        new Date(hireDate),
         parseFloat(salary),
-        classId || null,
-        req.user.id
+        req.user.id,
+        {
+          email,
+          phone,
+          address,
+          is_teacher: isTeacherBoolean,
+          status,
+          managerId: managerId || undefined,
+          departmentId: departmentId || undefined,
+          profile_image: profileImagePath,
+          docs: docsPath,
+        }
       );
       res.status(201).send({
         message: "Employee created successfully",
@@ -63,16 +121,54 @@ export default class EmployeeController {
   // Update employee
   static async update(req: RequestWithUser, res: Response) {
     const { id } = req.params;
-    const { name, role, is_teacher, joinDate, salary, classId } = req.body;
+    const {
+      name,
+      position,
+      hireDate,
+      salary,
+      is_teacher,
+      email,
+      phone,
+      address,
+      status,
+      managerId,
+      departmentId,
+    } = req.body;
+
+    // Convert is_teacher string to boolean
+    const isTeacherBoolean = is_teacher === "true" || is_teacher === true;
 
     try {
+      // Handle file uploads if present
+      let profileImagePath: string | undefined;
+      let docsPath: string | undefined;
+      if (req.files?.profile_image) {
+        const profile = Array.isArray(req.files.profile_image)
+          ? req.files.profile_image[0]
+          : (req.files.profile_image as UploadedFile);
+        profileImagePath = EmployeeController.uploadFile(profile);
+      }
+      if (req.files?.docs) {
+        const doc = Array.isArray(req.files.docs)
+          ? req.files.docs[0]
+          : (req.files.docs as UploadedFile);
+        docsPath = EmployeeController.uploadFile(doc);
+      }
+
       const employee = await EmployeeServices.updateEmployee(id, {
         name,
-        role,
-        is_teacher,
-        joinDate: joinDate ? new Date(joinDate) : undefined,
+        position,
+        hireDate: hireDate ? new Date(hireDate) : undefined,
         salary: salary ? parseFloat(salary) : undefined,
-        classId,
+        is_teacher: is_teacher !== undefined ? isTeacherBoolean : undefined,
+        email,
+        phone,
+        address,
+        status,
+        managerId,
+        departmentId,
+        ...(profileImagePath ? { profile_image: profileImagePath } : {}),
+        ...(docsPath ? { docs: docsPath } : {}),
       });
       res.send({
         message: "Employee updated successfully",

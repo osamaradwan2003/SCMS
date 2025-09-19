@@ -31,7 +31,7 @@ export default class transactionervices {
 
     // Update bank balance based on category calculation method
     const newBalance =
-      category.calculateMethod === "add"
+      category.calculateMethod === "ADD"
         ? bank.balance + amount
         : bank.balance - amount;
 
@@ -154,7 +154,7 @@ export default class transactionervices {
       return await prisma.$transaction(async (tx) => {
         // Reverse the original transaction effect
         const originalBalance =
-          existingtransaction.category.calculateMethod === "add"
+          existingtransaction.category.calculateMethod === "ADD"
             ? existingtransaction.bank.balance - existingtransaction.amount
             : existingtransaction.bank.balance + existingtransaction.amount;
 
@@ -182,7 +182,7 @@ export default class transactionervices {
           ? newBank.balance
           : originalBalance;
         const newBalance =
-          newCategory.calculateMethod === "add"
+          newCategory.calculateMethod === "ADD"
             ? targetBankBalance + newAmount
             : targetBankBalance - newAmount;
 
@@ -254,7 +254,7 @@ export default class transactionervices {
     return await prisma.$transaction(async (tx) => {
       // Reverse the transaction effect on bank balance
       const newBalance =
-        transaction.category.calculateMethod === "add"
+        transaction.category.calculateMethod === "ADD"
           ? transaction.bank.balance - transaction.amount
           : transaction.bank.balance + transaction.amount;
 

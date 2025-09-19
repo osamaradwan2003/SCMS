@@ -34,4 +34,38 @@ export default class AuthController {
       res.status(400).send({ message: error.message });
     }
   }
+
+  // change password (first login or normal)
+  static async changePassword(req: RequestWithUser, res: Response) {
+    try {
+      const { currentPassword, newPassword } = req.body as { currentPassword: string; newPassword: string };
+      const result = await AuthServices.changePassword(req.user.id, currentPassword, newPassword);
+      res.send(result);
+    } catch (error: any) {
+      res.status(400).send({ message: error.message });
+    }
+  }
+
+  // update current user's profile
+  static async updateProfile(req: RequestWithUser, res: Response) {
+    try {
+      const { name, username, email, phone, image } = req.body as {
+        name?: string;
+        username?: string;
+        email?: string;
+        phone?: string;
+        image?: string;
+      };
+      const result = await AuthServices.updateProfile(req.user.id, {
+        name,
+        username,
+        email,
+        phone,
+        image,
+      });
+      res.send(result);
+    } catch (error: any) {
+      res.status(400).send({ message: error.message });
+    }
+  }
 }

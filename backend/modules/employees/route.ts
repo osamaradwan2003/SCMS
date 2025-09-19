@@ -1,39 +1,42 @@
 import { Router } from "express";
 import EmployeeController from "./controllers/Employee";
+import { checkLogin } from "@/middleware/auth";
+import { checkPermission } from "@/middleware/permissions";
+import { AppModel } from "@prisma/client";
 
 const routes = Router();
 
 // Create employee
-routes.post("/", EmployeeController.create as any);
+routes.post("/", checkLogin, checkPermission(AppModel.Employee, "create"), EmployeeController.create as any);
 
 // Get all employees
-routes.get("/", EmployeeController.getAll as any);
+routes.get("/", checkLogin, checkPermission(AppModel.Employee, "view"), EmployeeController.getAll as any);
 
 // Get paginated employees
-routes.get("/paginate", EmployeeController.paginate as any);
+routes.get("/paginate", checkLogin, checkPermission(AppModel.Employee, "view"), EmployeeController.paginate as any);
 
 // Search employees
-routes.get("/search", EmployeeController.search as any);
+routes.get("/search", checkLogin, checkPermission(AppModel.Employee, "view"), EmployeeController.search as any);
 
 // Get teachers only
-routes.get("/teachers", EmployeeController.getTeachers as any);
+routes.get("/teachers", checkLogin, checkPermission(AppModel.Employee, "view"), EmployeeController.getTeachers as any);
 
 // Get employee statistics
-routes.get("/statistics", EmployeeController.getStatistics as any);
+routes.get("/statistics", checkLogin, checkPermission(AppModel.Employee, "view"), EmployeeController.getStatistics as any);
 
 // Get employees by role
-routes.get("/role/:role", EmployeeController.getByRole as any);
+routes.get("/role/:role", checkLogin, checkPermission(AppModel.Employee, "view"), EmployeeController.getByRole as any);
 
 // Get employee by ID
-routes.get("/:id", EmployeeController.getById as any);
+routes.get("/:id", checkLogin, checkPermission(AppModel.Employee, "view"), EmployeeController.getById as any);
 
 // Update employee
-routes.put("/:id", EmployeeController.update as any);
+routes.put("/:id", checkLogin, checkPermission(AppModel.Employee, "update"), EmployeeController.update as any);
 
 // Delete employee
-routes.delete("/:id", EmployeeController.delete as any);
+routes.delete("/:id", checkLogin, checkPermission(AppModel.Employee, "delete"), EmployeeController.delete as any);
 
 // Delete multiple employees
-routes.delete("/", EmployeeController.deleteMany as any);
+routes.delete("/", checkLogin, checkPermission(AppModel.Employee, "delete"), EmployeeController.deleteMany as any);
 
 export default routes;

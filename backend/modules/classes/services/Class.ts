@@ -1,4 +1,5 @@
-import { prisma } from "@db/client";
+import { prisma } from "@/db/client";
+import type { Prisma } from "@prisma/client";
 
 export default class ClassServices {
   // Create class
@@ -7,7 +8,7 @@ export default class ClassServices {
     userId: string
   ) {
     const existingClass = await prisma.class.findFirst({
-      where: { name: { equals: name, mode: "insensitive" } },
+      where: { name: { equals: name, mode: "insensitive" as Prisma.QueryMode } },
     });
 
     if (existingClass) {
@@ -26,7 +27,6 @@ export default class ClassServices {
           },
         },
         subjects: true,
-        teachers: true,
         created_by: {
           select: {
             id: true,
@@ -54,7 +54,6 @@ export default class ClassServices {
           },
         },
         subjects: true,
-        teachers: true,
         created_by: {
           select: {
             id: true,
@@ -84,13 +83,6 @@ export default class ClassServices {
             name: true,
           },
         },
-        teachers: {
-          select: {
-            id: true,
-            name: true,
-            role: true,
-          },
-        },
         created_by: {
           select: {
             id: true,
@@ -102,7 +94,6 @@ export default class ClassServices {
           select: {
             students: true,
             subjects: true,
-            teachers: true,
           },
         },
       },
@@ -122,7 +113,7 @@ export default class ClassServices {
     if (data.name) {
       const existingClass = await prisma.class.findFirst({
         where: { 
-          name: { equals: data.name, mode: "insensitive" },
+          name: { equals: data.name, mode: "insensitive" as Prisma.QueryMode },
           NOT: { id },
         },
       });
@@ -142,7 +133,6 @@ export default class ClassServices {
           },
         },
         subjects: true,
-        teachers: true,
         created_by: {
           select: {
             id: true,
@@ -162,7 +152,11 @@ export default class ClassServices {
       where: { id },
       include: {
         students: true,
-        teachers: true,
+        subjects: {
+          include: {
+            teachers: true,
+          },
+        },
       },
     });
 
@@ -172,7 +166,8 @@ export default class ClassServices {
       throw new Error("Cannot delete class with enrolled students");
     }
 
-    if (classEntity.teachers.length > 0) {
+    const hasAssignedTeachers = classEntity.subjects.some((s) => s.teachers.length > 0);
+    if (hasAssignedTeachers) {
       throw new Error("Cannot delete class with assigned teachers");
     }
 
@@ -200,13 +195,6 @@ export default class ClassServices {
             name: true,
           },
         },
-        teachers: {
-          select: {
-            id: true,
-            name: true,
-            role: true,
-          },
-        },
         created_by: {
           select: {
             id: true,
@@ -218,7 +206,6 @@ export default class ClassServices {
           select: {
             students: true,
             subjects: true,
-            teachers: true,
           },
         },
       },
@@ -240,10 +227,10 @@ export default class ClassServices {
 
   // Search classes
   static async search(search: string, page: number = 1, limit?: number) {
-    const whereClause = {
+    const whereClause: Prisma.ClassWhereInput = {
       name: {
         contains: search,
-        mode: "insensitive" as const,
+        mode: "insensitive" as Prisma.QueryMode,
       },
     };
 
@@ -262,13 +249,6 @@ export default class ClassServices {
             name: true,
           },
         },
-        teachers: {
-          select: {
-            id: true,
-            name: true,
-            role: true,
-          },
-        },
         created_by: {
           select: {
             id: true,
@@ -280,7 +260,6 @@ export default class ClassServices {
           select: {
             students: true,
             subjects: true,
-            teachers: true,
           },
         },
       },
@@ -296,14 +275,13 @@ export default class ClassServices {
 
   // Count searched classes
   static async countSearched(search: string) {
-    return await prisma.class.count({
-      where: {
-        name: {
-          contains: search,
-          mode: "insensitive" as const,
-        },
+    const whereClause: Prisma.ClassWhereInput = {
+      name: {
+        contains: search,
+        mode: "insensitive",
       },
-    });
+    };
+    return await prisma.class.count({ where: whereClause });
   }
 
   // Paginate searched classes
@@ -329,7 +307,11 @@ export default class ClassServices {
       },
       include: {
         students: true,
-        teachers: true,
+        subjects: {
+          include: {
+            teachers: true,
+          },
+        },
       },
     });
 
@@ -338,7 +320,7 @@ export default class ClassServices {
     );
 
     const classesWithTeachers = classesWithRelations.filter(
-      (classEntity) => classEntity.teachers.length > 0
+      (classEntity) => classEntity.subjects.some((s) => s.teachers.length > 0)
     );
 
     if (classesWithStudents.length > 0) {
@@ -406,7 +388,6 @@ export default class ClassServices {
           select: {
             students: true,
             subjects: true,
-            teachers: true,
           },
         },
       },

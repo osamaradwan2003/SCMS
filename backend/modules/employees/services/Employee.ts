@@ -1,28 +1,67 @@
-import { prisma } from "@db/client";
+import { prisma } from "@/db/client";
+import type { Prisma } from "@prisma/client";
+import { provisionUserForEntity } from "@/modules/shared/UserProvisioning";
 
 export default class EmployeeServices {
   // Create employee
   static async createEmployee(
     name: string,
-    role: string,
-    is_teacher: boolean,
-    joinDate: Date,
+    position: string,
+    hireDate: Date,
     salary: number,
-    classId: string | null,
-    userId: string
+    userId: string,
+    options?: {
+      email?: string;
+      phone?: string;
+      address?: string;
+      is_teacher?: boolean;
+      status?: "active" | "inactive" | "terminated" | "on_leave";
+      managerId?: string | null;
+      departmentId?: string | null;
+      profile_image?: string;
+      docs?: string;
+    }
   ) {
+    const {
+      email,
+      phone,
+      address,
+      is_teacher,
+      status,
+      managerId,
+      departmentId,
+      profile_image,
+      docs,
+    } = options || {};
+    // Provision account user (username from name + random; default password username+123; must change on first login)
+    // Use "teacher" role if employee is marked as teacher, otherwise use "employee" role
+    const roleName = is_teacher ? "teacher" : "employee";
+    const { user: accountUser, credentials } = await provisionUserForEntity({
+      name,
+      email,
+      phone,
+      roleName,
+    });
+
     const employee = await prisma.employee.create({
       data: {
         name,
-        role,
+        position,
+        hireDate,
         is_teacher,
-        joinDate,
         salary,
-        classId,
+        email,
+        phone,
+        address,
+        status,
+        managerId: managerId ?? undefined,
+        departmentId: departmentId ?? undefined,
+        profile_image,
+        docs,
         userId,
+        accountUserId: accountUser.id,
       },
       include: {
-        Class: true,
         attendance: {
           orderBy: {
             date: "desc",
@@ -42,9 +81,12 @@ export default class EmployeeServices {
             username: true,
           },
         },
+        department: { select: { id: true, name: true } },
+        manager: { select: { id: true, name: true } },
       },
     });
-    return employee;
+    // Attach credentials only for admin caller context; here we return in a meta wrapper for controller to handle
+    return Object.assign({}, employee, { meta: { credentials } });
   }
 
   // Find employee by ID
@@ -52,7 +94,6 @@ export default class EmployeeServices {
     const employee = await prisma.employee.findUnique({
       where: { id },
       include: {
-        Class: true,
         attendance: {
           orderBy: {
             date: "desc",
@@ -70,6 +111,8 @@ export default class EmployeeServices {
             username: true,
           },
         },
+        department: { select: { id: true, name: true } },
+        manager: { select: { id: true, name: true } },
       },
     });
     if (!employee) throw new Error("Employee not found");
@@ -80,7 +123,6 @@ export default class EmployeeServices {
   static async getAllEmployees() {
     return await prisma.employee.findMany({
       include: {
-        Class: true,
         created_by: {
           select: {
             id: true,
@@ -106,18 +148,50 @@ export default class EmployeeServices {
     id: string,
     data: {
       name?: string;
-      role?: string;
-      is_teacher?: boolean;
-      joinDate?: Date;
+      position?: string;
+      hireDate?: Date;
       salary?: number;
-      classId?: string | null;
+      email?: string;
+      phone?: string;
+      address?: string;
+      is_teacher?: boolean;
+      status?: "active" | "inactive" | "terminated" | "on_leave";
+      managerId?: string | null;
+      departmentId?: string | null;
+      profile_image?: string;
+      docs?: string;
     }
   ) {
+    // If is_teacher status is being updated, we need to update the user role as well
+    if (data.is_teacher !== undefined) {
+      const employee = await prisma.employee.findUnique({
+        where: { id },
+        select: { accountUserId: true, is_teacher: true },
+      });
+
+      if (employee && employee.accountUserId && employee.is_teacher !== data.is_teacher) {
+        // Remove existing roles
+        await prisma.user.update({
+          where: { id: employee.accountUserId },
+          data: { roles: { set: [] } },
+        });
+
+        // Add new role based on teacher status
+        const newRoleName = data.is_teacher ? "teacher" : "employee";
+        const role = await prisma.role.findUnique({ where: { name: newRoleName } });
+        if (role) {
+          await prisma.user.update({
+            where: { id: employee.accountUserId },
+            data: { roles: { connect: { id: role.id } } },
+          });
+        }
+      }
+    }
+
     const employee = await prisma.employee.update({
       where: { id },
       data,
       include: {
-        Class: true,
         created_by: {
           select: {
             id: true,
@@ -125,6 +199,8 @@ export default class EmployeeServices {
             username: true,
           },
         },
+        department: { select: { id: true, name: true } },
+        manager: { select: { id: true, name: true } },
       },
     });
     return employee;
@@ -142,12 +218,12 @@ export default class EmployeeServices {
     });
 
     if (!employee) throw new Error("Employee not found");
-    
+
     // Delete related records first
     await prisma.employeeAttendance.deleteMany({
       where: { employeeId: id },
     });
-    
+
     await prisma.payroll.deleteMany({
       where: { employeeId: id },
     });
@@ -164,7 +240,6 @@ export default class EmployeeServices {
       skip,
       take: limit,
       include: {
-        Class: true,
         created_by: {
           select: {
             id: true,
@@ -178,6 +253,8 @@ export default class EmployeeServices {
             payrolls: true,
           },
         },
+        department: { select: { id: true, name: true } },
+        manager: { select: { id: true, name: true } },
       },
       orderBy: {
         created_at: "desc",
@@ -197,18 +274,25 @@ export default class EmployeeServices {
 
   // Search employees
   static async search(search: string, page: number = 1, limit?: number) {
-    const whereClause = {
+    const whereClause: Prisma.EmployeeWhereInput = {
       OR: [
         {
           name: {
             contains: search,
-            mode: "insensitive" as const,
+            mode: "insensitive",
           },
         },
         {
-          role: {
+          position: {
             contains: search,
-            mode: "insensitive" as const,
+            mode: "insensitive",
+          },
+        },
+        {
+          department: {
+            is: {
+              name: { contains: search, mode: "insensitive" },
+            },
           },
         },
       ],
@@ -217,7 +301,6 @@ export default class EmployeeServices {
     const employees = await prisma.employee.findMany({
       where: whereClause,
       include: {
-        Class: true,
         created_by: {
           select: {
             id: true,
@@ -231,6 +314,8 @@ export default class EmployeeServices {
             payrolls: true,
           },
         },
+        department: { select: { id: true, name: true } },
+        manager: { select: { id: true, name: true } },
       },
       skip: limit ? (page - 1) * limit : 0,
       take: limit,
@@ -244,24 +329,30 @@ export default class EmployeeServices {
 
   // Count searched employees
   static async countSearched(search: string) {
-    return await prisma.employee.count({
-      where: {
-        OR: [
-          {
-            name: {
-              contains: search,
-              mode: "insensitive" as const,
+    const whereClause: Prisma.EmployeeWhereInput = {
+      OR: [
+        {
+          name: {
+            contains: search,
+            mode: "insensitive",
+          },
+        },
+        {
+          position: {
+            contains: search,
+            mode: "insensitive",
+          },
+        },
+        {
+          department: {
+            is: {
+              name: { contains: search, mode: "insensitive" },
             },
           },
-          {
-            role: {
-              contains: search,
-              mode: "insensitive" as const,
-            },
-          },
-        ],
-      },
-    });
+        },
+      ],
+    };
+    return await prisma.employee.count({ where: whereClause });
   }
 
   // Paginate searched employees
@@ -284,7 +375,7 @@ export default class EmployeeServices {
     await prisma.employeeAttendance.deleteMany({
       where: { employeeId: { in: ids } },
     });
-    
+
     await prisma.payroll.deleteMany({
       where: { employeeId: { in: ids } },
     });
@@ -299,9 +390,8 @@ export default class EmployeeServices {
   // Get teachers only
   static async getTeachers() {
     return await prisma.employee.findMany({
-      where: { is_teacher: true },
+      where: { position: { contains: "teacher", mode: "insensitive" } },
       include: {
-        Class: true,
         created_by: {
           select: {
             id: true,
@@ -309,6 +399,7 @@ export default class EmployeeServices {
             username: true,
           },
         },
+        department: { select: { id: true, name: true } },
       },
       orderBy: {
         name: "asc",
@@ -319,14 +410,13 @@ export default class EmployeeServices {
   // Get employees by role
   static async getByRole(role: string) {
     return await prisma.employee.findMany({
-      where: { 
-        role: {
+      where: {
+        position: {
           contains: role,
           mode: "insensitive",
         },
       },
       include: {
-        Class: true,
         created_by: {
           select: {
             id: true,
@@ -334,6 +424,7 @@ export default class EmployeeServices {
             username: true,
           },
         },
+        department: { select: { id: true, name: true } },
       },
       orderBy: {
         name: "asc",
@@ -345,10 +436,10 @@ export default class EmployeeServices {
   static async getStatistics() {
     const totalEmployees = await prisma.employee.count();
     const totalTeachers = await prisma.employee.count({
-      where: { is_teacher: true },
+      where: { position: { contains: "teacher", mode: "insensitive" } },
     });
     const totalStaff = totalEmployees - totalTeachers;
-    
+
     const averageSalary = await prisma.employee.aggregate({
       _avg: {
         salary: true,
@@ -361,5 +452,19 @@ export default class EmployeeServices {
       totalStaff,
       averageSalary: averageSalary._avg.salary || 0,
     };
+  }
+
+  // Helper method to check if an employee is a teacher
+  static isTeacher(employee: { position: string }): boolean {
+    return employee.position.toLowerCase().includes("teacher");
+  }
+
+  // Helper method to check if an employee is a teacher by ID
+  static async isTeacherById(employeeId: string): Promise<boolean> {
+    const employee = await prisma.employee.findUnique({
+      where: { id: employeeId },
+      select: { position: true },
+    });
+    return employee ? this.isTeacher(employee) : false;
   }
 }
