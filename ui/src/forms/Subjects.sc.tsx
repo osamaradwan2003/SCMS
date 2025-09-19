@@ -1,9 +1,24 @@
 import * as yup from "yup";
 import { type FormSchema } from "@/@types";
 import { useTranslate } from "@/hooks/locales";
+import { useQuery } from "@tanstack/react-query";
+import { employeesApi } from "@/api/employees";
+import type { Employee } from "@/api/employees";
 
 export const CreateSubjectFormSchema = (): FormSchema[] => {
   const t = useTranslate("subjects");
+
+  // Teachers options (employees). We fetch a large page and map by name
+  const { data: employeesRes } = useQuery({
+    queryKey: ["employees", "dropdown"],
+    queryFn: async () => {
+      const res = await employeesApi.getAll({ page: 1, limit: 1000 });
+      return res.data.data || [];
+    },
+  });
+  const teacherOptions = (
+    Array.isArray(employeesRes) ? (employeesRes as Employee[]) : []
+  ).map((e: Employee) => ({ label: e.name, value: e.id }));
   return [
     {
       name: "name",
@@ -11,14 +26,6 @@ export const CreateSubjectFormSchema = (): FormSchema[] => {
       rules: yup.string().required(t("validation.name_required")),
       inputProps: {
         placeholder: t("placeholder.name"),
-      },
-    },
-    {
-      name: "code",
-      type: "input",
-      rules: yup.string().required(t("validation.code_required")),
-      inputProps: {
-        placeholder: t("placeholder.code"),
       },
     },
     {
@@ -31,27 +38,13 @@ export const CreateSubjectFormSchema = (): FormSchema[] => {
       },
     },
     {
-      name: "credits",
-      type: "number",
-      rules: yup
-        .number()
-        .required(t("validation.credits_required"))
-        .min(1, t("validation.credits_min"))
-        .max(10, t("validation.credits_max")),
-      inputProps: {
-        placeholder: t("placeholder.credits"),
-        min: 1,
-        max: 10,
-      },
-    },
-    {
-      name: "classId",
-      type: "autoComplete",
-      rules: yup.string().required(t("validation.class_required")),
-      autoCompleteProps: {
-        showSearch: true,
-        placeholder: t("placeholder.classId"),
-        options: [],
+      name: "teachers",
+      type: "select",
+      rules: yup.array().nullable().notRequired(),
+      selectProps: {
+        mode: "multiple",
+        placeholder: t("placeholder.teachers"),
+        options: teacherOptions,
       },
     },
   ];
@@ -59,6 +52,17 @@ export const CreateSubjectFormSchema = (): FormSchema[] => {
 
 export const UpdateSubjectFormSchema = (): FormSchema[] => {
   const t = useTranslate("subjects");
+  // Teachers options (employees)
+  const { data: employeesRes } = useQuery({
+    queryKey: ["employees", "dropdown"],
+    queryFn: async () => {
+      const res = await employeesApi.getAll({ page: 1, limit: 1000 });
+      return res.data.data || [];
+    },
+  });
+  const teacherOptions = (
+    Array.isArray(employeesRes) ? (employeesRes as Employee[]) : []
+  ).map((e: Employee) => ({ label: e.name, value: e.id }));
   return [
     {
       name: "name",
@@ -66,14 +70,6 @@ export const UpdateSubjectFormSchema = (): FormSchema[] => {
       rules: yup.string().required(t("validation.name_required")),
       inputProps: {
         placeholder: t("placeholder.name"),
-      },
-    },
-    {
-      name: "code",
-      type: "input",
-      rules: yup.string().required(t("validation.code_required")),
-      inputProps: {
-        placeholder: t("placeholder.code"),
       },
     },
     {
@@ -86,27 +82,13 @@ export const UpdateSubjectFormSchema = (): FormSchema[] => {
       },
     },
     {
-      name: "credits",
-      type: "number",
-      rules: yup
-        .number()
-        .required(t("validation.credits_required"))
-        .min(1, t("validation.credits_min"))
-        .max(10, t("validation.credits_max")),
-      inputProps: {
-        placeholder: t("placeholder.credits"),
-        min: 1,
-        max: 10,
-      },
-    },
-    {
-      name: "classId",
-      type: "autoComplete",
-      rules: yup.string().required(t("validation.class_required")),
-      autoCompleteProps: {
-        showSearch: true,
-        placeholder: t("placeholder.classId"),
-        options: [],
+      name: "teachers",
+      type: "select",
+      rules: yup.array().nullable().notRequired(),
+      selectProps: {
+        mode: "multiple",
+        placeholder: t("placeholder.teachers"),
+        options: teacherOptions,
       },
     },
   ];

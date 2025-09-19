@@ -1,0 +1,89 @@
+{
+  "list": "الفئات",
+  "create": "إضافة فئة",
+  "edit": "تعديل الفئة",
+  "view": "تفاصيل الفئة",
+  "categories_list": "قائمة الفئات",
+  "create_category": "إضافة فئة",
+  
+  "fields": {
+    "name": "اسم الفئة",
+    "description": "الوصف",
+    "type": "نوع الفئة",
+    "calculationMethod": "طريقة الحساب",
+    "created_at": "تاريخ الإنشاء",
+    "updated_at": "آخر تحديث"
+  },
+  
+  "placeholder": {
+    "name": "أدخل اسم الفئة",
+    "description": "أدخل وصف الفئة (اختياري)",
+    "type": "اختر نوع الفئة",
+    "calculationMethod": "اختر طريقة الحساب"
+  },
+  
+  "type_options": {
+    "income": "إيراد",
+    "expense": "مصروف"
+  },
+  
+  "calculation_options": {
+    "fixed": "مبلغ ثابت",
+    "percentage": "نسبة مئوية",
+    "hourly": "معدل بالساعة"
+  },
+  
+  "buttons": {
+    "create": "إضافة فئة",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "view": "عرض التفاصيل",
+    "save": "حفظ التغييرات",
+    "cancel": "إلغاء",
+    "back": "رجوع",
+    "back_to_list": "العودة إلى الفئات",
+    "yes": "نعم",
+    "no": "لا",
+    "update": "تحديث الفئة"
+  },
+  
+  "messages": {
+    "create_success": "تم إنشاء الفئة بنجاح",
+    "create_error": "فشل في إنشاء الفئة",
+    "update_success": "تم تحديث الفئة بنجاح",
+    "update_error": "فشل في تحديث الفئة",
+    "delete_success": "تم حذف الفئة بنجاح",
+    "delete_error": "فشل في حذف الفئة",
+    "load_error": "فشل في تحميل بيانات الفئة",
+    "not_found": "الفئة غير موجودة",
+    "delete_confirm": "حذف الفئة",
+    "delete_description": "هل أنت متأكد من حذف هذه الفئة؟ لا يمكن التراجع عن هذا الإجراء."
+  },
+  
+  "validation": {
+    "name_required": "اسم الفئة مطلوب",
+    "type_required": "نوع الفئة مطلوب",
+    "calculation_method_required": "طريقة الحساب مطلوبة",
+    "name_min": "يجب أن يكون اسم الفئة على الأقل حرفين",
+    "name_max": "لا يمكن أن يتجاوز اسم الفئة 100 حرف"
+  },
+  
+  "table": {
+    "actions": "الإجراءات",
+    "pagination_info": "عرض {start}-{end} من {total} فئة"
+  },
+  
+  "search_placeholder": "البحث في الفئات...",
+  "filter_by_type": "تصفية حسب النوع",
+  "filter_by_method": "تصفية حسب طريقة الحساب",
+  "of": "من",
+  "items": "عنصر",
+  
+  "details": {
+    "category_info": "معلومات الفئة",
+    "usage_statistics": "إحصائيات الاستخدام",
+    "related_transactions": "المعاملات ذات الصلة"
+  },
+  
+  "no_transactions": "لا توجد معاملات لهذه الفئة"
+}

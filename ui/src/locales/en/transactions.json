@@ -1,0 +1,109 @@
+{
+  "list": "Transactions",
+  "create": "Create Transaction",
+  "edit": "Edit Transaction",
+  "view": "Transaction Details",
+  "transactions_list": "Transactions List",
+  "create_transaction": "Create Transaction",
+  
+  "fields": {
+    "amount": "Amount",
+    "description": "Description",
+    "date": "Transaction Date",
+    "type": "Transaction Type",
+    "category": "Category",
+    "bank": "Bank Account",
+    "reference": "Reference Number",
+    "status": "Status",
+    "created_at": "Created Date",
+    "updated_at": "Last Updated"
+  },
+  
+  "placeholder": {
+    "amount": "Enter transaction amount",
+    "description": "Enter transaction description",
+    "date": "Select transaction date",
+    "type": "Select transaction type",
+    "category": "Select category",
+    "bank": "Select bank account",
+    "reference": "Enter reference number (optional)"
+  },
+  
+  "type_options": {
+    "income": "Income",
+    "expense": "Expense"
+  },
+  
+  "status_options": {
+    "pending": "Pending",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
+  },
+  
+  "buttons": {
+    "create": "Create Transaction",
+    "edit": "Edit",
+    "delete": "Delete",
+    "view": "View Details",
+    "save": "Save Changes",
+    "cancel": "Cancel",
+    "back": "Back",
+    "back_to_list": "Back to Transactions",
+    "yes": "Yes",
+    "no": "No",
+    "update": "Update Transaction"
+  },
+  
+  "messages": {
+    "create_success": "Transaction created successfully",
+    "create_error": "Failed to create transaction",
+    "update_success": "Transaction updated successfully",
+    "update_error": "Failed to update transaction",
+    "delete_success": "Transaction deleted successfully",
+    "delete_error": "Failed to delete transaction",
+    "load_error": "Failed to load transaction data",
+    "not_found": "Transaction not found",
+    "delete_confirm": "Delete Transaction",
+    "delete_description": "Are you sure you want to delete this transaction? This action cannot be undone."
+  },
+  
+  "validation": {
+    "amount_required": "Amount is required",
+    "amount_min": "Amount must be greater than 0",
+    "description_required": "Description is required",
+    "date_required": "Transaction date is required",
+    "type_required": "Transaction type is required",
+    "category_required": "Category is required",
+    "bank_required": "Bank account is required",
+    "description_min": "Description must be at least 5 characters",
+    "description_max": "Description cannot exceed 500 characters"
+  },
+  
+  "table": {
+    "actions": "Actions",
+    "pagination_info": "Showing {start}-{end} of {total} transactions"
+  },
+  
+  "search_placeholder": "Search transactions...",
+  "filter_by_type": "Filter by Type",
+  "filter_by_category": "Filter by Category",
+  "filter_by_bank": "Filter by Bank",
+  "filter_by_date": "Filter by Date Range",
+  "of": "of",
+  "items": "items",
+  
+  "details": {
+    "transaction_info": "Transaction Information",
+    "financial_summary": "Financial Summary",
+    "related_documents": "Related Documents"
+  },
+  
+  "summary": {
+    "total_income": "Total Income",
+    "total_expense": "Total Expense",
+    "net_balance": "Net Balance"
+  },
+  
+  "currency": "$",
+  "no_documents": "No documents attached"
+}

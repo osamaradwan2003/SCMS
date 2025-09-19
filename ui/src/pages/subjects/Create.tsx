@@ -1,15 +1,17 @@
 import React from "react";
-import { Form, Input, Button, Card, message } from "antd";
+import { Form, Button, Card, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { httpClient } from "@/api/httpClient";
 import { useTranslate } from "@/hooks/locales";
 import type { CreateSubjectData } from "@/types/api";
+import { CreateSubjectFormSchema } from "@/forms/Subjects.sc";
+import CreateField from "@/components/Form/CreateField";
 
 const CreateSubjectPage: React.FC = () => {
   const navigate = useNavigate();
   const t = useTranslate("subjects");
-  const [form] = Form.useForm();
+  const [form] = Form.useForm<CreateSubjectData>();
 
   const createSubjectMutation = useMutation({
     mutationFn: (data: CreateSubjectData) => httpClient.post("/subjects", data),
@@ -29,22 +31,10 @@ const CreateSubjectPage: React.FC = () => {
   return (
     <div className="p-6">
       <Card title={t("create_subject")} className="max-w-2xl mx-auto">
-        <Form
-          form={form}
-          layout="vertical"
-          onFinish={handleSubmit}
-          requiredMark={false}
-        >
-          <Form.Item
-            name="name"
-            label={t("name")}
-            rules={[
-              { required: true, message: t("validation.name_required") },
-              { min: 2, message: t("validation.name_min_length") },
-            ]}
-          >
-            <Input placeholder={t("placeholders.name")} />
-          </Form.Item>
+        <Form form={form} layout="vertical" onFinish={handleSubmit} requiredMark={false}>
+          {CreateSubjectFormSchema().map((f) => (
+            <React.Fragment key={String(f.name)}>{CreateField(f)}</React.Fragment>
+          ))}
 
           <Form.Item className="mb-0">
             <div className="flex gap-3 justify-end">

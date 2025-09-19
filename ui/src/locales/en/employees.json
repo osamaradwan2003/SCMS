@@ -1,0 +1,152 @@
+{
+  "title": "Employees",
+  "create": "Create Employee",
+  "edit": "Edit Employee",
+  "view": "View Employee",
+  "delete": "Delete Employee",
+  "list": "Employee List",
+  "search": "Search Employees",
+  "filter": "Filter Employees",
+  "export": "Export Employees",
+  "import": "Import Employees",
+  "bulk_delete": "Delete Selected",
+  "total": "Total Employees",
+  "active": "Active Employees",
+  "inactive": "Inactive Employees",
+  "teachers": "Teachers",
+  "staff": "Staff Members",
+
+  "fields": {
+    "id": "Employee ID",
+    "name": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "address": "Address",
+    "position": "Position/Job Title",
+    "department": "Department",
+    "hireDate": "Hire Date",
+    "salary": "Salary",
+    "status": "Employment Status",
+    "manager": "Manager",
+    "is_teacher": "Is Teacher",
+    "profile_image": "Profile Image",
+    "docs": "Documents",
+    "created_at": "Created At",
+    "updated_at": "Updated At",
+    "created_by": "Created By"
+  },
+
+  "placeholder": {
+    "name": "Enter employee full name",
+    "email": "Enter email address",
+    "phone": "Enter phone number",
+    "address": "Enter employee address",
+    "position": "Enter job position/title",
+    "department": "Select department",
+    "hireDate": "Select hire date",
+    "salary": "Enter salary amount",
+    "status": "Select employment status",
+    "manager": "Select manager",
+    "search": "Search by name, position, or department..."
+  },
+
+  "status_options": {
+    "active": "Active",
+    "inactive": "Inactive", 
+    "terminated": "Terminated",
+    "on_leave": "On Leave"
+  },
+
+  "validation": {
+    "name_required": "Employee name is required",
+    "email_invalid": "Please enter a valid email address",
+    "position_required": "Position is required",
+    "hireDate_required": "Hire date is required",
+    "salary_required": "Salary is required",
+    "salary_number": "Salary must be a valid number",
+    "salary_min": "Salary must be greater than or equal to 0",
+    "status_required": "Employment status is required"
+  },
+
+  "messages": {
+    "create_success": "Employee created successfully",
+    "create_error": "Failed to create employee",
+    "update_success": "Employee updated successfully", 
+    "update_error": "Failed to update employee",
+    "delete_success": "Employee deleted successfully",
+    "delete_error": "Failed to delete employee",
+    "bulk_delete_success": "Selected employees deleted successfully",
+    "bulk_delete_error": "Failed to delete selected employees",
+    "fetch_error": "Failed to fetch employees",
+    "not_found": "Employee not found"
+  },
+
+  "buttons": {
+    "create": "Create Employee",
+    "edit": "Edit",
+    "delete": "Delete", 
+    "view": "View Details",
+    "save": "Save Changes",
+    "cancel": "Cancel",
+    "upload": "Upload File",
+    "download": "Download",
+    "export": "Export Data",
+    "import": "Import Data",
+    "search": "Search",
+    "filter": "Filter",
+    "reset": "Reset",
+    "refresh": "Refresh"
+  },
+
+  "labels": {
+    "yes": "Yes",
+    "no": "No",
+    "active": "Active",
+    "inactive": "Inactive",
+    "all": "All Employees",
+    "recent": "Recent Employees",
+    "statistics": "Employee Statistics"
+  },
+
+  "help": {
+    "profile_image": "Upload employee profile picture (JPG, PNG, max 5MB)",
+    "docs": "Upload employee documents (PDF, DOC, images, max 10 files)",
+    "salary": "Enter monthly salary amount",
+    "manager": "Select the direct manager for this employee",
+    "department": "Assign employee to a department",
+    "is_teacher": "When enabled, a user account with 'teacher' role will be automatically created for system access"
+  },
+
+  "table": {
+    "name": "Name",
+    "position": "Position",
+    "department": "Department", 
+    "status": "Status",
+    "hireDate": "Hire Date",
+    "salary": "Salary",
+    "manager": "Manager",
+    "actions": "Actions",
+    "no_data": "No employees found",
+    "loading": "Loading employees..."
+  },
+
+  "filters": {
+    "all": "All Employees",
+    "active": "Active Only",
+    "inactive": "Inactive Only",
+    "teachers": "Teachers Only",
+    "staff": "Staff Only",
+    "by_department": "By Department",
+    "by_manager": "By Manager",
+    "recent": "Recently Added"
+  },
+
+  "statistics": {
+    "total_employees": "Total Employees",
+    "total_teachers": "Total Teachers", 
+    "total_staff": "Total Staff",
+    "average_salary": "Average Salary",
+    "active_employees": "Active Employees",
+    "new_this_month": "New This Month"
+  }
+}

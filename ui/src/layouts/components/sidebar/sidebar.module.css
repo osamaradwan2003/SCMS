@@ -13,3 +13,99 @@
 .sidebar .ant-menu {
   background: transparent !important;
 }
+
+/* Horizontal navigation styles */
+.horizontalNav {
+  min-height: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.horizontalNav .ant-menu-horizontal {
+  border-bottom: none !important;
+  flex: 1;
+  justify-content: center;
+}
+
+.horizontalNav .ant-menu-horizontal > .ant-menu-item {
+  border-bottom: 2px solid transparent;
+  margin: 0 4px;
+  white-space: nowrap;
+}
+
+.horizontalNav .ant-menu-horizontal > .ant-menu-item:hover,
+.horizontalNav .ant-menu-horizontal > .ant-menu-item-selected {
+  border-bottom-color: #1890ff;
+}
+
+.horizontalNav .ant-menu-horizontal > .ant-menu-submenu {
+  border-bottom: 2px solid transparent;
+  margin: 0 4px;
+  white-space: nowrap;
+}
+
+.horizontalNav .ant-menu-horizontal > .ant-menu-submenu:hover,
+.horizontalNav .ant-menu-horizontal > .ant-menu-submenu-selected {
+  border-bottom-color: #1890ff;
+}
+
+/* Overflow handling */
+.horizontalNav .ant-menu-overflow {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.horizontalNav .ant-menu-overflow-item {
+  flex-shrink: 0;
+}
+
+/* Mobile horizontal navigation */
+@media (max-width: 768px) {
+  .horizontalNav .ant-menu-horizontal {
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  
+  .horizontalNav .ant-menu-horizontal::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  
+  .horizontalNav .ant-menu-horizontal > .ant-menu-item,
+  .horizontalNav .ant-menu-horizontal > .ant-menu-submenu {
+    display: inline-block;
+    margin: 0 2px;
+    flex-shrink: 0;
+  }
+}
+
+/* Ensure proper spacing and alignment */
+.horizontalNav .ant-layout-header {
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .horizontalNav .ant-menu-horizontal > .ant-menu-item,
+  .horizontalNav .ant-menu-horizontal > .ant-menu-submenu {
+    margin: 0 2px;
+    padding: 0 8px;
+  }
+}
+
+@media (max-width: 576px) {
+  .horizontalNav .ant-menu-horizontal > .ant-menu-item,
+  .horizontalNav .ant-menu-horizontal > .ant-menu-submenu {
+    margin: 0 1px;
+    padding: 0 4px;
+    font-size: 12px;
+  }
+}

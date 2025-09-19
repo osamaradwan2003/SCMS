@@ -1,0 +1,85 @@
+{
+  "list": "الفصول",
+  "create": "إضافة فصل",
+  "edit": "تعديل الفصل",
+  "view": "تفاصيل الفصل",
+  "classes_list": "قائمة الفصول",
+  "create_class": "إضافة فصل",
+  
+  "fields": {
+    "name": "اسم الفصل",
+    "description": "الوصف",
+    "subjects": "المواد الدراسية",
+    "capacity": "السعة",
+    "currentEnrollment": "العدد الحالي",
+    "academicYear": "السنة الدراسية",
+    "semester": "الفصل الدراسي",
+    "created_at": "تاريخ الإنشاء",
+    "updated_at": "آخر تحديث"
+  },
+  
+  "placeholder": {
+    "name": "أدخل اسم الفصل (مثال: الصف العاشر-أ)",
+    "description": "أدخل وصف الفصل (اختياري)",
+    "subjects": "اختر المواد الدراسية لهذا الفصل",
+    "capacity": "أدخل العدد الأقصى للطلاب",
+    "academicYear": "أدخل السنة الدراسية",
+    "semester": "اختر الفصل الدراسي"
+  },
+  
+  "buttons": {
+    "create": "إضافة فصل",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "view": "عرض التفاصيل",
+    "save": "حفظ التغييرات",
+    "cancel": "إلغاء",
+    "back": "رجوع",
+    "back_to_list": "العودة إلى الفصول",
+    "yes": "نعم",
+    "no": "لا",
+    "update": "تحديث الفصل"
+  },
+  
+  "messages": {
+    "create_success": "تم إنشاء الفصل بنجاح",
+    "create_error": "فشل في إنشاء الفصل",
+    "update_success": "تم تحديث الفصل بنجاح",
+    "update_error": "فشل في تحديث الفصل",
+    "delete_success": "تم حذف الفصل بنجاح",
+    "delete_error": "فشل في حذف الفصل",
+    "load_error": "فشل في تحميل بيانات الفصل",
+    "not_found": "الفصل غير موجود",
+    "delete_confirm": "حذف الفصل",
+    "delete_description": "هل أنت متأكد من حذف هذا الفصل؟ لا يمكن التراجع عن هذا الإجراء."
+  },
+  
+  "validation": {
+    "name_required": "اسم الفصل مطلوب",
+    "name_min": "يجب أن يكون اسم الفصل على الأقل حرفين",
+    "name_max": "لا يمكن أن يتجاوز اسم الفصل 100 حرف",
+    "capacity_required": "السعة مطلوبة",
+    "capacity_min": "يجب أن تكون السعة على الأقل 1",
+    "capacity_max": "لا يمكن أن تتجاوز السعة 1000"
+  },
+  
+  "table": {
+    "actions": "الإجراءات",
+    "pagination_info": "عرض {start}-{end} من {total} فصل"
+  },
+  
+  "search_placeholder": "البحث في الفصول...",
+  "filter_by_subject": "تصفية حسب المادة",
+  "filter_by_year": "تصفية حسب السنة الدراسية",
+  "of": "من",
+  "items": "عنصر",
+  
+  "details": {
+    "class_info": "معلومات الفصل",
+    "subjects_assigned": "المواد المخصصة",
+    "students_enrolled": "الطلاب المسجلون"
+  },
+  
+  "no_subjects": "لا توجد مواد مخصصة",
+  "no_students": "لا يوجد طلاب مسجلون"
+}

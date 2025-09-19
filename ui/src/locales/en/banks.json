@@ -1,0 +1,81 @@
+{
+  "list": "Banks",
+  "create": "Create Bank Account",
+  "edit": "Edit Bank Account",
+  "view": "Bank Account Details",
+  "banks_list": "Bank Accounts List",
+  "create_bank": "Create Bank Account",
+  
+  "fields": {
+    "name": "Bank Name",
+    "accountNumber": "Account Number",
+    "balance": "Current Balance",
+    "description": "Description",
+    "created_at": "Created Date",
+    "updated_at": "Last Updated"
+  },
+  
+  "placeholder": {
+    "name": "Enter bank name (e.g., ABC Bank)",
+    "accountNumber": "Enter account number",
+    "balance": "Enter current balance",
+    "description": "Enter account description (optional)"
+  },
+  
+  "buttons": {
+    "create": "Create Bank Account",
+    "edit": "Edit",
+    "delete": "Delete",
+    "view": "View Details",
+    "save": "Save Changes",
+    "cancel": "Cancel",
+    "back": "Back",
+    "back_to_list": "Back to Bank Accounts",
+    "yes": "Yes",
+    "no": "No",
+    "update": "Update Bank Account"
+  },
+  
+  "messages": {
+    "create_success": "Bank account created successfully",
+    "create_error": "Failed to create bank account",
+    "update_success": "Bank account updated successfully",
+    "update_error": "Failed to update bank account",
+    "delete_success": "Bank account deleted successfully",
+    "delete_error": "Failed to delete bank account",
+    "load_error": "Failed to load bank account data",
+    "not_found": "Bank account not found",
+    "delete_confirm": "Delete Bank Account",
+    "delete_description": "Are you sure you want to delete this bank account? This action cannot be undone."
+  },
+  
+  "validation": {
+    "name_required": "Bank name is required",
+    "account_number_required": "Account number is required",
+    "balance_required": "Balance is required",
+    "balance_min": "Balance cannot be negative",
+    "name_min": "Bank name must be at least 2 characters",
+    "name_max": "Bank name cannot exceed 100 characters",
+    "account_number_min": "Account number must be at least 5 characters",
+    "account_number_max": "Account number cannot exceed 50 characters"
+  },
+  
+  "table": {
+    "actions": "Actions",
+    "pagination_info": "Showing {start}-{end} of {total} bank accounts"
+  },
+  
+  "search_placeholder": "Search bank accounts...",
+  "filter_by_balance": "Filter by Balance Range",
+  "of": "of",
+  "items": "items",
+  
+  "details": {
+    "account_info": "Account Information",
+    "transaction_history": "Transaction History",
+    "account_summary": "Account Summary"
+  },
+  
+  "currency": "$",
+  "no_transactions": "No transactions found"
+}

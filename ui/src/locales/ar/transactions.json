@@ -1,0 +1,109 @@
+{
+  "list": "المعاملات",
+  "create": "إضافة معاملة",
+  "edit": "تعديل المعاملة",
+  "view": "تفاصيل المعاملة",
+  "transactions_list": "قائمة المعاملات",
+  "create_transaction": "إضافة معاملة",
+  
+  "fields": {
+    "amount": "المبلغ",
+    "description": "الوصف",
+    "date": "تاريخ المعاملة",
+    "type": "نوع المعاملة",
+    "category": "الفئة",
+    "bank": "الحساب البنكي",
+    "reference": "الرقم المرجعي",
+    "status": "الحالة",
+    "created_at": "تاريخ الإنشاء",
+    "updated_at": "آخر تحديث"
+  },
+  
+  "placeholder": {
+    "amount": "أدخل مبلغ المعاملة",
+    "description": "أدخل وصف المعاملة",
+    "date": "اختر تاريخ المعاملة",
+    "type": "اختر نوع المعاملة",
+    "category": "اختر الفئة",
+    "bank": "اختر الحساب البنكي",
+    "reference": "أدخل الرقم المرجعي (اختياري)"
+  },
+  
+  "type_options": {
+    "income": "إيراد",
+    "expense": "مصروف"
+  },
+  
+  "status_options": {
+    "pending": "قيد الانتظار",
+    "completed": "مكتملة",
+    "cancelled": "ملغية"
+  },
+  
+  "buttons": {
+    "create": "إضافة معاملة",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "view": "عرض التفاصيل",
+    "save": "حفظ التغييرات",
+    "cancel": "إلغاء",
+    "back": "رجوع",
+    "back_to_list": "العودة إلى المعاملات",
+    "yes": "نعم",
+    "no": "لا",
+    "update": "تحديث المعاملة"
+  },
+  
+  "messages": {
+    "create_success": "تم إنشاء المعاملة بنجاح",
+    "create_error": "فشل في إنشاء المعاملة",
+    "update_success": "تم تحديث المعاملة بنجاح",
+    "update_error": "فشل في تحديث المعاملة",
+    "delete_success": "تم حذف المعاملة بنجاح",
+    "delete_error": "فشل في حذف المعاملة",
+    "load_error": "فشل في تحميل بيانات المعاملة",
+    "not_found": "المعاملة غير موجودة",
+    "delete_confirm": "حذف المعاملة",
+    "delete_description": "هل أنت متأكد من حذف هذه المعاملة؟ لا يمكن التراجع عن هذا الإجراء."
+  },
+  
+  "validation": {
+    "amount_required": "المبلغ مطلوب",
+    "amount_min": "يجب أن يكون المبلغ أكبر من 0",
+    "description_required": "الوصف مطلوب",
+    "date_required": "تاريخ المعاملة مطلوب",
+    "type_required": "نوع المعاملة مطلوب",
+    "category_required": "الفئة مطلوبة",
+    "bank_required": "الحساب البنكي مطلوب",
+    "description_min": "يجب أن يكون الوصف على الأقل 5 أحرف",
+    "description_max": "لا يمكن أن يتجاوز الوصف 500 حرف"
+  },
+  
+  "table": {
+    "actions": "الإجراءات",
+    "pagination_info": "عرض {start}-{end} من {total} معاملة"
+  },
+  
+  "search_placeholder": "البحث في المعاملات...",
+  "filter_by_type": "تصفية حسب النوع",
+  "filter_by_category": "تصفية حسب الفئة",
+  "filter_by_bank": "تصفية حسب البنك",
+  "filter_by_date": "تصفية حسب نطاق التاريخ",
+  "of": "من",
+  "items": "عنصر",
+  
+  "details": {
+    "transaction_info": "معلومات المعاملة",
+    "financial_summary": "الملخص المالي",
+    "related_documents": "المستندات ذات الصلة"
+  },
+  
+  "summary": {
+    "total_income": "إجمالي الإيرادات",
+    "total_expense": "إجمالي المصروفات",
+    "net_balance": "الرصيد الصافي"
+  },
+  
+  "currency": "ر.س",
+  "no_documents": "لا توجد مستندات مرفقة"
+}

@@ -6,6 +6,7 @@ import {
   UploadProps,
   SelectProps,
   ButtonProps,
+  SwitchProps,
 } from "antd";
 import type { TextAreaProps } from "antd/es/input";
 
@@ -25,7 +26,8 @@ declare type FormSchema = {
     | "select"
     | "field"
     | "textarea"
-    | "input";
+    | "input"
+    | "switch";
   rules?: Schema;
   fieldProps?: FormItemProps;
   inputProps?: InputProps;
@@ -34,6 +36,7 @@ declare type FormSchema = {
   textareaProps?: TextAreaProps;
   selectProps?: SelectProps;
   buttonProps?: ButtonProps;
+  switchProps?: SwitchProps;
 };
 
 export { FormSchema };

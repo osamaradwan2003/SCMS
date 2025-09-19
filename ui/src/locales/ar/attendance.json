@@ -1,0 +1,130 @@
+{
+  "list": "الحضور",
+  "create": "تسجيل الحضور",
+  "edit": "تعديل الحضور",
+  "view": "تفاصيل الحضور",
+  "attendance_list": "قائمة الحضور",
+  "mark_attendance": "تسجيل الحضور",
+  "take_attendance": "أخذ الحضور",
+  
+  "fields": {
+    "student": "الطالب",
+    "studentId": "الطالب",
+    "employee": "الموظف",
+    "employeeId": "الموظف",
+    "date": "التاريخ",
+    "status": "حالة الحضور",
+    "checkIn": "وقت الدخول",
+    "checkOut": "وقت الخروج",
+    "notes": "ملاحظات",
+    "class": "الفصل",
+    "subject": "المادة",
+    "created_at": "تاريخ الإنشاء",
+    "updated_at": "آخر تحديث"
+  },
+  
+  "placeholder": {
+    "student": "ابحث واختر الطالب",
+    "employee": "ابحث واختر الموظف",
+    "date": "اختر تاريخ الحضور",
+    "status": "اختر حالة الحضور",
+    "checkIn": "اختر وقت الدخول",
+    "checkOut": "اختر وقت الخروج",
+    "notes": "أدخل ملاحظات إضافية (اختياري)",
+    "class": "اختر الفصل",
+    "subject": "اختر المادة"
+  },
+  
+  "status_options": {
+    "present": "حاضر",
+    "absent": "غائب",
+    "late": "متأخر",
+    "excused": "غياب بعذر",
+    "partial": "حضور جزئي"
+  },
+  
+  "buttons": {
+    "mark": "تسجيل الحضور",
+    "bulk_mark": "تسجيل حضور جماعي",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "view": "عرض التفاصيل",
+    "save": "حفظ التغييرات",
+    "cancel": "إلغاء",
+    "back": "رجوع",
+    "back_to_list": "العودة إلى الحضور",
+    "yes": "نعم",
+    "no": "لا",
+    "update": "تحديث الحضور",
+    "export": "تصدير الحضور",
+    "generate_report": "إنشاء تقرير"
+  },
+  
+  "messages": {
+    "mark_success": "تم تسجيل الحضور بنجاح",
+    "mark_error": "فشل في تسجيل الحضور",
+    "update_success": "تم تحديث الحضور بنجاح",
+    "update_error": "فشل في تحديث الحضور",
+    "delete_success": "تم حذف سجل الحضور بنجاح",
+    "delete_error": "فشل في حذف سجل الحضور",
+    "bulk_mark_success": "تم تسجيل الحضور الجماعي بنجاح",
+    "bulk_mark_error": "فشل في تسجيل الحضور الجماعي",
+    "load_error": "فشل في تحميل بيانات الحضور",
+    "not_found": "سجل الحضور غير موجود",
+    "delete_confirm": "حذف سجل الحضور",
+    "delete_description": "هل أنت متأكد من حذف سجل الحضور هذا؟ لا يمكن التراجع عن هذا الإجراء.",
+    "already_marked": "تم تسجيل الحضور بالفعل لهذا التاريخ",
+    "export_success": "تم تصدير بيانات الحضور بنجاح"
+  },
+  
+  "validation": {
+    "student_required": "اختيار الطالب مطلوب",
+    "employee_required": "اختيار الموظف مطلوب",
+    "date_required": "التاريخ مطلوب",
+    "status_required": "حالة الحضور مطلوبة",
+    "check_in_required": "وقت الدخول مطلوب",
+    "check_out_after_in": "يجب أن يكون وقت الخروج بعد وقت الدخول",
+    "future_date": "لا يمكن تسجيل الحضور للتواريخ المستقبلية"
+  },
+  
+  "table": {
+    "actions": "الإجراءات",
+    "pagination_info": "عرض {start}-{end} من {total} سجل حضور"
+  },
+  
+  "search_placeholder": "البحث في سجلات الحضور...",
+  "filter_by_student": "تصفية حسب الطالب",
+  "filter_by_class": "تصفية حسب الفصل",
+  "filter_by_status": "تصفية حسب الحالة",
+  "filter_by_date": "تصفية حسب نطاق التاريخ",
+  "of": "من",
+  "items": "عنصر",
+  
+  "details": {
+    "attendance_info": "معلومات الحضور",
+    "statistics": "إحصائيات الحضور",
+    "history": "تاريخ الحضور"
+  },
+  
+  "statistics": {
+    "total_days": "إجمالي الأيام",
+    "present_days": "أيام الحضور",
+    "absent_days": "أيام الغياب",
+    "late_days": "أيام التأخير",
+    "attendance_rate": "معدل الحضور"
+  },
+  
+  "reports": {
+    "daily": "تقرير يومي",
+    "weekly": "تقرير أسبوعي",
+    "monthly": "تقرير شهري",
+    "student_summary": "ملخص الطالب",
+    "class_summary": "ملخص الفصل"
+  },
+  
+  "no_records": "لا توجد سجلات حضور",
+  "today": "اليوم",
+  "yesterday": "أمس",
+  "this_week": "هذا الأسبوع",
+  "this_month": "هذا الشهر"
+}

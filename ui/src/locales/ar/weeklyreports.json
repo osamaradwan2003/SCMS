@@ -1,0 +1,154 @@
+{
+  "list": "التقارير الأسبوعية",
+  "create": "إنشاء تقرير أسبوعي",
+  "edit": "تعديل التقرير الأسبوعي",
+  "view": "تفاصيل التقرير الأسبوعي",
+  "reports_list": "قائمة التقارير الأسبوعية",
+  "create_report": "إنشاء تقرير أسبوعي",
+  
+  "fields": {
+    "student": "الطالب",
+    "studentId": "الطالب",
+    "subject": "المادة",
+    "subjectId": "المادة",
+    "week": "الأسبوع",
+    "score": "الدرجة",
+    "grade": "التقدير",
+    "attendance": "الحضور",
+    "behavior": "السلوك",
+    "homework": "الواجبات المنزلية",
+    "participation": "المشاركة",
+    "notes": "ملاحظات المعلم",
+    "recommendations": "التوصيات",
+    "created_at": "تاريخ الإنشاء",
+    "updated_at": "آخر تحديث"
+  },
+  
+  "placeholder": {
+    "student": "ابحث واختر الطالب",
+    "subject": "ابحث واختر المادة",
+    "week": "اختر تاريخ الأسبوع",
+    "score": "أدخل الدرجة (0-100)",
+    "grade": "أدخل التقدير",
+    "attendance": "اختر حالة الحضور",
+    "behavior": "اختر تقييم السلوك",
+    "homework": "اختر مستوى إنجاز الواجبات",
+    "participation": "اختر مستوى المشاركة",
+    "notes": "أدخل ملاحظات المعلم",
+    "recommendations": "أدخل توصيات للتحسين"
+  },
+  
+  "grade_options": {
+    "A+": "أ+ (ممتاز)",
+    "A": "أ (جيد جداً)",
+    "B+": "ب+ (جيد)",
+    "B": "ب (فوق المتوسط)",
+    "C+": "ج+ (متوسط)",
+    "C": "ج (دون المتوسط)",
+    "D": "د (ضعيف)",
+    "F": "هـ (راسب)"
+  },
+  
+  "behavior_options": {
+    "excellent": "ممتاز",
+    "good": "جيد",
+    "satisfactory": "مرضي",
+    "needs_improvement": "يحتاج تحسين",
+    "poor": "ضعيف"
+  },
+  
+  "homework_options": {
+    "always": "ينجز دائماً",
+    "usually": "ينجز عادة",
+    "sometimes": "ينجز أحياناً",
+    "rarely": "نادراً ما ينجز",
+    "never": "لا ينجز أبداً"
+  },
+  
+  "participation_options": {
+    "very_active": "نشط جداً",
+    "active": "نشط",
+    "moderate": "متوسط",
+    "passive": "سلبي",
+    "disruptive": "مشاغب"
+  },
+  
+  "buttons": {
+    "create": "إنشاء تقرير",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "view": "عرض التفاصيل",
+    "save": "حفظ التغييرات",
+    "cancel": "إلغاء",
+    "back": "رجوع",
+    "back_to_list": "العودة إلى التقارير",
+    "yes": "نعم",
+    "no": "لا",
+    "update": "تحديث التقرير",
+    "export": "تصدير التقرير",
+    "print": "طباعة التقرير",
+    "send_to_parent": "إرسال لولي الأمر"
+  },
+  
+  "messages": {
+    "create_success": "تم إنشاء التقرير الأسبوعي بنجاح",
+    "create_error": "فشل في إنشاء التقرير الأسبوعي",
+    "update_success": "تم تحديث التقرير الأسبوعي بنجاح",
+    "update_error": "فشل في تحديث التقرير الأسبوعي",
+    "delete_success": "تم حذف التقرير الأسبوعي بنجاح",
+    "delete_error": "فشل في حذف التقرير الأسبوعي",
+    "send_success": "تم إرسال التقرير لولي الأمر بنجاح",
+    "send_error": "فشل في إرسال التقرير لولي الأمر",
+    "load_error": "فشل في تحميل بيانات التقرير",
+    "not_found": "التقرير الأسبوعي غير موجود",
+    "delete_confirm": "حذف التقرير الأسبوعي",
+    "delete_description": "هل أنت متأكد من حذف هذا التقرير الأسبوعي؟ لا يمكن التراجع عن هذا الإجراء.",
+    "send_confirm": "إرسال التقرير لولي الأمر",
+    "send_description": "هل أنت متأكد من إرسال هذا التقرير لولي الأمر؟"
+  },
+  
+  "validation": {
+    "student_required": "اختيار الطالب مطلوب",
+    "subject_required": "اختيار المادة مطلوب",
+    "week_required": "تاريخ الأسبوع مطلوب",
+    "score_required": "الدرجة مطلوبة",
+    "score_min": "يجب أن تكون الدرجة بين 0 و 100",
+    "score_max": "يجب أن تكون الدرجة بين 0 و 100",
+    "grade_required": "التقدير مطلوب",
+    "attendance_required": "حالة الحضور مطلوبة",
+    "behavior_required": "تقييم السلوك مطلوب",
+    "notes_max": "لا يمكن أن تتجاوز الملاحظات 1000 حرف"
+  },
+  
+  "table": {
+    "actions": "الإجراءات",
+    "pagination_info": "عرض {start}-{end} من {total} تقرير أسبوعي"
+  },
+  
+  "search_placeholder": "البحث في التقارير الأسبوعية...",
+  "filter_by_student": "تصفية حسب الطالب",
+  "filter_by_subject": "تصفية حسب المادة",
+  "filter_by_week": "تصفية حسب الأسبوع",
+  "filter_by_grade": "تصفية حسب التقدير",
+  "of": "من",
+  "items": "عنصر",
+  
+  "details": {
+    "report_info": "معلومات التقرير",
+    "academic_performance": "الأداء الأكاديمي",
+    "behavioral_assessment": "التقييم السلوكي",
+    "teacher_feedback": "تعليقات المعلم"
+  },
+  
+  "summary": {
+    "total_reports": "إجمالي التقارير",
+    "average_score": "متوسط الدرجات",
+    "improvement_needed": "الطلاب المحتاجون للتحسين",
+    "excellent_performance": "المتفوقون"
+  },
+  
+  "no_reports": "لا توجد تقارير أسبوعية",
+  "current_week": "الأسبوع الحالي",
+  "last_week": "الأسبوع الماضي",
+  "this_month": "هذا الشهر"
+}

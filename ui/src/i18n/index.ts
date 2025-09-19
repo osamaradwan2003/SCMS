@@ -38,6 +38,8 @@ import expensetypesEn from "./locales/en/expensetypes.json";
 import expensetypesAr from "./locales/ar/expensetypes.json";
 import subscriptionsEn from "./locales/en/subscriptions.json";
 import subscriptionsAr from "./locales/ar/subscriptions.json";
+import departmentsEn from "./locales/en/departments.json";
+import departmentsAr from "./locales/ar/departments.json";
 i18n
   .use(LanguageDetector) // Detects browser language
   .use(initReactI18next) // Integrates with React
@@ -62,6 +64,7 @@ i18n
         incometypes: incometypesEn,
         expensetypes: expensetypesEn,
         subscriptions: subscriptionsEn,
+        departments: departmentsEn,
       },
       ar: {
         auth: authAr,
@@ -82,6 +85,7 @@ i18n
         incometypes: incometypesAr,
         expensetypes: expensetypesAr,
         subscriptions: subscriptionsAr,
+        departments: departmentsAr,
       },
     },
     // lng: "ar", // default
@@ -107,6 +111,7 @@ i18n
       "incometypes",
       "expensetypes",
       "subscriptions",
+      "departments",
     ],
     defaultNS: "index",
 

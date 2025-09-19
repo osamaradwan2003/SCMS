@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
-import { Form, Input, Button, Card, message, Spin } from "antd";
+import { Button, Card, message, Spin, Form } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { httpClient } from "@/api/httpClient";
+import { guardiansApi } from "@/api/guardians";
 import { useTranslate } from "@/hooks/locales";
-import type { Guardian, UpdateGuardianData } from "@/types/api";
+import type { Guardian, UpdateGuardianData } from "@/api/guardians";
+import CreateForm from "@/components/Form/CreateForm";
+import { UpdateGuardianFormSchema } from "@/forms/Guardians.sc";
 
 const EditGuardianPage: React.FC = () => {
   const navigate = useNavigate();
@@ -15,7 +17,7 @@ const EditGuardianPage: React.FC = () => {
   const { data: guardian, isLoading } = useQuery({
     queryKey: ["guardian", id],
     queryFn: async () => {
-      const response = await httpClient.get(`/guardians/${id}`);
+      const response = await guardiansApi.getById(`${id}`);
       return response.data.data as Guardian;
     },
     enabled: !!id,
@@ -23,7 +25,7 @@ const EditGuardianPage: React.FC = () => {
 
   const updateGuardianMutation = useMutation({
     mutationFn: (data: UpdateGuardianData) =>
-      httpClient.put(`/guardians/${id}`, data),
+      guardiansApi.update(`${id}`, data),
     onSuccess: () => {
       message.success(t("messages.update_success"));
       navigate("/guardians");
@@ -33,12 +35,17 @@ const EditGuardianPage: React.FC = () => {
     },
   });
 
+  const formSchema = UpdateGuardianFormSchema();
+
   useEffect(() => {
     if (guardian) {
       form.setFieldsValue({
         name: guardian.name,
         phone: guardian.phone,
-        relationDegree: guardian.relationDegree,
+        email: guardian.email,
+        address: guardian.address,
+        profile_photo: guardian.profile_photo,
+        documents: guardian.documents,
       });
     }
   }, [guardian, form]);
@@ -73,47 +80,13 @@ const EditGuardianPage: React.FC = () => {
   return (
     <div className="p-6">
       <Card title={t("edit_guardian")} className="max-w-2xl mx-auto">
-        <Form
+        <CreateForm
           form={form}
           layout="vertical"
           onFinish={handleSubmit}
           requiredMark={false}
+          formSchema={formSchema}
         >
-          <Form.Item
-            name="name"
-            label={t("name")}
-            rules={[
-              { required: true, message: t("validation.name_required") },
-              { min: 2, message: t("validation.name_min_length") },
-            ]}
-          >
-            <Input placeholder={t("placeholders.name")} />
-          </Form.Item>
-
-          <Form.Item
-            name="phone"
-            label={t("phone")}
-            rules={[
-              { required: true, message: t("validation.phone_required") },
-              {
-                pattern: /^\+?[\d\s-()]+$/,
-                message: t("validation.phone_invalid"),
-              },
-            ]}
-          >
-            <Input placeholder={t("placeholders.phone")} />
-          </Form.Item>
-
-          <Form.Item
-            name="relationDegree"
-            label={t("relation_degree")}
-            rules={[
-              { required: true, message: t("validation.relation_required") },
-            ]}
-          >
-            <Input placeholder={t("placeholders.relation_degree")} />
-          </Form.Item>
-
           <Form.Item className="mb-0">
             <div className="flex gap-3 justify-end">
               <Button onClick={() => navigate("/guardians")}>
@@ -128,7 +101,7 @@ const EditGuardianPage: React.FC = () => {
               </Button>
             </div>
           </Form.Item>
-        </Form>
+        </CreateForm>
       </Card>
     </div>
   );

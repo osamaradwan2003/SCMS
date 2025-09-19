@@ -90,7 +90,7 @@ export const classesApi = {
   },
 
   // Get simple list for dropdowns
-  getList: (): Promise<AxiosResponse<{ id: string; name: string; code: string }[]>> => {
+  getList: (): Promise<AxiosResponse<{ data: { id: string; name: string; code: string }[] }>> => {
     return httpClient.get('/classes');
   },
 

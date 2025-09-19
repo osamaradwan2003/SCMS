@@ -1,0 +1,85 @@
+{
+  "title": "الأقسام",
+  "create_department": "إنشاء قسم",
+  "edit_department": "تعديل القسم",
+  "department_details": "تفاصيل القسم",
+  "department_employees": "موظفو القسم",
+  "statistics": "الإحصائيات",
+  "no_manager": "لا يوجد مدير",
+  "create": "إنشاء",
+  "update": "تحديث",
+  "cancel": "إلغاء",
+  "fields": {
+    "name": "الاسم",
+    "description": "الوصف",
+    "manager": "المدير",
+    "created_at": "تاريخ الإنشاء",
+    "updated_at": "تاريخ التحديث"
+  },
+  "placeholder": {
+    "name": "أدخل اسم القسم",
+    "description": "أدخل وصف القسم",
+    "manager": "اختر المدير",
+    "search": "البحث في الأقسام..."
+  },
+  "table": {
+    "name": "الاسم",
+    "description": "الوصف",
+    "manager": "المدير",
+    "employees_count": "الموظفون",
+    "created_at": "تاريخ الإنشاء",
+    "actions": "الإجراءات",
+    "no_manager": "لا يوجد مدير",
+    "pagination_info": "عرض {start} إلى {end} من {total} إدخال"
+  },
+  "actions": {
+    "create": "إنشاء قسم",
+    "edit": "تعديل",
+    "view": "عرض",
+    "delete": "حذف",
+    "back": "رجوع",
+    "back_to_list": "العودة إلى القائمة",
+    "yes": "نعم",
+    "no": "لا",
+    "remove": "إزالة",
+    "delete_selected": "حذف المحدد"
+  },
+  "messages": {
+    "create_success": "تم إنشاء القسم بنجاح",
+    "create_error": "فشل في إنشاء القسم",
+    "update_success": "تم تحديث القسم بنجاح",
+    "update_error": "فشل في تحديث القسم",
+    "delete_success": "تم حذف القسم بنجاح",
+    "delete_error": "فشل في حذف القسم",
+    "delete_confirm": "حذف القسم",
+    "delete_description": "هل أنت متأكد من حذف هذا القسم؟ لا يمكن التراجع عن هذا الإجراء.",
+    "bulk_delete_success": "تم حذف الأقسام المحددة بنجاح",
+    "bulk_delete_error": "فشل في حذف الأقسام المحددة",
+    "bulk_delete_confirm": "حذف الأقسام المحددة",
+    "bulk_delete_description": "هل أنت متأكد من حذف الأقسام المحددة؟ لا يمكن التراجع عن هذا الإجراء.",
+    "select_items": "يرجى تحديد العناصر للحذف",
+    "selected_count": "تم تحديد {count} عنصر",
+    "not_found": "القسم غير موجود",
+    "manager_removed": "تم إزالة المدير بنجاح",
+    "manager_remove_error": "فشل في إزالة المدير",
+    "remove_manager_confirm": "هل أنت متأكد من إزالة هذا المدير؟"
+  },
+  "validation": {
+    "name_required": "اسم القسم مطلوب"
+  },
+  "stats": {
+    "total_employees": "إجمالي الموظفين",
+    "active_employees": "الموظفون النشطون",
+    "inactive_employees": "الموظفون غير النشطين",
+    "salary_budget": "ميزانية الرواتب"
+  },
+  "employees": {
+    "name": "الاسم",
+    "position": "المنصب",
+    "status": "الحالة",
+    "subjects": "المواد",
+    "status_active": "نشط",
+    "status_inactive": "غير نشط",
+    "status_suspended": "معلق"
+  }
+}

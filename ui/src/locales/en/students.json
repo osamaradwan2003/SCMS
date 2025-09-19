@@ -1,0 +1,164 @@
+{
+  "title": "Students",
+  "create": "Create Student",
+  "edit": "Edit Student",
+  "view": "View Student",
+  "delete": "Delete Student",
+  "list": "Student List",
+  "search": "Search Students",
+  "filter": "Filter Students",
+  "export": "Export Students",
+  "import": "Import Students",
+  "bulk_delete": "Delete Selected",
+  "total": "Total Students",
+  "active": "Active Students",
+  "inactive": "Inactive Students",
+
+  "fields": {
+    "id": "Student ID",
+    "name": "Full Name",
+    "dob": "Date of Birth",
+    "phone": "Phone Number",
+    "gender": "Gender",
+    "address": "Address",
+    "classId": "Class",
+    "guardianId": "Guardian",
+    "guradianDegree": "Relationship to Guardian",
+    "subscriptionsId": "Subscription",
+    "image": "Profile Image",
+    "docs": "Documents",
+    "created_at": "Created At",
+    "updated_at": "Updated At"
+  },
+
+  "placeholder": {
+    "name": "Enter student full name",
+    "dob": "Select date of birth",
+    "phone": "Enter phone number",
+    "gender": "Select gender",
+    "address": "Enter student address",
+    "classId": "Select class",
+    "guardianId": "Select guardian",
+    "relationship": "Select relationship",
+    "subscriptionsId": "Select subscription plan",
+    "search": "Search by name, class, or guardian..."
+  },
+
+  "gender_options": {
+    "male": "Male",
+    "female": "Female"
+  },
+
+  "relationship_options": {
+    "father": "Father",
+    "mother": "Mother",
+    "grandfather": "Grandfather",
+    "grandmother": "Grandmother",
+    "uncle": "Uncle",
+    "aunt": "Aunt",
+    "brother": "Brother",
+    "sister": "Sister",
+    "other": "Other"
+  },
+
+  "validation": {
+    "name_required": "Student name is required",
+    "dob_required": "Date of birth is required",
+    "phone_invalid": "Please enter a valid phone number",
+    "gender_invalid": "Please select a valid gender",
+    "gender_max_length": "Gender must be 10 characters or less",
+    "address_required": "Address is required",
+    "guardianId_required": "Guardian is required",
+    "relationship_required": "Relationship to guardian is required",
+    "subscriptionsId_required": "Subscription is required"
+  },
+
+  "messages": {
+    "create_success": "Student created successfully",
+    "create_error": "Failed to create student",
+    "update_success": "Student updated successfully",
+    "update_error": "Failed to update student",
+    "delete_success": "Student deleted successfully",
+    "delete_error": "Failed to delete student",
+    "bulk_delete_success": "Selected students deleted successfully",
+    "bulk_delete_error": "Failed to delete selected students",
+    "fetch_error": "Failed to fetch students",
+    "not_found": "Student not found",
+    "delete_confirm": "Delete Student",
+    "delete_description": "Are you sure you want to delete this student? This action cannot be undone."
+  },
+
+  "buttons": {
+    "create": "Create Student",
+    "edit": "Edit",
+    "delete": "Delete",
+    "view": "View Details",
+    "save": "Save Changes",
+    "cancel": "Cancel",
+    "upload": "Upload File",
+    "download": "Download",
+    "export": "Export Data",
+    "import": "Import Data",
+    "search": "Search",
+    "filter": "Filter",
+    "reset": "Reset",
+    "refresh": "Refresh",
+    "back": "Back",
+    "back_to_list": "Back to Students"
+  },
+
+  "labels": {
+    "yes": "Yes",
+    "no": "No",
+    "active": "Active",
+    "inactive": "Inactive",
+    "all": "All Students",
+    "recent": "Recent Students",
+    "statistics": "Student Statistics"
+  },
+
+  "no_class": "No Class",
+  "no_guardian": "No Guardian",
+  "no_subscription": "No Subscription",
+  "years_old": "years old",
+  "relationship": "Relationship",
+
+  "help": {
+    "image": "Upload student profile picture (JPG, PNG, max 5MB)",
+    "docs": "Upload student documents (PDF, DOC, images, max 10 files)",
+    "dob": "Student's date of birth for age verification",
+    "guardianId": "Primary guardian responsible for this student",
+    "subscriptionsId": "Subscription plan for school fees and services"
+  },
+
+  "table": {
+    "name": "Name",
+    "class": "Class",
+    "guardian": "Guardian",
+    "subscription": "Subscription",
+    "status": "Status",
+    "dob": "Date of Birth",
+    "actions": "Actions",
+    "no_data": "No students found",
+    "loading": "Loading students...",
+    "pagination_info": "Showing {start}-{end} of {total} students"
+  },
+
+  "filters": {
+    "all": "All Students",
+    "active": "Active Only",
+    "inactive": "Inactive Only",
+    "by_class": "By Class",
+    "by_guardian": "By Guardian",
+    "by_subscription": "By Subscription",
+    "recent": "Recently Added"
+  },
+
+  "statistics": {
+    "total_students": "Total Students",
+    "active_students": "Active Students",
+    "by_class": "Students by Class",
+    "by_subscription": "Students by Subscription",
+    "new_this_month": "New This Month"
+  }
+}

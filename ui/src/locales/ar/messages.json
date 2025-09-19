@@ -1,0 +1,123 @@
+{
+  "list": "الرسائل",
+  "create": "إرسال رسالة",
+  "edit": "تعديل الرسالة",
+  "view": "تفاصيل الرسالة",
+  "messages_list": "قائمة الرسائل",
+  "create_message": "إرسال رسالة",
+  "compose": "كتابة رسالة",
+  
+  "fields": {
+    "content": "محتوى الرسالة",
+    "recipient": "المستقبل",
+    "recipientId": "المستقبل",
+    "type": "نوع الرسالة",
+    "subject": "الموضوع",
+    "priority": "الأولوية",
+    "status": "الحالة",
+    "sentAt": "تاريخ الإرسال",
+    "readAt": "تاريخ القراءة",
+    "created_at": "تاريخ الإنشاء",
+    "updated_at": "آخر تحديث"
+  },
+  
+  "placeholder": {
+    "content": "أدخل محتوى الرسالة هنا...",
+    "recipient": "ابحث واختر المستقبل",
+    "type": "اختر نوع الرسالة",
+    "subject": "أدخل موضوع الرسالة",
+    "priority": "اختر مستوى الأولوية"
+  },
+  
+  "type_options": {
+    "private": "رسالة خاصة",
+    "bulk": "رسالة جماعية",
+    "report": "رسالة تقرير",
+    "notification": "إشعار",
+    "announcement": "إعلان"
+  },
+  
+  "priority_options": {
+    "low": "منخفضة",
+    "normal": "عادية",
+    "high": "عالية",
+    "urgent": "عاجلة"
+  },
+  
+  "status_options": {
+    "draft": "مسودة",
+    "sent": "مرسلة",
+    "delivered": "تم التسليم",
+    "read": "مقروءة",
+    "failed": "فشل الإرسال"
+  },
+  
+  "buttons": {
+    "send": "إرسال الرسالة",
+    "save_draft": "حفظ كمسودة",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "view": "عرض التفاصيل",
+    "reply": "رد",
+    "forward": "إعادة توجيه",
+    "cancel": "إلغاء",
+    "back": "رجوع",
+    "back_to_list": "العودة إلى الرسائل",
+    "yes": "نعم",
+    "no": "لا",
+    "mark_read": "تحديد كمقروءة",
+    "mark_unread": "تحديد كغير مقروءة"
+  },
+  
+  "messages": {
+    "send_success": "تم إرسال الرسالة بنجاح",
+    "send_error": "فشل في إرسال الرسالة",
+    "save_success": "تم حفظ الرسالة كمسودة",
+    "save_error": "فشل في حفظ الرسالة",
+    "delete_success": "تم حذف الرسالة بنجاح",
+    "delete_error": "فشل في حذف الرسالة",
+    "load_error": "فشل في تحميل بيانات الرسالة",
+    "not_found": "الرسالة غير موجودة",
+    "delete_confirm": "حذف الرسالة",
+    "delete_description": "هل أنت متأكد من حذف هذه الرسالة؟ لا يمكن التراجع عن هذا الإجراء.",
+    "mark_read_success": "تم تحديد الرسالة كمقروءة",
+    "mark_unread_success": "تم تحديد الرسالة كغير مقروءة"
+  },
+  
+  "validation": {
+    "content_required": "محتوى الرسالة مطلوب",
+    "type_required": "نوع الرسالة مطلوب",
+    "recipient_required": "المستقبل مطلوب",
+    "subject_required": "الموضوع مطلوب",
+    "content_min": "يجب أن يكون محتوى الرسالة على الأقل 10 أحرف",
+    "content_max": "لا يمكن أن يتجاوز محتوى الرسالة 2000 حرف",
+    "subject_max": "لا يمكن أن يتجاوز الموضوع 200 حرف"
+  },
+  
+  "table": {
+    "actions": "الإجراءات",
+    "pagination_info": "عرض {start}-{end} من {total} رسالة"
+  },
+  
+  "search_placeholder": "البحث في الرسائل...",
+  "filter_by_type": "تصفية حسب النوع",
+  "filter_by_status": "تصفية حسب الحالة",
+  "filter_by_priority": "تصفية حسب الأولوية",
+  "filter_by_date": "تصفية حسب التاريخ",
+  "of": "من",
+  "items": "عنصر",
+  
+  "details": {
+    "message_info": "معلومات الرسالة",
+    "delivery_status": "حالة التسليم",
+    "conversation_history": "تاريخ المحادثة"
+  },
+  
+  "inbox": "صندوق الوارد",
+  "sent": "المرسلة",
+  "drafts": "المسودات",
+  "trash": "المحذوفة",
+  "unread": "غير مقروءة",
+  "read": "مقروءة",
+  "no_messages": "لا توجد رسائل"
+}

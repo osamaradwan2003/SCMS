@@ -9,6 +9,8 @@
   "position": "المنصب",
   "salary": "الراتب",
   "hireDate": "تاريخ التوظيف",
+  "profile_image": "صورة الملف الشخصي",
+  "docs": "المستندات",
   "classId": "الفصل المخصص",
   "submit": "حفظ الموظف",
   "update": "تحديث الموظف",
@@ -25,7 +27,9 @@
     "position": "أدخل المنصب",
     "salary": "أدخل مبلغ الراتب",
     "hireDate": "اختر تاريخ التوظيف",
-    "classId": "اختر الفصل المخصص"
+    "classId": "اختر الفصل المخصص",
+    "role": "اختر الدور",
+    "is_teacher": "هل هو معلم؟"
   },
 
   "validation": {
@@ -37,7 +41,31 @@
     "position_required": "المنصب مطلوب",
     "salary_required": "الراتب مطلوب",
     "salary_min": "الراتب يجب أن يكون أكبر من 0",
-    "hire_date_required": "تاريخ التوظيف مطلوب"
+    "salary_number": "يجب أن يكون الراتب رقماً",
+    "role_required": "الدور مطلوب",
+    "is_teacher_invalid": "اختيار غير صالح لحقل هل هو معلم",
+    "hireDate_required": "تاريخ التوظيف مطلوب"
+  },
+
+  "help": {
+    "profile_image": "قم برفع صورة واضحة للملف الشخصي (JPG/PNG). صورة واحدة فقط.",
+    "docs": "قم برفع المستندات ذات الصلة (PDF, DOC, صور). يمكنك اختيار عدة ملفات."
+  },
+
+  "buttons": {
+    "upload": "رفع"
+  },
+
+  "role_options": {
+    "teacher": "معلم",
+    "staff": "موظف",
+    "admin": "مدير",
+    "data_entry": "مدخل بيانات"
+  },
+
+  "boolean": {
+    "yes": "نعم",
+    "no": "لا"
   },
 
   "messages": {

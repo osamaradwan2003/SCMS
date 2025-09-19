@@ -24,10 +24,7 @@ export const CreateGuardianFormSchema = (): FormSchema[] => {
     {
       name: "email",
       type: "input",
-      rules: yup
-        .string()
-        .email(t("validation.email_invalid"))
-        .required(t("validation.email_required")),
+      rules: yup.string().email(t("validation.email_invalid")),
       inputProps: {
         placeholder: t("placeholder.email"),
         type: "email",
@@ -40,31 +37,6 @@ export const CreateGuardianFormSchema = (): FormSchema[] => {
       textareaProps: {
         placeholder: t("placeholder.address"),
         rows: 3,
-      },
-    },
-    {
-      name: "relationship",
-      type: "select",
-      rules: yup.string().required(t("validation.relationship_required")),
-      selectProps: {
-        placeholder: t("placeholder.relationship"),
-        options: [
-          { label: t("relationship_options.father"), value: "father" },
-          { label: t("relationship_options.mother"), value: "mother" },
-          {
-            label: t("relationship_options.grandfather"),
-            value: "grandfather",
-          },
-          {
-            label: t("relationship_options.grandmother"),
-            value: "grandmother",
-          },
-          { label: t("relationship_options.uncle"), value: "uncle" },
-          { label: t("relationship_options.aunt"), value: "aunt" },
-          { label: t("relationship_options.brother"), value: "brother" },
-          { label: t("relationship_options.sister"), value: "sister" },
-          { label: t("relationship_options.other"), value: "other" },
-        ],
       },
     },
     {
@@ -137,10 +109,7 @@ export const UpdateGuardianFormSchema = (): FormSchema[] => {
     {
       name: "email",
       type: "input",
-      rules: yup
-        .string()
-        .email(t("validation.email_invalid"))
-        .required(t("validation.email_required")),
+      rules: yup.string().email(t("validation.email_invalid")),
       inputProps: {
         placeholder: t("placeholder.email"),
         type: "email",
@@ -156,38 +125,14 @@ export const UpdateGuardianFormSchema = (): FormSchema[] => {
       },
     },
     {
-      name: "relationship",
-      type: "select",
-      rules: yup.string().required(t("validation.relationship_required")),
-      selectProps: {
-        placeholder: t("placeholder.relationship"),
-        options: [
-          { label: t("relationship_options.father"), value: "father" },
-          { label: t("relationship_options.mother"), value: "mother" },
-          {
-            label: t("relationship_options.grandfather"),
-            value: "grandfather",
-          },
-          {
-            label: t("relationship_options.grandmother"),
-            value: "grandmother",
-          },
-          { label: t("relationship_options.uncle"), value: "uncle" },
-          { label: t("relationship_options.aunt"), value: "aunt" },
-          { label: t("relationship_options.brother"), value: "brother" },
-          { label: t("relationship_options.sister"), value: "sister" },
-          { label: t("relationship_options.other"), value: "other" },
-        ],
-      },
-    },
-    {
       name: "profile_photo",
       type: "upload",
       rules: yup.mixed().nullable().notRequired(),
       uploadProp: {
         name: "profile_photo",
-        listType: "picture-card",
+        listType: "picture",
         maxCount: 1,
+        multiple: false,
         accept: "image/*",
         beforeUpload: () => false, // Prevent auto upload
         showUploadList: {
@@ -198,6 +143,7 @@ export const UpdateGuardianFormSchema = (): FormSchema[] => {
       fieldProps: {
         label: t("fields.profile_photo"),
         help: t("help.profile_photo"),
+        className: "item-file-upload",
       },
     },
     {
@@ -205,9 +151,11 @@ export const UpdateGuardianFormSchema = (): FormSchema[] => {
       type: "upload",
       rules: yup.mixed().nullable().notRequired(),
       uploadProp: {
+        children: t("buttons.upload"),
         name: "documents",
-        listType: "text",
+        listType: "picture",
         maxCount: 5,
+        multiple: true,
         accept: ".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png",
         beforeUpload: () => false, // Prevent auto upload
         showUploadList: {
@@ -218,6 +166,7 @@ export const UpdateGuardianFormSchema = (): FormSchema[] => {
       fieldProps: {
         label: t("fields.documents"),
         help: t("help.documents"),
+        className: "item-file-upload",
       },
     },
   ];

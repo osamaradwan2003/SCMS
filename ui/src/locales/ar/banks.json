@@ -1,0 +1,81 @@
+{
+  "list": "البنوك",
+  "create": "إضافة حساب بنكي",
+  "edit": "تعديل الحساب البنكي",
+  "view": "تفاصيل الحساب البنكي",
+  "banks_list": "قائمة الحسابات البنكية",
+  "create_bank": "إضافة حساب بنكي",
+  
+  "fields": {
+    "name": "اسم البنك",
+    "accountNumber": "رقم الحساب",
+    "balance": "الرصيد الحالي",
+    "description": "الوصف",
+    "created_at": "تاريخ الإنشاء",
+    "updated_at": "آخر تحديث"
+  },
+  
+  "placeholder": {
+    "name": "أدخل اسم البنك (مثال: بنك ABC)",
+    "accountNumber": "أدخل رقم الحساب",
+    "balance": "أدخل الرصيد الحالي",
+    "description": "أدخل وصف الحساب (اختياري)"
+  },
+  
+  "buttons": {
+    "create": "إضافة حساب بنكي",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "view": "عرض التفاصيل",
+    "save": "حفظ التغييرات",
+    "cancel": "إلغاء",
+    "back": "رجوع",
+    "back_to_list": "العودة إلى الحسابات البنكية",
+    "yes": "نعم",
+    "no": "لا",
+    "update": "تحديث الحساب البنكي"
+  },
+  
+  "messages": {
+    "create_success": "تم إنشاء الحساب البنكي بنجاح",
+    "create_error": "فشل في إنشاء الحساب البنكي",
+    "update_success": "تم تحديث الحساب البنكي بنجاح",
+    "update_error": "فشل في تحديث الحساب البنكي",
+    "delete_success": "تم حذف الحساب البنكي بنجاح",
+    "delete_error": "فشل في حذف الحساب البنكي",
+    "load_error": "فشل في تحميل بيانات الحساب البنكي",
+    "not_found": "الحساب البنكي غير موجود",
+    "delete_confirm": "حذف الحساب البنكي",
+    "delete_description": "هل أنت متأكد من حذف هذا الحساب البنكي؟ لا يمكن التراجع عن هذا الإجراء."
+  },
+  
+  "validation": {
+    "name_required": "اسم البنك مطلوب",
+    "account_number_required": "رقم الحساب مطلوب",
+    "balance_required": "الرصيد مطلوب",
+    "balance_min": "لا يمكن أن يكون الرصيد سالباً",
+    "name_min": "يجب أن يكون اسم البنك على الأقل حرفين",
+    "name_max": "لا يمكن أن يتجاوز اسم البنك 100 حرف",
+    "account_number_min": "يجب أن يكون رقم الحساب على الأقل 5 أحرف",
+    "account_number_max": "لا يمكن أن يتجاوز رقم الحساب 50 حرف"
+  },
+  
+  "table": {
+    "actions": "الإجراءات",
+    "pagination_info": "عرض {start}-{end} من {total} حساب بنكي"
+  },
+  
+  "search_placeholder": "البحث في الحسابات البنكية...",
+  "filter_by_balance": "تصفية حسب نطاق الرصيد",
+  "of": "من",
+  "items": "عنصر",
+  
+  "details": {
+    "account_info": "معلومات الحساب",
+    "transaction_history": "تاريخ المعاملات",
+    "account_summary": "ملخص الحساب"
+  },
+  
+  "currency": "ر.س",
+  "no_transactions": "لا توجد معاملات"
+}

@@ -1,0 +1,87 @@
+{
+  "list": "Subjects",
+  "create": "Create Subject",
+  "edit": "Edit Subject",
+  "view": "Subject Details",
+  "subjects_list": "Subjects List",
+  "create_subject": "Create Subject",
+  
+  "fields": {
+    "name": "Subject Name",
+    "code": "Subject Code",
+    "description": "Description",
+    "teachers": "Teachers",
+    "credits": "Credits",
+    "hours": "Hours per Week",
+    "created_at": "Created Date",
+    "updated_at": "Last Updated"
+  },
+  
+  "placeholder": {
+    "name": "Enter subject name (e.g., Mathematics)",
+    "code": "Enter subject code (e.g., MATH101)",
+    "description": "Enter subject description (optional)",
+    "teachers": "Select teachers for this subject",
+    "credits": "Enter credit hours",
+    "hours": "Enter hours per week"
+  },
+  
+  "buttons": {
+    "create": "Create Subject",
+    "edit": "Edit",
+    "delete": "Delete",
+    "view": "View Details",
+    "save": "Save Changes",
+    "cancel": "Cancel",
+    "back": "Back",
+    "back_to_list": "Back to Subjects",
+    "yes": "Yes",
+    "no": "No",
+    "update": "Update Subject"
+  },
+  
+  "messages": {
+    "create_success": "Subject created successfully",
+    "create_error": "Failed to create subject",
+    "update_success": "Subject updated successfully",
+    "update_error": "Failed to update subject",
+    "delete_success": "Subject deleted successfully",
+    "delete_error": "Failed to delete subject",
+    "load_error": "Failed to load subject data",
+    "not_found": "Subject not found",
+    "delete_confirm": "Delete Subject",
+    "delete_description": "Are you sure you want to delete this subject? This action cannot be undone."
+  },
+  
+  "validation": {
+    "name_required": "Subject name is required",
+    "code_required": "Subject code is required",
+    "name_min": "Subject name must be at least 2 characters",
+    "name_max": "Subject name cannot exceed 100 characters",
+    "code_min": "Subject code must be at least 2 characters",
+    "code_max": "Subject code cannot exceed 20 characters",
+    "credits_required": "Credits are required",
+    "credits_min": "Credits must be at least 1",
+    "credits_max": "Credits cannot exceed 10"
+  },
+  
+  "table": {
+    "actions": "Actions",
+    "pagination_info": "Showing {start}-{end} of {total} subjects"
+  },
+  
+  "search_placeholder": "Search subjects...",
+  "filter_by_teacher": "Filter by Teacher",
+  "filter_by_credits": "Filter by Credits",
+  "of": "of",
+  "items": "items",
+  
+  "details": {
+    "subject_info": "Subject Information",
+    "assigned_teachers": "Assigned Teachers",
+    "classes_using": "Classes Using This Subject"
+  },
+  
+  "no_teachers": "No teachers assigned",
+  "no_classes": "No classes using this subject"
+}

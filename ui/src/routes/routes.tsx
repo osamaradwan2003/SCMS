@@ -6,11 +6,15 @@ import { lazy } from "react";
 const Dashboard = lazy(() => import("@pages/dashboard/Dashboard"));
 
 // Student pages
-const CreateStudent = lazy(() => import("@pages/student/Create"));
+const StudentsListPage = lazy(() => import("@/pages/student/List"));
+const CreateStudentPage = lazy(() => import("@/pages/student/Create"));
+const EditStudentPage = lazy(() => import("@/pages/student/Edit"));
+const ViewStudentPage = lazy(() => import("@/pages/student/View"));
 
 // Auth pages
 const Login = lazy(() => import("@/pages/auth/Login"));
 const Logout = lazy(() => import("@/pages/auth/Logout"));
+const ChangePassword = lazy(() => import("@/pages/auth/ChangePassword"));
 
 // Guardians pages
 const GuardiansListPage = lazy(() => import("@/pages/guardians/List"));
@@ -34,7 +38,15 @@ const ViewSubjectPage = lazy(() => import("@/pages/subjects/View"));
 const WeeklyReportsPage = lazy(() => import("@/pages/weeklyreports"));
 
 // Employees pages
-const EmployeesPage = lazy(() => import("@/pages/employees"));
+const CreateEmployeePage = lazy(() => import("@/pages/employees/Create"));
+// const ViewEmployeePage = lazy(() => import("@/pages/employees/View"));
+const EmployeesListPage = lazy(() => import("@/pages/employees/List"));
+
+// Departments pages
+const DepartmentsListPage = lazy(() => import("@/pages/departments/List"));
+const CreateDepartmentPage = lazy(() => import("@/pages/departments/Create"));
+const EditDepartmentPage = lazy(() => import("@/pages/departments/Edit"));
+const ViewDepartmentPage = lazy(() => import("@/pages/departments/View"));
 
 // Attendance pages
 const AttendancePage = lazy(() => import("@/pages/attendance"));
@@ -61,7 +73,14 @@ const IncomeTypesPage = lazy(() => import("@/pages/incometypes"));
 const ExpenseTypesPage = lazy(() => import("@/pages/expensetypes"));
 
 // Subscriptions pages
-const SubscriptionsPage = lazy(() => import("@/pages/subscriptions"));
+const SubscriptionsListPage = lazy(() => import("@/pages/subscriptions"));
+const CreateSubscriptionPage = lazy(() => import("@/pages/subscriptions/Create"));
+const EditSubscriptionPage = lazy(() => import("@/pages/subscriptions/Edit"));
+const ViewSubscriptionPage = lazy(() => import("@/pages/subscriptions/View"));
+
+// User pages
+const ProfilePage = lazy(() => import("@/pages/user/Profile"));
+const EditProfilePage = lazy(() => import("@/pages/user/EditProfile"));
 
 const AppRoutes: RouteObject[] = [
   {
@@ -69,6 +88,7 @@ const AppRoutes: RouteObject[] = [
     element: <AuthLayout />,
     children: [
       { path: "login", element: <Login /> },
+      { path: "change-password", element: <ChangePassword /> },
       { path: "", element: <Navigate to="login" />, index: true },
     ],
   },
@@ -84,10 +104,10 @@ const AppRoutes: RouteObject[] = [
       {
         path: "students",
         children: [
-          { path: "", element: <>list</>, index: true },
-          { path: "create", element: <CreateStudent /> },
-          { path: ":id/edit", element: <>update</> },
-          { path: ":id", element: <>view</> },
+          { path: "", element: <StudentsListPage />, index: true },
+          { path: "create", element: <CreateStudentPage /> },
+          { path: ":id/edit", element: <EditStudentPage /> },
+          { path: ":id", element: <ViewStudentPage /> },
         ],
       },
       {
@@ -129,10 +149,19 @@ const AppRoutes: RouteObject[] = [
       {
         path: "employees",
         children: [
-          { path: "", element: <EmployeesPage />, index: true },
-          { path: "create", element: <div>Create Employee</div> },
+          { path: "", element: <EmployeesListPage />, index: true },
+          { path: "create", element: <CreateEmployeePage /> },
           { path: ":id/edit", element: <div>Edit Employee</div> },
-          { path: ":id", element: <div>View Employee</div> },
+          // { path: ":id", element: <ViewEmployeePage /> },
+        ],
+      },
+      {
+        path: "departments",
+        children: [
+          { path: "", element: <DepartmentsListPage />, index: true },
+          { path: "create", element: <CreateDepartmentPage /> },
+          { path: ":id/edit", element: <EditDepartmentPage /> },
+          { path: ":id", element: <ViewDepartmentPage /> },
         ],
       },
       {
@@ -208,16 +237,17 @@ const AppRoutes: RouteObject[] = [
       {
         path: "subscriptions",
         children: [
-          { path: "", element: <SubscriptionsPage />, index: true },
-          { path: "create", element: <div>Create Subscription</div> },
-          { path: ":id/edit", element: <div>Edit Subscription</div> },
-          { path: ":id", element: <div>View Subscription</div> },
+          { path: "", element: <SubscriptionsListPage />, index: true },
+          { path: "create", element: <CreateSubscriptionPage /> },
+          { path: ":id/edit", element: <EditSubscriptionPage /> },
+          { path: ":id", element: <ViewSubscriptionPage /> },
         ],
       },
       {
         path: "user/me",
-        element: <div>User Profile</div>,
+        element: <ProfilePage />,
       },
+      { path: "user/me/edit", element: <EditProfilePage /> },
       {
         path: "settings",
         element: <div>Settings</div>,

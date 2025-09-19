@@ -1,0 +1,164 @@
+{
+  "title": "الطلاب",
+  "create": "إضافة طالب",
+  "edit": "تعديل الطالب",
+  "view": "عرض الطالب",
+  "delete": "حذف الطالب",
+  "list": "قائمة الطلاب",
+  "search": "البحث في الطلاب",
+  "filter": "تصفية الطلاب",
+  "export": "تصدير الطلاب",
+  "import": "استيراد الطلاب",
+  "bulk_delete": "حذف المحدد",
+  "total": "إجمالي الطلاب",
+  "active": "الطلاب النشطون",
+  "inactive": "الطلاب غير النشطين",
+
+  "fields": {
+    "id": "رقم الطالب",
+    "name": "الاسم الكامل",
+    "dob": "تاريخ الميلاد",
+    "phone": "رقم الهاتف",
+    "gender": "الجنس",
+    "address": "العنوان",
+    "classId": "الفصل",
+    "guardianId": "ولي الأمر",
+    "guradianDegree": "صلة القرابة بولي الأمر",
+    "subscriptionsId": "الاشتراك",
+    "image": "صورة الملف الشخصي",
+    "docs": "المستندات",
+    "created_at": "تاريخ الإنشاء",
+    "updated_at": "تاريخ التحديث"
+  },
+
+  "placeholder": {
+    "name": "أدخل الاسم الكامل للطالب",
+    "dob": "اختر تاريخ الميلاد",
+    "phone": "أدخل رقم الهاتف",
+    "gender": "اختر الجنس",
+    "address": "أدخل عنوان الطالب",
+    "classId": "اختر الفصل",
+    "guardianId": "اختر ولي الأمر",
+    "relationship": "اختر صلة القرابة",
+    "subscriptionsId": "اختر خطة الاشتراك",
+    "search": "البحث بالاسم أو الفصل أو ولي الأمر..."
+  },
+
+  "gender_options": {
+    "male": "ذكر",
+    "female": "أنثى"
+  },
+
+  "relationship_options": {
+    "father": "الأب",
+    "mother": "الأم",
+    "grandfather": "الجد",
+    "grandmother": "الجدة",
+    "uncle": "العم/الخال",
+    "aunt": "العمة/الخالة",
+    "brother": "الأخ",
+    "sister": "الأخت",
+    "other": "أخرى"
+  },
+
+  "validation": {
+    "name_required": "اسم الطالب مطلوب",
+    "dob_required": "تاريخ الميلاد مطلوب",
+    "phone_invalid": "يرجى إدخال رقم هاتف صحيح",
+    "gender_invalid": "يرجى اختيار جنس صحيح",
+    "gender_max_length": "يجب أن يكون الجنس 10 أحرف أو أقل",
+    "address_required": "العنوان مطلوب",
+    "guardianId_required": "ولي الأمر مطلوب",
+    "relationship_required": "صلة القرابة بولي الأمر مطلوبة",
+    "subscriptionsId_required": "الاشتراك مطلوب"
+  },
+
+  "messages": {
+    "create_success": "تم إنشاء الطالب بنجاح",
+    "create_error": "فشل في إنشاء الطالب",
+    "update_success": "تم تحديث الطالب بنجاح",
+    "update_error": "فشل في تحديث الطالب",
+    "delete_success": "تم حذف الطالب بنجاح",
+    "delete_error": "فشل في حذف الطالب",
+    "bulk_delete_success": "تم حذف الطلاب المحددين بنجاح",
+    "bulk_delete_error": "فشل في حذف الطلاب المحددين",
+    "fetch_error": "فشل في جلب الطلاب",
+    "not_found": "الطالب غير موجود",
+    "delete_confirm": "حذف الطالب",
+    "delete_description": "هل أنت متأكد من حذف هذا الطالب؟ لا يمكن التراجع عن هذا الإجراء."
+  },
+
+  "buttons": {
+    "create": "إضافة طالب",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "view": "عرض التفاصيل",
+    "save": "حفظ التغييرات",
+    "cancel": "إلغاء",
+    "upload": "رفع ملف",
+    "download": "تحميل",
+    "export": "تصدير البيانات",
+    "import": "استيراد البيانات",
+    "search": "بحث",
+    "filter": "تصفية",
+    "reset": "إعادة تعيين",
+    "refresh": "تحديث",
+    "back": "رجوع",
+    "back_to_list": "العودة إلى الطلاب"
+  },
+
+  "labels": {
+    "yes": "نعم",
+    "no": "لا",
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "all": "جميع الطلاب",
+    "recent": "الطلاب الجدد",
+    "statistics": "إحصائيات الطلاب"
+  },
+
+  "no_class": "لا يوجد فصل",
+  "no_guardian": "لا يوجد ولي أمر",
+  "no_subscription": "لا يوجد اشتراك",
+  "years_old": "سنة",
+  "relationship": "صلة القرابة",
+
+  "help": {
+    "image": "رفع صورة الملف الشخصي للطالب (JPG, PNG, حد أقصى 5 ميجابايت)",
+    "docs": "رفع مستندات الطالب (PDF, DOC, صور, حد أقصى 10 ملفات)",
+    "dob": "تاريخ ميلاد الطالب للتحقق من العمر",
+    "guardianId": "ولي الأمر الأساسي المسؤول عن هذا الطالب",
+    "subscriptionsId": "خطة الاشتراك للرسوم المدرسية والخدمات"
+  },
+
+  "table": {
+    "name": "الاسم",
+    "class": "الفصل",
+    "guardian": "ولي الأمر",
+    "subscription": "الاشتراك",
+    "status": "الحالة",
+    "dob": "تاريخ الميلاد",
+    "actions": "الإجراءات",
+    "no_data": "لا توجد طلاب",
+    "loading": "جاري تحميل الطلاب...",
+    "pagination_info": "عرض {start}-{end} من {total} طالب"
+  },
+
+  "filters": {
+    "all": "جميع الطلاب",
+    "active": "النشطون فقط",
+    "inactive": "غير النشطين فقط",
+    "by_class": "حسب الفصل",
+    "by_guardian": "حسب ولي الأمر",
+    "by_subscription": "حسب الاشتراك",
+    "recent": "المضافون حديثاً"
+  },
+
+  "statistics": {
+    "total_students": "إجمالي الطلاب",
+    "active_students": "الطلاب النشطون",
+    "by_class": "الطلاب حسب الفصل",
+    "by_subscription": "الطلاب حسب الاشتراك",
+    "new_this_month": "الجدد هذا الشهر"
+  }
+}

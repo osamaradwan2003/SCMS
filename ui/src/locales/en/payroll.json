@@ -1,0 +1,128 @@
+{
+  "list": "Payroll",
+  "create": "Create Payroll",
+  "edit": "Edit Payroll",
+  "view": "Payroll Details",
+  "payroll_list": "Payroll List",
+  "create_payroll": "Create Payroll",
+  "process_payroll": "Process Payroll",
+  
+  "fields": {
+    "employee": "Employee",
+    "employeeId": "Employee",
+    "amount": "Amount",
+    "month": "Payroll Month",
+    "year": "Payroll Year",
+    "basicSalary": "Basic Salary",
+    "allowances": "Allowances",
+    "deductions": "Deductions",
+    "netSalary": "Net Salary",
+    "status": "Status",
+    "paymentDate": "Payment Date",
+    "notes": "Notes",
+    "created_at": "Created Date",
+    "updated_at": "Last Updated"
+  },
+  
+  "placeholder": {
+    "employee": "Search and select employee",
+    "amount": "Enter payroll amount",
+    "month": "Select payroll month",
+    "year": "Select payroll year",
+    "basicSalary": "Enter basic salary",
+    "allowances": "Enter allowances amount",
+    "deductions": "Enter deductions amount",
+    "paymentDate": "Select payment date",
+    "notes": "Enter additional notes (optional)"
+  },
+  
+  "status_options": {
+    "draft": "Draft",
+    "pending": "Pending",
+    "approved": "Approved",
+    "paid": "Paid",
+    "cancelled": "Cancelled"
+  },
+  
+  "buttons": {
+    "create": "Create Payroll",
+    "process": "Process Payroll",
+    "approve": "Approve",
+    "pay": "Mark as Paid",
+    "edit": "Edit",
+    "delete": "Delete",
+    "view": "View Details",
+    "save": "Save Changes",
+    "cancel": "Cancel",
+    "back": "Back",
+    "back_to_list": "Back to Payroll",
+    "yes": "Yes",
+    "no": "No",
+    "update": "Update Payroll",
+    "export": "Export Payroll",
+    "print": "Print Payslip"
+  },
+  
+  "messages": {
+    "create_success": "Payroll created successfully",
+    "create_error": "Failed to create payroll",
+    "update_success": "Payroll updated successfully",
+    "update_error": "Failed to update payroll",
+    "delete_success": "Payroll deleted successfully",
+    "delete_error": "Failed to delete payroll",
+    "approve_success": "Payroll approved successfully",
+    "approve_error": "Failed to approve payroll",
+    "pay_success": "Payroll marked as paid successfully",
+    "pay_error": "Failed to mark payroll as paid",
+    "load_error": "Failed to load payroll data",
+    "not_found": "Payroll record not found",
+    "delete_confirm": "Delete Payroll",
+    "delete_description": "Are you sure you want to delete this payroll record? This action cannot be undone.",
+    "approve_confirm": "Approve Payroll",
+    "approve_description": "Are you sure you want to approve this payroll? This action cannot be undone.",
+    "process_success": "Payroll processed successfully",
+    "process_error": "Failed to process payroll"
+  },
+  
+  "validation": {
+    "employee_required": "Employee selection is required",
+    "amount_required": "Amount is required",
+    "amount_min": "Amount must be greater than 0",
+    "month_required": "Payroll month is required",
+    "year_required": "Payroll year is required",
+    "basic_salary_required": "Basic salary is required",
+    "basic_salary_min": "Basic salary must be greater than 0",
+    "allowances_min": "Allowances cannot be negative",
+    "deductions_min": "Deductions cannot be negative"
+  },
+  
+  "table": {
+    "actions": "Actions",
+    "pagination_info": "Showing {start}-{end} of {total} payroll records"
+  },
+  
+  "search_placeholder": "Search payroll records...",
+  "filter_by_employee": "Filter by Employee",
+  "filter_by_month": "Filter by Month",
+  "filter_by_status": "Filter by Status",
+  "filter_by_year": "Filter by Year",
+  "of": "of",
+  "items": "items",
+  
+  "details": {
+    "payroll_info": "Payroll Information",
+    "salary_breakdown": "Salary Breakdown",
+    "payment_history": "Payment History"
+  },
+  
+  "summary": {
+    "total_employees": "Total Employees",
+    "total_amount": "Total Amount",
+    "pending_payments": "Pending Payments",
+    "completed_payments": "Completed Payments"
+  },
+  
+  "currency": "$",
+  "no_records": "No payroll records found",
+  "payslip": "Payslip"
+}

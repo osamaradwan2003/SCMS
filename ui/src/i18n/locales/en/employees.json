@@ -35,6 +35,8 @@
     "position": "Position",
     "salary": "Salary",
     "hireDate": "Hire Date",
+    "profile_image": "Profile Image",
+    "docs": "Documents",
     "classId": "Assigned Class",
     "class": "Assigned Class"
   },
@@ -49,7 +51,9 @@
     "position": "Enter position",
     "salary": "Enter salary amount",
     "hireDate": "Select hire date",
-    "classId": "Select assigned class"
+    "classId": "Select assigned class",
+    "role": "Select role",
+    "is_teacher": "Is teacher?"
   },
 
   "placeholders": {
@@ -66,6 +70,7 @@
   },
 
   "validation": {
+    "name_required": "Name is required",
     "firstName_required": "First name is required",
     "lastName_required": "Last name is required",
     "email_required": "Email is required",
@@ -75,7 +80,31 @@
     "position_required": "Position is required",
     "salary_required": "Salary is required",
     "salary_min": "Salary must be greater than 0",
-    "hire_date_required": "Hire date is required"
+    "salary_number": "Salary must be a number",
+    "role_required": "Role is required",
+    "is_teacher_invalid": "Invalid selection for Is teacher",
+    "hireDate_required": "Hire date is required"
+  },
+
+  "help": {
+    "profile_image": "Upload a clear profile photo (JPG/PNG). Max 1 image.",
+    "docs": "Upload related documents (PDF, DOC, images). You can select multiple files."
+  },
+
+  "buttons": {
+    "upload": "Upload"
+  },
+
+  "role_options": {
+    "teacher": "Teacher",
+    "staff": "Staff",
+    "admin": "Admin",
+    "data_entry": "Data Entry"
+  },
+
+  "boolean": {
+    "yes": "Yes",
+    "no": "No"
   },
 
   "messages": {

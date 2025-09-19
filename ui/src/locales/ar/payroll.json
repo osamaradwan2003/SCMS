@@ -1,0 +1,128 @@
+{
+  "list": "الرواتب",
+  "create": "إضافة راتب",
+  "edit": "تعديل الراتب",
+  "view": "تفاصيل الراتب",
+  "payroll_list": "قائمة الرواتب",
+  "create_payroll": "إضافة راتب",
+  "process_payroll": "معالجة الرواتب",
+  
+  "fields": {
+    "employee": "الموظف",
+    "employeeId": "الموظف",
+    "amount": "المبلغ",
+    "month": "شهر الراتب",
+    "year": "سنة الراتب",
+    "basicSalary": "الراتب الأساسي",
+    "allowances": "البدلات",
+    "deductions": "الاستقطاعات",
+    "netSalary": "صافي الراتب",
+    "status": "الحالة",
+    "paymentDate": "تاريخ الدفع",
+    "notes": "ملاحظات",
+    "created_at": "تاريخ الإنشاء",
+    "updated_at": "آخر تحديث"
+  },
+  
+  "placeholder": {
+    "employee": "ابحث واختر الموظف",
+    "amount": "أدخل مبلغ الراتب",
+    "month": "اختر شهر الراتب",
+    "year": "اختر سنة الراتب",
+    "basicSalary": "أدخل الراتب الأساسي",
+    "allowances": "أدخل مبلغ البدلات",
+    "deductions": "أدخل مبلغ الاستقطاعات",
+    "paymentDate": "اختر تاريخ الدفع",
+    "notes": "أدخل ملاحظات إضافية (اختياري)"
+  },
+  
+  "status_options": {
+    "draft": "مسودة",
+    "pending": "قيد الانتظار",
+    "approved": "معتمد",
+    "paid": "مدفوع",
+    "cancelled": "ملغي"
+  },
+  
+  "buttons": {
+    "create": "إضافة راتب",
+    "process": "معالجة الرواتب",
+    "approve": "اعتماد",
+    "pay": "تحديد كمدفوع",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "view": "عرض التفاصيل",
+    "save": "حفظ التغييرات",
+    "cancel": "إلغاء",
+    "back": "رجوع",
+    "back_to_list": "العودة إلى الرواتب",
+    "yes": "نعم",
+    "no": "لا",
+    "update": "تحديث الراتب",
+    "export": "تصدير الرواتب",
+    "print": "طباعة قسيمة الراتب"
+  },
+  
+  "messages": {
+    "create_success": "تم إنشاء الراتب بنجاح",
+    "create_error": "فشل في إنشاء الراتب",
+    "update_success": "تم تحديث الراتب بنجاح",
+    "update_error": "فشل في تحديث الراتب",
+    "delete_success": "تم حذف الراتب بنجاح",
+    "delete_error": "فشل في حذف الراتب",
+    "approve_success": "تم اعتماد الراتب بنجاح",
+    "approve_error": "فشل في اعتماد الراتب",
+    "pay_success": "تم تحديد الراتب كمدفوع بنجاح",
+    "pay_error": "فشل في تحديد الراتب كمدفوع",
+    "load_error": "فشل في تحميل بيانات الراتب",
+    "not_found": "سجل الراتب غير موجود",
+    "delete_confirm": "حذف الراتب",
+    "delete_description": "هل أنت متأكد من حذف سجل الراتب هذا؟ لا يمكن التراجع عن هذا الإجراء.",
+    "approve_confirm": "اعتماد الراتب",
+    "approve_description": "هل أنت متأكد من اعتماد هذا الراتب؟ لا يمكن التراجع عن هذا الإجراء.",
+    "process_success": "تم معالجة الرواتب بنجاح",
+    "process_error": "فشل في معالجة الرواتب"
+  },
+  
+  "validation": {
+    "employee_required": "اختيار الموظف مطلوب",
+    "amount_required": "المبلغ مطلوب",
+    "amount_min": "يجب أن يكون المبلغ أكبر من 0",
+    "month_required": "شهر الراتب مطلوب",
+    "year_required": "سنة الراتب مطلوبة",
+    "basic_salary_required": "الراتب الأساسي مطلوب",
+    "basic_salary_min": "يجب أن يكون الراتب الأساسي أكبر من 0",
+    "allowances_min": "لا يمكن أن تكون البدلات سالبة",
+    "deductions_min": "لا يمكن أن تكون الاستقطاعات سالبة"
+  },
+  
+  "table": {
+    "actions": "الإجراءات",
+    "pagination_info": "عرض {start}-{end} من {total} سجل راتب"
+  },
+  
+  "search_placeholder": "البحث في سجلات الرواتب...",
+  "filter_by_employee": "تصفية حسب الموظف",
+  "filter_by_month": "تصفية حسب الشهر",
+  "filter_by_status": "تصفية حسب الحالة",
+  "filter_by_year": "تصفية حسب السنة",
+  "of": "من",
+  "items": "عنصر",
+  
+  "details": {
+    "payroll_info": "معلومات الراتب",
+    "salary_breakdown": "تفصيل الراتب",
+    "payment_history": "تاريخ المدفوعات"
+  },
+  
+  "summary": {
+    "total_employees": "إجمالي الموظفين",
+    "total_amount": "إجمالي المبلغ",
+    "pending_payments": "المدفوعات المعلقة",
+    "completed_payments": "المدفوعات المكتملة"
+  },
+  
+  "currency": "ر.س",
+  "no_records": "لا توجد سجلات رواتب",
+  "payslip": "قسيمة الراتب"
+}

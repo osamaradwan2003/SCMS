@@ -4,56 +4,60 @@ import type { AxiosResponse } from 'axios';
 // Types
 export interface Student {
   id: string;
-  firstName: string;
-  lastName: string;
-  email?: string;
+  name: string;
+  dob: string;
   phone?: string;
-  dateOfBirth: string;
-  address?: string;
-  enrollmentDate: string;
-  studentId: string;
-  classId: string;
-  guardianId?: string;
-  status: 'active' | 'inactive' | 'graduated' | 'suspended';
+  gender?: string;
+  address: string;
+  image?: string;
+  docs?: string;
+  classId?: string;
+  guardianId: string;
+  guradianDegree: string;
+  subscriptionsId: string;
   class?: {
     id: string;
     name: string;
   };
-  guardian?: {
+  Guardian?: {
     id: string;
-    firstName: string;
-    lastName: string;
+    name: string;
+  };
+  Subscriptions?: {
+    id: string;
+    name: string;
+    value: number;
   };
   created_at: string;
   updated_at: string;
 }
 
 export interface CreateStudentData {
-  firstName: string;
-  lastName: string;
-  email?: string;
+  name: string;
+  dob: string;
   phone?: string;
-  dateOfBirth: string;
-  address?: string;
-  enrollmentDate: string;
-  studentId: string;
-  classId: string;
-  guardianId?: string;
-  status: 'active' | 'inactive' | 'graduated' | 'suspended';
+  gender?: string;
+  address: string;
+  image?: string;
+  docs?: string;
+  classId?: string;
+  guardianId: string;
+  guradianDegree: string;
+  subscriptionsId: string;
 }
 
 export interface UpdateStudentData {
-  firstName: string;
-  lastName: string;
-  email?: string;
+  name?: string;
+  dob?: string;
   phone?: string;
-  dateOfBirth: string;
+  gender?: string;
   address?: string;
-  enrollmentDate: string;
-  studentId: string;
-  classId: string;
+  image?: string;
+  docs?: string;
+  classId?: string;
   guardianId?: string;
-  status: 'active' | 'inactive' | 'graduated' | 'suspended';
+  guradianDegree?: string;
+  subscriptionsId?: string;
 }
 
 export interface PaginatedResponse<T> {
@@ -69,7 +73,8 @@ export interface SearchParams {
   limit?: number;
   q?: string;
   classId?: string;
-  status?: string;
+  guardianId?: string;
+  subscriptionsId?: string;
 }
 
 // API Functions
@@ -81,7 +86,8 @@ export const studentsApi = {
     if (params?.limit) searchParams.append('limit', params.limit.toString());
     if (params?.q) searchParams.append('q', params.q);
     if (params?.classId) searchParams.append('classId', params.classId);
-    if (params?.status) searchParams.append('status', params.status);
+    if (params?.guardianId) searchParams.append('guardianId', params.guardianId);
+    if (params?.subscriptionsId) searchParams.append('subscriptionsId', params.subscriptionsId);
     
     return httpClient.get(`/students/paginate?${searchParams}`);
   },
@@ -132,8 +138,4 @@ export const studentsApi = {
     return httpClient.delete('/students/bulk', { data: { ids } });
   },
 
-  // Update student status
-  updateStatus: (id: string, status: 'active' | 'inactive' | 'graduated' | 'suspended'): Promise<AxiosResponse<Student>> => {
-    return httpClient.patch(`/students/${id}/status`, { status });
-  },
 };

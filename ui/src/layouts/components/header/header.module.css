@@ -1,6 +1,81 @@
 .header {
   display: flex;
   align-items: center;
-  flex-direction: row-reverse;
-  gap: 1.5rem;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 16px;
+  width: 100%;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.navigation {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+/* Navigation menu styles */
+.navigation .ant-menu-horizontal {
+  border-bottom: none !important;
+  background: transparent !important;
+}
+
+.navigation .ant-menu-horizontal > .ant-menu-item {
+  border-bottom: 2px solid transparent;
+  margin: 0 4px;
+}
+
+.navigation .ant-menu-horizontal > .ant-menu-item:hover,
+.navigation .ant-menu-horizontal > .ant-menu-item-selected {
+  border-bottom-color: #1890ff;
+}
+
+.navigation .ant-menu-horizontal > .ant-menu-submenu {
+  border-bottom: 2px solid transparent;
+  margin: 0 4px;
+}
+
+.navigation .ant-menu-horizontal > .ant-menu-submenu:hover,
+.navigation .ant-menu-horizontal > .ant-menu-submenu-selected {
+  border-bottom-color: #1890ff;
+}
+
+@media (max-width: 768px) {
+  .header {
+    gap: 0.75rem;
+    padding: 0 8px;
+  }
+  
+  .controls {
+    gap: 0.5rem;
+  }
+  
+  .navigation {
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    gap: 0.5rem;
+    padding: 0 4px;
+  }
+  
+  .controls {
+    gap: 0.25rem;
+  }
 }

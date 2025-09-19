@@ -1,9 +1,23 @@
 import * as yup from "yup";
 import { type FormSchema } from "@/@types";
 import { useTranslate } from "@/hooks/locales";
+import { useQuery } from "@tanstack/react-query";
+import { subjectsApi } from "@/api/subjects";
+import type { Subject as ApiSubject } from "@/api/subjects";
 
 export const CreateClassFormSchema = (): FormSchema[] => {
   const t = useTranslate("classes");
+  const { data: subjects = [] } = useQuery({
+    queryKey: ["subjects", "list"],
+    queryFn: async () => {
+      const res = await subjectsApi.getList();
+      return res.data.data || [];
+    },
+  });
+  const subjectOptions = subjects.map((s: ApiSubject) => ({
+    label: `${s.name}`,
+    value: s.id,
+  }));
   return [
     {
       name: "name",
@@ -23,37 +37,13 @@ export const CreateClassFormSchema = (): FormSchema[] => {
       },
     },
     {
-      name: "capacity",
-      type: "number",
-      rules: yup
-        .number()
-        .required(t("validation.capacity_required"))
-        .min(1, t("validation.capacity_min"))
-        .max(100, t("validation.capacity_max")),
-      inputProps: {
-        placeholder: t("placeholder.capacity"),
-        min: 1,
-        max: 100,
-      },
-    },
-    {
-      name: "teacherId",
-      type: "autoComplete",
-      rules: yup.string().required(t("validation.teacher_required")),
-      autoCompleteProps: {
-        showSearch: true,
-        placeholder: t("placeholder.teacherId"),
-        options: [],
-      },
-    },
-    {
       name: "subjects",
-      type: "multiSelect",
+      type: "select",
       rules: yup.array().nullable().notRequired(),
       selectProps: {
         mode: "multiple",
         placeholder: t("placeholder.subjects"),
-        options: [],
+        options: subjectOptions,
       },
     },
   ];
@@ -61,6 +51,17 @@ export const CreateClassFormSchema = (): FormSchema[] => {
 
 export const UpdateClassFormSchema = (): FormSchema[] => {
   const t = useTranslate("classes");
+  const { data: subjects = [] } = useQuery({
+    queryKey: ["subjects", "list"],
+    queryFn: async () => {
+      const res = await subjectsApi.getList();
+      return res.data.data || [];
+    },
+  });
+  const subjectOptions = subjects.map((s: ApiSubject) => ({
+    label: `${s.name} (${s.code})`,
+    value: s.id,
+  }));
   return [
     {
       name: "name",
@@ -80,37 +81,13 @@ export const UpdateClassFormSchema = (): FormSchema[] => {
       },
     },
     {
-      name: "capacity",
-      type: "number",
-      rules: yup
-        .number()
-        .required(t("validation.capacity_required"))
-        .min(1, t("validation.capacity_min"))
-        .max(100, t("validation.capacity_max")),
-      inputProps: {
-        placeholder: t("placeholder.capacity"),
-        min: 1,
-        max: 100,
-      },
-    },
-    {
-      name: "teacherId",
-      type: "autoComplete",
-      rules: yup.string().required(t("validation.teacher_required")),
-      autoCompleteProps: {
-        showSearch: true,
-        placeholder: t("placeholder.teacherId"),
-        options: [],
-      },
-    },
-    {
       name: "subjects",
       type: "multiSelect",
       rules: yup.array().nullable().notRequired(),
       selectProps: {
         mode: "multiple",
         placeholder: t("placeholder.subjects"),
-        options: [],
+        options: subjectOptions,
       },
     },
   ];

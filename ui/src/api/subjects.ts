@@ -59,6 +59,11 @@ export const subjectsApi = {
     return httpClient.get(`/subjects/paginate?${searchParams}`);
   },
 
+  // Get simple list for dropdowns
+  getList: (): Promise<AxiosResponse<{ data: Subject[] }>> => {
+    return httpClient.get('/subjects');
+  },
+
   // Search subjects
   search: (params: SearchParams): Promise<AxiosResponse<PaginatedResponse<Subject>>> => {
     const searchParams = new URLSearchParams();

@@ -1,0 +1,74 @@
+{
+  "list": "Subscriptions",
+  "create": "Create Subscription",
+  "edit": "Edit Subscription",
+  "view": "Subscription Details",
+  
+  "fields": {
+    "name": "Subscription Name",
+    "value": "Price",
+    "notes": "Notes",
+    "created_at": "Created Date",
+    "updated_at": "Last Updated"
+  },
+  
+  "placeholder": {
+    "search": "Search subscriptions...",
+    "name": "Enter subscription name",
+    "value": "Enter price amount",
+    "notes": "Enter additional notes (optional)"
+  },
+  
+  "buttons": {
+    "create": "Create Subscription",
+    "edit": "Edit",
+    "delete": "Delete",
+    "view": "View Details",
+    "save": "Save Changes",
+    "cancel": "Cancel",
+    "back": "Back",
+    "back_to_list": "Back to Subscriptions",
+    "yes": "Yes",
+    "no": "No",
+    "update": "Update Subscription"
+  },
+  
+  "messages": {
+    "create_success": "Subscription created successfully",
+    "create_error": "Failed to create subscription",
+    "update_success": "Subscription updated successfully",
+    "update_error": "Failed to update subscription",
+    "delete_success": "Subscription deleted successfully",
+    "delete_error": "Failed to delete subscription",
+    "not_found": "Subscription not found",
+    "delete_confirm": "Delete Subscription",
+    "delete_description": "Are you sure you want to delete this subscription? This action cannot be undone.",
+    "no_students": "No students are currently using this subscription plan"
+  },
+  
+  "table": {
+    "actions": "Actions",
+    "pagination_info": "Showing {start}-{end} of {total} subscriptions"
+  },
+  
+  "details": {
+    "subscription_info": "Subscription Information",
+    "students_with_subscription": "Students with this Subscription"
+  },
+  
+  "student_fields": {
+    "name": "Student Name",
+    "phone": "Phone Number",
+    "joined_date": "Enrollment Date"
+  },
+  
+  "validation": {
+    "name_required": "Subscription name is required",
+    "name_min": "Name must be at least 2 characters",
+    "name_max": "Name cannot exceed 100 characters",
+    "value_required": "Price is required",
+    "value_min": "Price must be greater than 0",
+    "value_max": "Price cannot exceed 999999",
+    "notes_max": "Notes cannot exceed 500 characters"
+  }
+}

@@ -4,7 +4,6 @@ import { login } from "@/api/auth";
 import type { AxiosResponse } from "axios";
 import type { LoginResponse } from "@/@types";
 import { useMutation } from "@tanstack/react-query";
-import { message } from "antd";
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -24,7 +23,7 @@ export const useLogin = () => {
     }) => login(username, password),
     onSuccess: (data: AxiosResponse<LoginResponse>) => {
       UpdateLoginContext(data.data.user, data.data.token);
-      message.info("Login Success");
+      // Success message is now handled in the Login component
     },
   });
 };

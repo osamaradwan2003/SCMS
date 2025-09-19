@@ -8,6 +8,10 @@ import {
   Card,
   Popconfirm,
   Divider,
+  Avatar,
+  Modal,
+  Form,
+  Input as AntInput,
 } from "antd";
 import {
   PlusOutlined,
@@ -30,6 +34,9 @@ const GuardiansListPage: React.FC = () => {
   const [searchText, setSearchText] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  const [accountModalOpen, setAccountModalOpen] = useState(false);
+  const [selectedGuardianId, setSelectedGuardianId] = useState<string | null>(null);
+  const [accountForm] = Form.useForm<{ username: string; password?: string; confirm?: string }>();
 
   const queryClient = useQueryClient();
 
@@ -65,12 +72,71 @@ const GuardiansListPage: React.FC = () => {
     deleteGuardianMutation.mutate(id);
   };
 
+  const openAccountModal = async (guardianId: string) => {
+    setSelectedGuardianId(guardianId);
+    try {
+      const res = await httpClient.get(`/guardians/${guardianId}`);
+      const username = res?.data?.data?.accountUser?.username || "";
+      accountForm.setFieldsValue({ username });
+      setAccountModalOpen(true);
+    } catch (e: any) {
+      message.error(e?.response?.data?.message || e?.message || t("messages.load_error"));
+    }
+  };
+
+  const submitAccount = async () => {
+    try {
+      const values = await accountForm.validateFields();
+      if (values.password && values.password.length < 6) {
+        message.error(t("password_min") || "Minimum 6 characters");
+        return;
+      }
+      if (values.password && values.password !== values.confirm) {
+        message.error(t("auth:passwords_must_match") || "Passwords must match");
+        return;
+      }
+      if (!selectedGuardianId) return;
+      await httpClient.post(`/guardians/${selectedGuardianId}/account`, {
+        username: values.username,
+        password: values.password || undefined,
+      });
+      message.success(t("messages.update_success"));
+      setAccountModalOpen(false);
+      setSelectedGuardianId(null);
+      accountForm.resetFields();
+      // refresh any cached view if needed
+      queryClient.invalidateQueries({ queryKey: ["guardian", selectedGuardianId] });
+    } catch (e: any) {
+      message.error(e?.response?.data?.message || e?.message || t("messages.update_error"));
+    }
+  };
+
   const handleSearch = (value: string) => {
     setSearchText(value);
     setCurrentPage(1);
   };
 
   const columns: ColumnsType<Guardian> = [
+    {
+      title: t("fields.profile_photo"),
+      dataIndex: "profile_photo",
+      key: "profile_photo",
+      render: (text: string) => (
+        <Avatar
+          src={`${import.meta.env.VITE_API_STATIC_URL}${text}`}
+          alt="Profile Photo"
+          style={{ width: 50, height: 50, objectFit: "cover" }}
+        >
+          Photo
+        </Avatar>
+      ),
+    },
+    {
+      title: t("ID"),
+      dataIndex: "id",
+      key: "id",
+      sorter: true,
+    },
     {
       title: t("fields.name"),
       dataIndex: "name",
@@ -81,11 +147,6 @@ const GuardiansListPage: React.FC = () => {
       title: t("fields.phone"),
       dataIndex: "phone",
       key: "phone",
-    },
-    {
-      title: t("fields.relationship"),
-      dataIndex: "relationDegree",
-      key: "relationDegree",
     },
     {
       title: t("fields.students"),
@@ -117,6 +178,9 @@ const GuardiansListPage: React.FC = () => {
             onClick={() => navigate(`/guardians/${record.id}/edit`)}
           >
             {t("edit")}
+          </Button>
+          <Button type="link" onClick={() => openAccountModal(record.id)}>
+            {t("edit_account")}
           </Button>
           <Popconfirm
             title={t("delete_confirmation")}
@@ -184,6 +248,30 @@ const GuardiansListPage: React.FC = () => {
             },
           }}
         />
+        <Modal
+          title={t("edit_account")}
+          open={accountModalOpen}
+          onCancel={() => {
+            setAccountModalOpen(false);
+            setSelectedGuardianId(null);
+            accountForm.resetFields();
+          }}
+          onOk={submitAccount}
+          okText={t("save")}
+          cancelText={t("cancel")}
+        >
+          <Form form={accountForm} layout="vertical">
+            <Form.Item name="username" label={t("username")} rules={[{ required: true, message: t("auth:username_required") }]}>
+              <AntInput />
+            </Form.Item>
+            <Form.Item name="password" label={t("new_password")} tooltip={t("leave_blank_to_keep_password") as string}>
+              <AntInput.Password autoComplete="new-password" />
+            </Form.Item>
+            <Form.Item name="confirm" label={t("confirm_new_password")}> 
+              <AntInput.Password autoComplete="new-password" />
+            </Form.Item>
+          </Form>
+        </Modal>
       </Card>
     </div>
   );

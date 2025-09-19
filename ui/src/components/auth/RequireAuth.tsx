@@ -1,5 +1,5 @@
 import { useAuth } from "@/hooks/auth";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { Spin } from "antd";
 
 const RequireAuth: React.FC<
@@ -7,7 +7,8 @@ const RequireAuth: React.FC<
     redirect_path: string;
   }>
 > = ({ children, redirect_path }) => {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading, user } = useAuth();
+  const location = useLocation();
   
   if (isLoading) {
     return (
@@ -22,7 +23,15 @@ const RequireAuth: React.FC<
     );
   }
   
-  if (isAuthenticated) return children;
+  if (isAuthenticated) {
+    const firstLogin = user?.firstLogin;
+    const mustChange = user?.mustChangePassword;
+    const onChangePassword = location.pathname === "/auth/change-password";
+    if ((firstLogin || mustChange) && !onChangePassword) {
+      return <Navigate to="/auth/change-password" replace />;
+    }
+    return children;
+  }
   return <Navigate to={redirect_path} state={401} />;
 };
 

@@ -1,6 +1,6 @@
-import { httpClient } from './httpClient';
-import type { AxiosResponse } from 'axios';
-import type { UploadFile } from 'antd';
+import { httpClient } from "./httpClient";
+import type { AxiosResponse } from "axios";
+import type { UploadFile } from "antd";
 
 // Types
 export interface Guardian {
@@ -46,13 +46,17 @@ export interface CreateGuardianFormData {
 }
 
 export interface UpdateGuardianData {
-  name?: string;
-  phone?: string;
+  name: string;
+  phone: string;
   email?: string;
   address?: string;
-  relationship?: string;
-  profile_photo?: File;
-  documents?: File;
+  relationship: string;
+  profile_photo?: {
+    fileList: UploadFile[];
+  };
+  documents?: {
+    fileList: UploadFile[];
+  };
 }
 
 export interface PaginatedResponse<T> {
@@ -74,58 +78,81 @@ export interface SearchParams {
 // API Functions
 export const guardiansApi = {
   // Get all guardians with pagination
-  getAll: (params?: SearchParams): Promise<AxiosResponse<PaginatedResponse<Guardian>>> => {
+  getAll: (
+    params?: SearchParams
+  ): Promise<AxiosResponse<PaginatedResponse<Guardian>>> => {
     const searchParams = new URLSearchParams();
-    if (params?.page) searchParams.append('page', params.page.toString());
-    if (params?.limit) searchParams.append('limit', params.limit.toString());
-    if (params?.q) searchParams.append('q', params.q);
-    if (params?.relationship) searchParams.append('relationship', params.relationship);
-    if (params?.emergencyContact !== undefined) searchParams.append('emergencyContact', params.emergencyContact.toString());
-    
+    if (params?.page) searchParams.append("page", params.page.toString());
+    if (params?.limit) searchParams.append("limit", params.limit.toString());
+    if (params?.q) searchParams.append("q", params.q);
+    if (params?.relationship)
+      searchParams.append("relationship", params.relationship);
+    if (params?.emergencyContact !== undefined)
+      searchParams.append(
+        "emergencyContact",
+        params.emergencyContact.toString()
+      );
+
     return httpClient.get(`/guardians/paginate?${searchParams}`);
   },
 
   // Get simple list for dropdowns
-  getList: (): Promise<AxiosResponse<{ id: string; firstName: string; lastName: string }[]>> => {
-    return httpClient.get('/guardians');
+  getList: (): Promise<
+    AxiosResponse<{ id: string; firstName: string; lastName: string }[]>
+  > => {
+    return httpClient.get("/guardians");
   },
 
   // Search guardians
-  search: (params: SearchParams): Promise<AxiosResponse<PaginatedResponse<Guardian>>> => {
+  search: (
+    params: SearchParams
+  ): Promise<AxiosResponse<PaginatedResponse<Guardian>>> => {
     const searchParams = new URLSearchParams();
-    if (params.page) searchParams.append('page', params.page.toString());
-    if (params.limit) searchParams.append('limit', params.limit.toString());
-    if (params.q) searchParams.append('q', params.q);
-    if (params.relationship) searchParams.append('relationship', params.relationship);
-    if (params.emergencyContact !== undefined) searchParams.append('emergencyContact', params.emergencyContact.toString());
-    
+    if (params.page) searchParams.append("page", params.page.toString());
+    if (params.limit) searchParams.append("limit", params.limit.toString());
+    if (params.q) searchParams.append("q", params.q);
+    if (params.relationship)
+      searchParams.append("relationship", params.relationship);
+    if (params.emergencyContact !== undefined)
+      searchParams.append(
+        "emergencyContact",
+        params.emergencyContact.toString()
+      );
+
     return httpClient.get(`/guardians/search?${searchParams}`);
   },
 
   // Get guardian by ID
-  getById: (id: string): Promise<AxiosResponse<Guardian>> => {
-    return httpClient.get(`/guardians/${id}`);
+  getById: async (id: string): Promise<AxiosResponse> => {
+    return await httpClient.get(`/guardians/${id}`);
   },
 
   // Create new guardian
   create: (data: CreateGuardianFormData): Promise<AxiosResponse<Guardian>> => {
     const formData = new FormData();
-    formData.append('name', data.name);
-    formData.append('phone', data.phone);
-    formData.append('relationship', data.relationship);
-    
-    if (data.email) formData.append('email', data.email);
-    if (data.address) formData.append('address', data.address);
-    
+    formData.append("name", data.name);
+    formData.append("phone", data.phone);
+
+    if (data.email) formData.append("email", data.email);
+    if (data.address) formData.append("address", data.address);
+
     // Handle file uploads from Ant Design Upload component
-    if (data.profile_photo && data.profile_photo.fileList && data.profile_photo.fileList.length > 0) {
+    if (
+      data.profile_photo &&
+      data.profile_photo.fileList &&
+      data.profile_photo.fileList.length > 0
+    ) {
       const file = data.profile_photo.fileList[0];
       if (file.originFileObj) {
-        formData.append('profile_photo', file.originFileObj);
+        formData.append("profile_photo", file.originFileObj);
       }
     }
-    
-    if (data.documents && data.documents.fileList && data.documents.fileList.length > 0) {
+
+    if (
+      data.documents &&
+      data.documents.fileList &&
+      data.documents.fileList.length > 0
+    ) {
       data.documents.fileList.forEach((file: UploadFile) => {
         if (file.originFileObj) {
           formData.append(`documents`, file.originFileObj);
@@ -133,42 +160,70 @@ export const guardiansApi = {
       });
     }
 
-    return httpClient.post('/guardians', formData, {
+    return httpClient.post("/guardians", formData, {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
       },
     });
   },
 
   // Update guardian
-  update: (id: string, data: UpdateGuardianData): Promise<AxiosResponse<Guardian>> => {
+  update: (
+    id: string,
+    data: UpdateGuardianData
+  ): Promise<AxiosResponse<Guardian>> => {
     const formData = new FormData();
-    
-    if (data.name) formData.append('name', data.name);
-    if (data.phone) formData.append('phone', data.phone);
-    if (data.relationship) formData.append('relationship', data.relationship);
-    if (data.email) formData.append('email', data.email);
-    if (data.address) formData.append('address', data.address);
-    if (data.profile_photo) formData.append('profile_photo', data.profile_photo);
-    if (data.documents) formData.append('documents', data.documents);
+    formData.append("name", data.name);
+    formData.append("phone", data.phone);
+
+    if (data.email) formData.append("email", data.email);
+    if (data.address) formData.append("address", data.address);
+
+    // Handle file uploads from Ant Design Upload component
+    if (
+      data.profile_photo &&
+      data.profile_photo.fileList &&
+      data.profile_photo.fileList.length > 0
+    ) {
+      const file = data.profile_photo.fileList[0];
+      if (file.originFileObj) {
+        formData.append("profile_photo", file.originFileObj);
+      }
+    }
+
+    if (
+      data.documents &&
+      data.documents.fileList &&
+      data.documents.fileList.length > 0
+    ) {
+      data.documents.fileList.forEach((file: UploadFile) => {
+        if (file.originFileObj) {
+          formData.append(`documents`, file.originFileObj);
+        }
+      });
+    }
 
     return httpClient.put(`/guardians/${id}`, formData, {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
       },
     });
   },
 
   // Upload files to existing guardian
-  uploadFiles: (id: string, files: { profile_photo?: File; documents?: File }): Promise<AxiosResponse<Guardian>> => {
+  uploadFiles: (
+    id: string,
+    files: { profile_photo?: File; documents?: File }
+  ): Promise<AxiosResponse<Guardian>> => {
     const formData = new FormData();
-    
-    if (files.profile_photo) formData.append('profile_photo', files.profile_photo);
-    if (files.documents) formData.append('documents', files.documents);
+
+    if (files.profile_photo)
+      formData.append("profile_photo", files.profile_photo);
+    if (files.documents) formData.append("documents", files.documents);
 
     return httpClient.post(`/guardians/${id}/upload`, formData, {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
       },
     });
   },
@@ -180,21 +235,27 @@ export const guardiansApi = {
 
   // Bulk delete guardians
   bulkDelete: (ids: string[]): Promise<AxiosResponse<void>> => {
-    return httpClient.delete('/guardians/bulk', { data: { ids } });
+    return httpClient.delete("/guardians/bulk", { data: { ids } });
   },
 
   // Link guardian to student
-  linkStudent: (guardianId: string, studentId: string): Promise<AxiosResponse<void>> => {
+  linkStudent: (
+    guardianId: string,
+    studentId: string
+  ): Promise<AxiosResponse<void>> => {
     return httpClient.post(`/guardians/${guardianId}/students`, { studentId });
   },
 
   // Unlink guardian from student
-  unlinkStudent: (guardianId: string, studentId: string): Promise<AxiosResponse<void>> => {
+  unlinkStudent: (
+    guardianId: string,
+    studentId: string
+  ): Promise<AxiosResponse<void>> => {
     return httpClient.delete(`/guardians/${guardianId}/students/${studentId}`);
   },
 
   // Get emergency contacts
   getEmergencyContacts: (): Promise<AxiosResponse<Guardian[]>> => {
-    return httpClient.get('/guardians/emergency-contacts');
+    return httpClient.get("/guardians/emergency-contacts");
   },
 };

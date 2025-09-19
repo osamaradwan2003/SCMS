@@ -92,10 +92,16 @@ export interface Subject {
 // Subject form data types
 export interface CreateSubjectData {
   name: string;
+  description?: string;
+  classes?: string[];
+  teachers?: string[];
 }
 
 export interface UpdateSubjectData {
   name?: string;
+  description?: string;
+  classes?: string[];
+  teachers?: string[];
 }
 
 // Guardian type
@@ -103,7 +109,8 @@ export interface Guardian {
   id: string;
   name: string;
   phone: string;
-  relationDegree: string;
+  email?: string;
+  address?: string;
   Student?: Student[];
   created_by?: {
     id: string;
@@ -113,19 +120,27 @@ export interface Guardian {
   userId?: string;
   created_at: string;
   updated_at: string;
+  profile_photo?: string;
+  documents?: string[];
 }
 
 // Guardian form data types
 export interface CreateGuardianData {
   name: string;
   phone: string;
-  relationDegree: string;
+  email?: string;
+  address?: string;
+  profile_photo?: File;
+  documents?: File[];
 }
 
 export interface UpdateGuardianData {
   name?: string;
   phone?: string;
-  relationDegree?: string;
+  email?: string;
+  address?: string;
+  profile_photo?: File;
+  documents?: File[];
 }
 
 // Attendance type
@@ -252,4 +267,14 @@ export interface Category {
 export interface SelectOption {
   value: string;
   label: string;
+}
+
+// API Error type for error handling
+export interface ApiError {
+  response?: {
+    data?: {
+      message?: string;
+    };
+  };
+  message?: string;
 }

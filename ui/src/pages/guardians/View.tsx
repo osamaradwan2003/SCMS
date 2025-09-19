@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Descriptions, Button, Spin, Tag } from "antd";
+import { Card, Descriptions, Button, Spin, Table } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { EditOutlined, ArrowLeftOutlined } from "@ant-design/icons";
@@ -8,16 +8,28 @@ import { useTranslate } from "@/hooks/locales";
 import type { Guardian } from "@/types/api";
 import dayjs from "dayjs";
 
+type GuardianAccountUser = { id: string; username: string; name?: string };
+type StudentRow = {
+  id: string;
+  name: string;
+  phone?: string;
+  class?: { name: string };
+};
+type GuardianView = Guardian & {
+  accountUser?: GuardianAccountUser;
+  Student?: StudentRow[];
+};
+
 const ViewGuardianPage: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const t = useTranslate("guardians");
 
-  const { data: guardian, isLoading } = useQuery({
+  const { data: guardian, isLoading } = useQuery<GuardianView>({
     queryKey: ["guardian", id],
     queryFn: async () => {
       const response = await httpClient.get(`/guardians/${id}`);
-      return response.data.data as Guardian;
+      return response.data.data as GuardianView;
     },
     enabled: !!id,
   });
@@ -45,6 +57,8 @@ const ViewGuardianPage: React.FC = () => {
     );
   }
 
+  const gv: GuardianView = guardian as GuardianView;
+
   return (
     <div className="p-6">
       <div className="max-w-4xl mx-auto">
@@ -69,22 +83,24 @@ const ViewGuardianPage: React.FC = () => {
             <Descriptions.Item label={t("name")} span={2}>
               {guardian.name}
             </Descriptions.Item>
-            
+
             <Descriptions.Item label={t("phone")}>
               {guardian.phone}
             </Descriptions.Item>
-            
-            <Descriptions.Item label={t("relation_degree")}>
-              {guardian.relationDegree}
-            </Descriptions.Item>
-            
+
             <Descriptions.Item label={t("created_at")}>
               {dayjs(guardian.created_at).format("YYYY-MM-DD HH:mm")}
             </Descriptions.Item>
-            
+
             <Descriptions.Item label={t("updated_at")}>
               {dayjs(guardian.updated_at).format("YYYY-MM-DD HH:mm")}
             </Descriptions.Item>
+
+            {gv.accountUser && (
+              <Descriptions.Item label={t("username")} span={2}>
+                {gv.accountUser.username}
+              </Descriptions.Item>
+            )}
 
             {guardian.created_by && (
               <Descriptions.Item label={t("created_by")} span={2}>
@@ -94,20 +110,48 @@ const ViewGuardianPage: React.FC = () => {
           </Descriptions>
         </Card>
 
-        {guardian.Student && guardian.Student.length > 0 && (
+        {gv.Student && gv.Student.length > 0 && (
           <Card title={t("associated_students")} className="mt-6">
-            <div className="flex flex-wrap gap-2">
-              {guardian.Student.map((student) => (
-                <Tag
-                  key={student.id}
-                  color="blue"
-                  className="cursor-pointer"
-                  onClick={() => navigate(`/students/${student.id}`)}
-                >
-                  {student.name}
-                </Tag>
-              ))}
-            </div>
+            <Table<StudentRow>
+              rowKey="id"
+              dataSource={gv.Student}
+              pagination={false}
+              columns={[
+                {
+                  title: t("students:name"),
+                  dataIndex: "name",
+                  key: "name",
+                  render: (text: string, record: StudentRow) => (
+                    <Button
+                      type="link"
+                      onClick={() => navigate(`/students/${record.id}`)}
+                    >
+                      {text}
+                    </Button>
+                  ),
+                },
+                {
+                  title: t("students:class"),
+                  key: "class",
+                  render: (_: unknown, record: StudentRow) =>
+                    record.class?.name || "-",
+                },
+                {
+                  title: t("students:phone"),
+                  dataIndex: "phone",
+                  key: "phone",
+                },
+                {
+                  title: t("actions"),
+                  key: "actions",
+                  render: (_: unknown, record: StudentRow) => (
+                    <Button onClick={() => navigate(`/students/${record.id}`)}>
+                      {t("view")}
+                    </Button>
+                  ),
+                },
+              ]}
+            />
           </Card>
         )}
       </div>
